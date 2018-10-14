@@ -38,5 +38,5 @@ Version history:
     * For Cryptsetup LUKS: `/etc/crypto-sdcard/crypto_luks_<UUID>.key`
     * For Cryptsetup "plain": `/etc/crypto-sdcard/crypto_plain_<UUID>.key`
 * v0.4<br />
-  Optimised configuration file names.
+  Optimised configuration file names.<br />
   Initial RPM spec file.
