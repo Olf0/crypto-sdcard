@@ -32,3 +32,8 @@ Version history:
   "Key"-file format has changed (please rename your "key"-files accordingly):
     * For Cryptsetup LUKS: `/etc/crypto_luks_<device>.key`, e.g. */etc/crypto_luks_mmcblk1p2.key*
     * For Cryptsetup "plain": `/etc/crypto_plain_<device>.key`, e.g. */etc/crypto_plain_mmcblk1p2.key*
+* v0.3-1<br />
+  Switched to a UUID-based "key"-file naming scheme to allow for swapping encrypted SD-cards easily and moved "key"-files into a directory.<br /> 
+  Hence the "key"-file format has changed again (please rename your "key"-files accordingly): 
+    * For Cryptsetup LUKS: `/etc/crypto-sdcard/crypto_luks_<UUID>.key`
+    * For Cryptsetup "plain": `/etc/crypto-sdcard/crypto_plain_<UUID>.key`

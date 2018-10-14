@@ -1,5 +1,5 @@
 [Unit]
-Description=Mount "plain" encrypted SD-card (%i) with udisks
+Description=Mount "plain" encrypted SD-card (%I) with udisks
 Documentation=https://github.com/Olf0/crypto-sdcard
 After=udisks2.service crypto-sd-plain@%i.service dev-mapper-%i.device
 BindsTo=udisks2.service crypto-sd-plain@%i.service dev-mapper-%i.device
@@ -16,6 +16,6 @@ Before=alien-service-manager.service
 User=nemo
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/bin/udisksctl mount -b /dev/mapper/%i
-ExecStop=/usr/bin/udisksctl unmount -b /dev/mapper/%i
+ExecStart=/usr/bin/udisksctl mount -b /dev/mapper/%I
+ExecStop=/usr/bin/udisksctl unmount -b /dev/mapper/%I
 

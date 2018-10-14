@@ -1,8 +1,9 @@
 # All calls to any crypto-sd-*.service will ultimately start this Unit, if successful throughout the call chain.
-# This Unit always successfully starts, even if its command fails, so one can depend on it; temporal ordering might be controlled by a Before= statement in calling Units.
+# Temporal ordering (and true success of the calling unit per Type=oneshot there) might be controlled by a Before= statement in calling Units.
+# This Unit always successfully starts, even if its command fails, so one can depend on it.
 
 [Unit]
-Description=Create media symlink to encrypted SD-card %i
+Description=Create media symlink to encrypted SD-card %I
 Documentation=https://github.com/Olf0/crypto-sdcard
 After=dev-mapper-%i.device
 Requisite=dev-mapper-%i.device
@@ -10,5 +11,5 @@ Requisite=dev-mapper-%i.device
 [Service]
 # The symlink is meant to stay, so it cannot be accidentially overwritten.
 # OTOH, ln does not overwrite anything; it just fails, if a file, directory or link of that name already exists.
-ExecStart=-/bin/sh -c 'UUID="$(/sbin/blkid -c /dev/null -s UUID -o value /dev/mapper/%i)" && ln -s /run/media/nemo/$UUID /media/sdcard/$UUID'
+ExecStart=-/bin/sh -c 'UUID="$(/sbin/blkid -c /dev/null -s UUID -o value /dev/mapper/%I)" && ln -s /run/media/nemo/$UUID /media/sdcard/$UUID'
 
