@@ -26,7 +26,7 @@ Requires:   	sailfish-version < 3.0.0
 %{summary}
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q -n %{name}-%{version}-%{release}
 
 %build
 
