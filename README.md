@@ -13,7 +13,7 @@ Note that the "key"-file resides unencrypted on fixed mass storage, as mobile de
 Thus **crypto-sdcard** solely protects "data at rest" on SD-cards, i.e. specifically when the device is locked or switched off (and the SD-card may be taken out).
 
 Features:
-It provides the following features: 
+
 * Start mounting (partitions on) SD-card via udisks at the earliest sensible time: Right after udisks2.service has started.
 * Unmount before udisks2 begins stopping, hence achieving a clean unmount.
 * Ensure, that AlienDalvik (alien-service-manager.service) begins starting after mounting succeeded, to allow for android_storage ("/data/media") on encrypted SD-card; even more importantly this also ensures, that unmounting occurs only after AlienDalvik is completely stopped.
