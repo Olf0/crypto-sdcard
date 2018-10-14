@@ -10,4 +10,8 @@ The necessary steps to prepare an SD-card are described on [Together.Jolla.com](
 <br />
 Note that the "key"-file resides unencrypted on fixed mass storage, as mobile devices usually have only a single user, who unlocks the whole device.
 <br />
-Thus **crypto-sdcard** solely protects "data at rest", i.e. specifically when the device is locked or switched off (and the SD-card may be taken out).
+Thus **crypto-sdcard** solely protects "data at rest" on SD-cards, i.e. specifically when the device is locked or switched off (and the SD-card may be taken out).
+
+Version history:
+* v0.1-1
+  Initial check-in of [last version on TJC](https://together.jolla.com/question/179054/how-to-creating-partitions-on-sd-card-optionally-encrypted/?answer=189813#post-id-189813).
