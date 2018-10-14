@@ -1,0 +1,18 @@
+[Unit]
+Description=Open DM-Crypt LUKS on SD-card %i
+Documentation=https://github.com/Olf0/crypto-sdcard
+After=systemd-udevd.service systemd-udev-settle.service dev-%i.device
+BindsTo=dev-%i.device
+Conflicts=rescue.target actdead.target factory-test.target
+AssertFileNotEmpty=/etc/%i.key
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+# Only needed on Jolla 1 phones running SailfishOS 2.2.0 for using XTS:
+ExecStartPre=/sbin/modprobe qcrypto
+# For various reasons (dependency on udisks2, allow discards etc.), do not use "udisksctl unlock --key-file", call cryptsetup directly:
+ExecStart=/usr/sbin/cryptsetup --allow-discards -d /etc/%i.key luksOpen /dev/%i %i
+# ExecStartPost=chgrp disk /dev/mapper/%i  # Moved to udev rules 82-crypto-sd
+ExecStop=/usr/sbin/cryptsetup close %i
+
