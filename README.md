@@ -27,3 +27,8 @@ Version history:
 * v0.1-1<br />
   Initial check-in of [last version on TJC](https://together.jolla.com/question/179054/how-to-creating-partitions-on-sd-card-optionally-encrypted/?answer=189813#post-id-189813).<br />
   "Key"-file format is `/etc/<device>.key`, e.g. */etc/mmcblk1p2.key*
+* v0.2-1<br />
+  Fixed automatic mounting of DM-Crypt "plain" partitions.<br />
+  "Key"-file format has changed (please rename your "key"-files accordingly):
+    * For Cryptsetup LUKS: `/etc/crypto_luks_<device>.key`, e.g. */etc/crypto_luks_mmcblk1p2.key*
+    * For Cryptsetup "plain": `/etc/crypto_plain_<device>.key`, e.g. */etc/crypto_plain_mmcblk1p2.key*
