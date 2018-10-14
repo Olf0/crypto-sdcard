@@ -1,12 +1,12 @@
 # For DM-Crypt LUKS, match sda0 to mmcblk1 to both SUBSYSTEM=="block" and ENV{ID_FS_TYPE}=="crypto_LUKS"
-KERNEL=="mmcblk1*|sd[a-z][0-9]", SUBSYSTEM=="block", ENV{ID_FS_TYPE}=="crypto_LUKS", ACTION=="add", MODE="0660", TAG+="systemd", ENV{SYSTEMD_WANTS}="crypto-sd-luks@%k.service"
+KERNEL=="mmcblk1*|sd[a-z][0-9]", SUBSYSTEM=="block", ENV{ID_FS_TYPE}=="crypto_LUKS", ACTION=="add", MODE="0660", SYMLINK+="crypto_luks_%k", TAG+="systemd", ENV{SYSTEMD_WANTS}="crypto-sd-luks@crypto_luks_%k.service"
 
 # For DM-Crypt "plain", also match sda0 to mmcblk1 to SUBSYSTEM=="block", but ensure (by ENV{ID_*}!= statements) that it appears to be unused space
-KERNEL=="mmcblk1*|sd[a-z][0-9]", SUBSYSTEM=="block", ENV{ID_FS_USAGE}!="filesystem", ENV{ID_FS_TYPE}!="crypto_LUKS", ENV{ID_PART_TABLE_TYPE}!="dos", ENV{ID_PART_TABLE_TYPE}!="gpt", ACTION=="add", MODE="0660", ENV{DM_CRYPT_PLAIN_SDCARD}="1", TAG+="systemd", ENV{SYSTEMD_WANTS}="crypto-sd-plain@%k.service"
+KERNEL=="mmcblk1*|sd[a-z][0-9]", SUBSYSTEM=="block", ENV{ID_FS_USAGE}!="filesystem", ENV{ID_FS_TYPE}!="crypto_LUKS", ENV{ID_PART_TABLE_TYPE}!="dos", ENV{ID_PART_TABLE_TYPE}!="gpt", ACTION=="add", MODE="0660", SYMLINK+="crypto_plain_%k", TAG+="systemd", ENV{SYSTEMD_WANTS}="crypto-sd-plain@crypto_plain_%k.service"
 
 # Carefully match resulting virtual node dm-* to trigger mounting it; see /lib/udev/rules.d/10-dm.rules for details
-KERNEL=="dm-[0-9]*", SUBSYSTEM=="block", SYMLINK=="mapper/mmcblk1*|mapper/sd[a-z][0-9]", ENV{ID_FS_USAGE}=="filesystem", ENV{DM_UDEV_RULES_VSN}=="[1-9]*", ACTION=="change", ENV{DM_UDEV_PRIMARY_SOURCE_FLAG}=="1", ENV{DM_ACTIVATION}=="1", ENV{DM_SUSPENDED}=="0", MODE="0660", GROUP="disk", TAG+="systemd", ENV{SYSTEMD_WANTS}="crypto-sd-luks-udisks@%E{DM_NAME}.service"
+KERNEL=="dm-[0-9]*", SUBSYSTEM=="block", SYMLINK=="mapper/crypto_luks_mmcblk1*|mapper/crypto_luks_sd[a-z][0-9]", ENV{ID_FS_USAGE}=="filesystem", ENV{DM_UDEV_RULES_VSN}=="[1-9]*", ACTION=="change", ENV{DM_UDEV_PRIMARY_SOURCE_FLAG}=="1", ENV{DM_ACTIVATION}=="1", ENV{DM_SUSPENDED}=="0", MODE="0660", GROUP="disk", TAG+="systemd", ENV{SYSTEMD_WANTS}="crypto-sd-luks-udisks@%E{DM_NAME}.service"
 
 # Ditto for DM-Crypt "plain":
-KERNEL=="dm-[0-9]*", SUBSYSTEM=="block", SYMLINK=="mapper/mmcblk1*|mapper/sd[a-z][0-9]", ENV{ID_FS_USAGE}=="filesystem", ENV{DM_UDEV_RULES_VSN}=="[1-9]*", ACTION=="change", ENV{DM_UDEV_PRIMARY_SOURCE_FLAG}=="1", ENV{DM_ACTIVATION}=="1", ENV{DM_SUSPENDED}=="0", ENV{DM_CRYPT_PLAIN_SDCARD}=="1", MODE="0660", GROUP="disk", TAG+="systemd", ENV{SYSTEMD_WANTS}="crypto-sd-plain-udisks@%E{DM_NAME}.service"
+KERNEL=="dm-[0-9]*", SUBSYSTEM=="block", SYMLINK=="mapper/crypto_plain_mmcblk1*|mapper/crypto_plain_sd[a-z][0-9]", ENV{ID_FS_USAGE}=="filesystem", ENV{DM_UDEV_RULES_VSN}=="[1-9]*", ACTION=="change", ENV{DM_UDEV_PRIMARY_SOURCE_FLAG}=="1", ENV{DM_ACTIVATION}=="1", ENV{DM_SUSPENDED}=="0", MODE="0660", GROUP="disk", TAG+="systemd", ENV{SYSTEMD_WANTS}="crypto-sd-plain-udisks@%E{DM_NAME}.service"
 
