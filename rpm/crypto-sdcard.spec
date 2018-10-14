@@ -1,5 +1,5 @@
 Name:       	crypto-sdcard
-Summary:    	Configuration files for unlocking and mounting encrypted SD-cards.
+Summary:    	Configuration files for unlocking and mounting encrypted SD-cards
 Version:    	0.4
 Release:    	2
 # Release:  	1+sbj
@@ -57,3 +57,4 @@ then rm -f \
 %{_sysconfdir}/systemd/system/crypto-sd-symlink@.service \
 || true
 fi
+
