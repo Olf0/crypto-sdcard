@@ -12,6 +12,17 @@ Note that the "key"-file resides unencrypted on fixed mass storage, as mobile de
 <br />
 Thus **crypto-sdcard** solely protects "data at rest" on SD-cards, i.e. specifically when the device is locked or switched off (and the SD-card may be taken out).
 
+Features:
+It provides the following features: 
+* Start mounting (partitions on) SD-card via udisks at the earliest sensible time: Right after udisks2.service has started.
+* Unmount before udisks2 begins stopping, hence achieving a clean unmount.
+* Ensure, that AlienDalvik (alien-service-manager.service) begins starting after mounting succeeded, to allow for android_storage ("/data/media") on encrypted SD-card; even more importantly this also ensures, that unmounting occurs only after AlienDalvik is completely stopped.
+Nevertheless, these configuration files are also applicable to devices without AlienDalvik installed.
+* These configuration files do not alter, substitute or delete any extant files.
+* Boot time is not significantly prolonged, as opening encrypted partitions per Cryptsetup occurs in parallel to starting udisks2; after both succeeded, all mount operations are also started concurrently. 
+* Create a "compatibility symlink" to allow older apps seamless access to (partitions on) the SD-card at its new (since SailfishOS 2.2.0) location.
+
+
 Version history:
-* v0.1-1
+* v0.1-1<br />
   Initial check-in of [last version on TJC](https://together.jolla.com/question/179054/how-to-creating-partitions-on-sd-card-optionally-encrypted/?answer=189813#post-id-189813).
