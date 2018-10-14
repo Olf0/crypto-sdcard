@@ -54,5 +54,6 @@ then rm -f \
 %{_sysconfdir}/systemd/system/crypto-sd-luks-udisks@.service \
 %{_sysconfdir}/systemd/system/crypto-sd-plain@.service \
 %{_sysconfdir}/systemd/system/crypto-sd-plain-udisks@.service \
-%{_sysconfdir}/systemd/system/crypto-sd-symlink@.service
+%{_sysconfdir}/systemd/system/crypto-sd-symlink@.service \
+|| true
 fi
