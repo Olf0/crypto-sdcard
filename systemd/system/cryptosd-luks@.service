@@ -10,9 +10,9 @@ AssertFileNotEmpty=/etc/crypto-sdcard/%I.key
 Type=oneshot
 RemainAfterExit=yes
 # Only needed on Jolla 1 phones running SailfishOS 2.2.0 for using XTS:
-# ExecStartPre=/sbin/modprobe qcrypto
+ExecStartPre=/sbin/modprobe qcrypto
 # For various reasons (dependency on udisks2, allow discards etc.), do not use "udisksctl unlock --key-file", call cryptsetup directly:
 ExecStart=/usr/sbin/cryptsetup --allow-discards -d /etc/crypto-sdcard/%I.key luksOpen /dev/%I %I
-# ExecStartPost=chgrp disk /dev/mapper/%I  # Moved to udev rules 82-crypto-sd
+# ExecStartPost=chgrp disk /dev/mapper/%I  # Moved to udev rules 82-cryptosd
 ExecStop=/usr/sbin/cryptsetup close %I
 
