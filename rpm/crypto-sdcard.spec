@@ -1,7 +1,7 @@
 Name:       	crypto-sdcard
 Summary:    	Configuration files for unlocking and mounting encrypted SD-cards
 Version:    	0.4
-Release:  	1sbj
+Release:  	3sbj
 Group:      	System/Base
 Distribution:	SailfishOS
 Vendor:     	olf
@@ -41,7 +41,8 @@ cp -R systemd polkit-1 udev %{buildroot}%{_sysconfdir}/
 %{_sysconfdir}/udev/rules.d/82-cryptosd.rules
 
 %post
-if [ "$1" = "1" ]  # First install
+if [ "$1" = "1" ] 
+# First install
 then rm -f \
 %{_sysconfdir}/udev/rules.d/81-crypto-sd.rules \
 %{_sysconfdir}/udev/rules.d/82-crypto-sd.rules \
@@ -51,7 +52,6 @@ then rm -f \
 %{_sysconfdir}/systemd/system/crypto-sd-luks-udisks@.service \
 %{_sysconfdir}/systemd/system/crypto-sd-plain@.service \
 %{_sysconfdir}/systemd/system/crypto-sd-plain-udisks@.service \
-%{_sysconfdir}/systemd/system/crypto-sd-symlink@.service \
-|| true
+%{_sysconfdir}/systemd/system/crypto-sd-symlink@.service
 fi
 
