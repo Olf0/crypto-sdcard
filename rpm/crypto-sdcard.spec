@@ -1,26 +1,26 @@
 Name:       	crypto-sdcard
 Summary:    	Configuration files for unlocking and mounting encrypted SD-cards.
 Version:    	0.4
-Release:     	2
-# Release:     	1+sbj
-Group:          System/Base
-Distribution: 	SailfishOS
+Release:     	0
+# Release:   	1+sbj
+Group:        System/Base
+Distribution:	SailfishOS
 Vendor:     	olf
 Packager:    	olf
-License:   	MIT
+License:    	MIT
 URL:        	https://github.com/Olf0/%{name}
 Source0:    	%{name}-%{version}-%{release}.tar.gz
-Source1:    	https://github.com/Olf0/%{name}/archive/%{name}-%{version}-%{release}.tar.gz
+Source1:    	https://github.com/Olf0/%{name}/archive/%{version}-%{release}.tar.gz
 BuildArch:  	noarch
-BuildRequires:  systemd
+BuildRequires: systemd
 Requires:   	systemd
 Requires:   	polkit
 Requires:   	udisks2
 Requires:   	sailfish-version >= 2.2.0
 Requires:   	sailfish-version < 3.0.0
-# Requires:   	sailfish-version = 2.2.0
-# Requires:   	sbj-version  # Filters for Jolla 1 phone
-# Conflicts:   	sailfish-version >= 3.0.0  # Would prevent OS updates?!?
+# Requires:  	sailfish-version = 2.2.0
+# Requires:  	sbj-version  # Filters for Jolla 1 phone
+
 
 %description
 %{summary}
@@ -32,10 +32,10 @@ Requires:   	sailfish-version < 3.0.0
 
 %install
 mkdir -p %{buildroot}%{_sysconfdir}
-#mkdir -p \
-#%{buildroot}%{_sysconfdir}/systemd/system \
-#%{buildroot}%{_sysconfdir}/polkit-1/localauthority/50-local.d \
-#%{buildroot}%{_sysconfdir}/udev/rules.d
+
+
+
+
 cp -R systemd polkit-1 udev %{buildroot}%{_sysconfdir}/
 
 
