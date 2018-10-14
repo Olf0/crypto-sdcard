@@ -20,7 +20,7 @@ Features:
 Nevertheless, these configuration files are also applicable to devices without AlienDalvik installed.
 * These configuration files do not alter, substitute or delete any extant files.
 * Boot time is not significantly prolonged, as opening encrypted partitions per Cryptsetup occurs in parallel to starting udisks2; after both succeeded, all mount operations are also started oncurrently.
-* Create a "compatibility symlink" to allow older apps seamlessly accessing encrypted (partitions on) SD-cards at its new (since SailfishOS 2.2.0) location.
+* Create a "compatibility symlink" to allow older apps seamlessly accessing encrypted (partitions on) SD-cards at their new (since SailfishOS 2.2.0) mount point.
 
 
 Version history:
