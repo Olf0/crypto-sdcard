@@ -1,0 +1,17 @@
+[Unit]
+Description=Open DM-Crypt "plain" on SD-card %i
+Documentation=https://github.com/Olf0/crypto-sdcard
+After=systemd-udevd.service systemd-udev-settle.service dev-%i.device
+BindsTo=dev-%i.device
+Conflicts=rescue.target actdead.target factory-test.target
+AssertFileNotEmpty=/etc/%i.key
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+# Only needed on Jolla 1 phones running SailfishOS 2.2.0 for using XTS:
+ExecStartPre=/sbin/modprobe qcrypto
+ExecStart=/bin/sh -c 'cat /etc/%i.key | /usr/sbin/cryptsetup -h sha1 -s 256 -c aes-xts-plain --allow-discards --type plain open /dev/%i %i'
+# ExecStartPost=chgrp disk /dev/mapper/%i  # Moved to udev rules 82-crypto-sd
+ExecStop=/usr/sbin/cryptsetup close %i
+
