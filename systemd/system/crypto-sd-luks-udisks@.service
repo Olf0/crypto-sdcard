@@ -1,0 +1,21 @@
+[Unit]
+Description=Mount LUKS encrypted SD-card %i with udisks
+Documentation=https://github.com/Olf0/crypto-sdcard
+After=udisks2.service crypto-sd-luks@%i.service dev-mapper-%i.device
+BindsTo=udisks2.service crypto-sd-luks@%i.service dev-mapper-%i.device
+Wants=crypto-sd-symlink@%i.service
+# Ensure that this Unit is processed before alien-service-manager 
+# is started (and even more importantly that it is shut down, *after*
+# alien-service-manager is shut down), to allow for android_storage 
+# on encrypted SD-card:
+Before=alien-service-manager.service
+# If temporal ordering is wanted, because something depends on the Symlink Unit indicating that (e.g. *this*) Udisks mount has succeeded, use:
+# Before=alien-service-manager.service crypto-sd-symlink@%i.service
+
+[Service]
+User=nemo
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/udisksctl mount -b /dev/mapper/%i
+ExecStop=/usr/bin/udisksctl unmount -b /dev/mapper/%i
+
