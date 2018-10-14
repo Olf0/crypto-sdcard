@@ -1,1 +1,7 @@
+[Allow nemo mounting encrypted SD-card]
+Identity=unix-group:system
+Action=org.freedesktop.udisks2.filesystem-mount-system
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
 
