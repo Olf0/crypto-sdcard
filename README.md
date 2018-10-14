@@ -19,8 +19,8 @@ Features:
 * Ensure, that AlienDalvik (alien-service-manager.service) begins starting after mounting succeeded, to allow for android_storage ("/data/media") on encrypted SD-card; even more importantly this also ensures, that unmounting occurs only after AlienDalvik is completely stopped.
 Nevertheless, these configuration files are also applicable to devices without AlienDalvik installed.
 * These configuration files do not alter, substitute or delete any extant files.
-* Boot time is not significantly prolonged, as opening encrypted partitions per Cryptsetup occurs in parallel to starting udisks2; after both succeeded, all mount operations are also started concurrently. 
-* Create a "compatibility symlink" to allow older apps seamless access to (partitions on) the SD-card at its new (since SailfishOS 2.2.0) location.
+* Boot time is not significantly prolonged, as opening encrypted partitions per Cryptsetup occurs in parallel to starting udisks2; after both succeeded, all mount operations are also started oncurrently.
+* Create a "compatibility symlink" to allow older apps seamlessly accessing encrypted (partitions on) SD-card at its new (since SailfishOS 2.2.0) location.
 
 
 Version history:
