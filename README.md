@@ -5,9 +5,9 @@ Extensively tested with systend 225 (which includes udev), udisks2 2.7.5 and pol
 RPM spec file is for SailfishOS 2.2, which provides aforementioned environment.<br />
 RPMs built for SailfishOS are available at [OpenRepos](https://openrepos.net/content/olf/crypto-sdcard).
 
-The necessary steps to prepare an SD-card are described on [Together.Jolla.com](https://together.jolla.com/question/179054/how-to-creating-partitions-on-sd-card-optionally-encrypted/).<br />
+The necessary steps to prepare an SD-card (or any other removable storage device) are described on [Together.Jolla.com](https://together.jolla.com/question/179054/how-to-creating-partitions-on-sd-card-optionally-encrypted/).<br />
 Note that the "key"-files reside unencrypted on fixed, internal mass storage, as mobile devices usually have only a single user, who unlocks the whole device.<br />
-Thus **crypto-sdcard** solely protects "data at rest" on SD-cards oand other "external" storage devices, i.e. specifically when the host device is locked or switched off (and the SD-card may be taken out).
+Thus **crypto-sdcard** solely protects "data at rest" on SD-cards and other removable storage devices, i.e. specifically when the host device is locked or switched off (and the SD-card may be taken out).
 
 Features:
 * Start mounting encrypted (partitions on) SD-card via udisks at the earliest sensible time: Right after udisks2.service has started.
