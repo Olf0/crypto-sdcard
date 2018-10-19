@@ -10,11 +10,15 @@ Note that the "key"-files reside unencrypted on fixed, internal mass storage, as
 Thus **crypto-sdcard** solely protects "data at rest" on SD-cards and other removable storage, i.e. specifically when the device is locked or switched off (and the SD-card may be taken out).
 
 Features:
+* These configuration files do not alter, replace or delete any extant files.
+* Support of encrypted partitions and whole devices.
+* Support for Cryptsetup LUKS and Cryptsetup "plain".
+* Default parameters for Cryptsetup "plain" are "-h sha1 -s 256 -c aes-xts-plain".
+* Note that SailfishOS 2 supports only LUKSv1 headers.
 * Start mounting encrypted (partitions on) SD-card via udisks at the earliest sensible time: Right after udisks2.service has started.
 * Unmount before udisks2 begins stopping, hence achieving a clean unmount.
 * Ensure, that AlienDalvik (alien-service-manager.service) begins starting after mounting succeeded, to allow for [android_storage on SD-card](https://together.jolla.com/question/179060/how-to-externalising-android_storage-and-other-directories-files-to-sd-card/#179060-2-externalising-homenemoandroid_storage).  Even more importantly this also ensures, that unmounting occurs only after AlienDalvik is completely stopped.<br />
 Nevertheless, these configuration files are also applicable to devices without AlienDalvik installed.
-* These configuration files do not alter, replace or delete any extant files.
 * Boot time is not significantly prolonged, as unlocking encrypted partitions per Cryptsetup occurs in parallel to starting udisks2; after both succeeded, all mount operations are also started concurrently.
 * Create a "compatibility symlink" to allow older apps seamlessly accessing encrypted (partitions on) SD-cards at their new (since SailfishOS 2.2.0) mount point.
 
