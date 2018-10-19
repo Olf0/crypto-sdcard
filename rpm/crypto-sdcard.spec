@@ -61,3 +61,10 @@ then rm -f \
    fi
 fi
 
+% postun
+if [ "$1" = "0" ]
+
+# Final uninstall
+then rmdir %{_sysconfdir}/%{name} || true
+fi
+
