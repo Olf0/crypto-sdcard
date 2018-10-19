@@ -53,5 +53,11 @@ then rm -f \
 %{_sysconfdir}/systemd/system/crypto-sd-plain@.service \
 %{_sysconfdir}/systemd/system/crypto-sd-plain-udisks@.service \
 %{_sysconfdir}/systemd/system/crypto-sd-symlink@.service
+# Create directory for "key"-files?
+   if [ ! -e %{_sysconfdir}/crypto-sdcard ]
+   then mkdir %{_sysconfdir}/crypto-sdcard &&\
+        chown root:root %{_sysconfdir}/crypto-sdcard &&\
+        chmod 0640 %{_sysconfdir}/crypto-sdcard
+   fi
 fi
 
