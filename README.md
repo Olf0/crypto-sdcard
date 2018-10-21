@@ -23,8 +23,8 @@ Nevertheless, these configuration files are also applicable to devices without A
 * Create a "compatibility symlink" to allow older apps seamlessly accessing encrypted (partitions on) SD-cards at their new (since SailfishOS 2.2.0) mount point.
 
 Version history:
-* v0.5<br />
-  Optimised RPM spec file 
+
+
 * v0.4<br />
   Optimised configuration file names.<br />
   RPM spec file provided.
