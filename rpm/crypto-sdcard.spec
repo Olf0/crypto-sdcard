@@ -16,6 +16,7 @@ BuildRequires:	systemd
 Requires:   	systemd
 Requires:   	polkit
 Requires:   	udisks2
+Requires:   	cryptsetup >= 1.4.0
 Requires:   	sailfish-version >= 2.2.0
 Requires:   	sailfish-version < 3.0.0
 # Requires: 	sailfish-version = 2.2.0
@@ -23,6 +24,7 @@ Requires:   	sailfish-version < 3.0.0
 
 %description
 %{summary}
+"Key"-file naming scheme: /etc/crypto-sd/crypto_{luks|plain}_<UUID>.key
 
 %prep
 %setup -q -n %{name}-%{version}-%{release}
@@ -30,18 +32,23 @@ Requires:   	sailfish-version < 3.0.0
 %build
 
 %install
-mkdir -p %{buildroot}%{_sysconfdir}
+mkdir -p %{buildroot}%{_sysconfdir}/%{name}
 cp -R systemd polkit-1 udev %{buildroot}%{_sysconfdir}/
 
 %files
 %defattr(-,root,root,-)
+# Files which may be altered by user:
+%config %{_sysconfdir}/systemd/system/cryptosd-plain@.service
+# Regular files:
 %{_sysconfdir}/systemd/system/cryptosd-luks@.service
-%{_sysconfdir}/systemd/system/cryptosd-plain@.service
 %{_sysconfdir}/systemd/system/mount-cryptosd-luks@.service
 %{_sysconfdir}/systemd/system/mount-cryptosd-plain@.service
 %{_sysconfdir}/systemd/system/symlink-cryptosd@.service
 %{_sysconfdir}/polkit-1/localauthority/50-local.d/69-cryptosd.pkla
 %{_sysconfdir}/udev/rules.d/82-cryptosd.rules
+# Extraordinary files / dirs:
+%defattr(0640,root,root,0640)
+%dir %{_sysconfdir}/%{name}
 
 %post
 if [ "$1" = "1" ] 
