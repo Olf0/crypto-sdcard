@@ -13,8 +13,8 @@ Features:
 * These configuration files do not alter, replace or delete any extant files.
 * Support of encrypted partitions and whole devices.
 * Support for Cryptsetup LUKS and Cryptsetup "plain".
-* Default parameters for Cryptsetup "plain" are "-h sha1 -s 256 -c aes-xts-plain".
-* Note that SailfishOS 2 supports only LUKSv1 headers.
+* Default parameters for Cryptsetup "plain" are "*-h sha1 -s 256 -c aes-xts-plain*".
+* Note that SailfishOS 2 (with Cryptsetup < 2.0) supports only LUKSv1 headers.
 * Start mounting encrypted (partitions on) SD-card via udisks at the earliest sensible time: Right after udisks2.service has started.
 * Unmount before udisks2 begins stopping, hence achieving a clean unmount.
 * Ensure, that AlienDalvik (alien-service-manager.service) begins starting after mounting succeeded, to allow for [android_storage on SD-card](https://together.jolla.com/question/179060/how-to-externalising-android_storage-and-other-directories-files-to-sd-card/#179060-2-externalising-homenemoandroid_storage).  Even more importantly this also ensures, that unmounting occurs only after AlienDalvik is completely stopped.<br />
