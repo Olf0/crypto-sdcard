@@ -2,7 +2,7 @@ Name:       	crypto-sdcard
 Summary:    	Configuration files for unlocking and mounting encrypted SD-cards
 Version:    	0.4
 Release:    	5
-# Release:  	5sbj
+# Release:   	5sbj
 Group:      	System/Base
 Distribution:	SailfishOS
 Vendor:     	olf
@@ -19,8 +19,8 @@ Requires:   	udisks2
 Requires:   	cryptsetup >= 1.4.0
 Requires:   	sailfish-version >= 2.2.0
 Requires:   	sailfish-version < 3.0.0
-# Requires: 	sailfish-version = 2.2.0
-# Requires: 	sbj-version  # Filters for Jolla 1 phone
+# Requires:  	sailfish-version = 2.2.0
+# Requires:  	sbj-version  # Filters for Jolla 1 phone
 
 %description
 %{summary}
