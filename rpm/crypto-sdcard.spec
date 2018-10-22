@@ -17,7 +17,7 @@ Requires:   	polkit
 Requires:   	udisks2
 Requires:   	cryptsetup >= 1.4.0
 Requires:  	sailfish-version = 2.2.0
-Requires:  	sbj-version  # Filters for Jolla 1 phone
+Requires:  	sbj-version
 
 %description
 %{summary}
