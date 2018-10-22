@@ -1,7 +1,7 @@
 Name:       	crypto-sdcard
 Summary:    	Configuration files for unlocking and mounting encrypted SD-cards
 Version:    	0.4
-Release:  	3sbj
+Release:   	5sbj
 Group:      	System/Base
 Distribution:	SailfishOS
 Vendor:     	olf
@@ -15,11 +15,13 @@ BuildRequires:	systemd
 Requires:   	systemd
 Requires:   	polkit
 Requires:   	udisks2
-Requires: 	sailfish-version = 2.2.0
-Requires: 	sbj-version
+Requires:   	cryptsetup >= 1.4.0
+Requires:  	sailfish-version = 2.2.0
+Requires:  	sbj-version  # Filters for Jolla 1 phone
 
 %description
 %{summary}
+"Key"-file naming scheme: /etc/crypto-sd/crypto_{luks|plain}_<UUID>.key
 
 %prep
 %setup -q -n %{name}-%{version}-%{release}
@@ -27,18 +29,23 @@ Requires: 	sbj-version
 %build
 
 %install
-mkdir -p %{buildroot}%{_sysconfdir}
+mkdir -p %{buildroot}%{_sysconfdir}/%{name}
 cp -R systemd polkit-1 udev %{buildroot}%{_sysconfdir}/
 
 %files
 %defattr(-,root,root,-)
+# Files which may be altered by user:
+%config %{_sysconfdir}/systemd/system/cryptosd-plain@.service
+# Regular files:
 %{_sysconfdir}/systemd/system/cryptosd-luks@.service
-%{_sysconfdir}/systemd/system/cryptosd-plain@.service
 %{_sysconfdir}/systemd/system/mount-cryptosd-luks@.service
 %{_sysconfdir}/systemd/system/mount-cryptosd-plain@.service
 %{_sysconfdir}/systemd/system/symlink-cryptosd@.service
 %{_sysconfdir}/polkit-1/localauthority/50-local.d/69-cryptosd.pkla
 %{_sysconfdir}/udev/rules.d/82-cryptosd.rules
+# Extraordinary files / dirs:
+%defattr(0640,root,root,0640)
+%dir %{_sysconfdir}/%{name}
 
 %post
 if [ "$1" = "1" ] 
@@ -53,17 +60,4 @@ then rm -f \
 %{_sysconfdir}/systemd/system/crypto-sd-plain@.service \
 %{_sysconfdir}/systemd/system/crypto-sd-plain-udisks@.service \
 %{_sysconfdir}/systemd/system/crypto-sd-symlink@.service
-# Create directory for "key"-files:
-   if [ ! -e %{_sysconfdir}/%{name} ]
-   then mkdir %{_sysconfdir}/%{name} && \
-        chmod 0640 %{_sysconfdir}/%name} && \
-        chown root:root %{_sysconfdir}/%{name} 
-   fi
 fi
-
-% postun
-if [ "$1" = "0" ]
-# Final uninstall
-then rmdir %{_sysconfdir}/%{name} || true
-fi
-
