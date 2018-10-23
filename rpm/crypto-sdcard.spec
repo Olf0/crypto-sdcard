@@ -1,5 +1,5 @@
 Name:       	crypto-sdcard
-Summary:    	Configuration files for unlocking and mounting encrypted SD-cards
+Summary:    	Configuration files for unlocking and mounting encrypted SD-cards automatically
 Version:    	0.4
 Release:   	5sbj
 Group:      	System/Base
