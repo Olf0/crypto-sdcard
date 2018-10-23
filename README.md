@@ -39,3 +39,4 @@ Version history:
 * v0.1<br />
   Initial check-in of the [last version on TJC](https://together.jolla.com/question/179054/how-to-creating-partitions-on-sd-card-optionally-encrypted/?answer=189813#post-id-189813).<br />
   "Key"-file format is `/etc/<device>.key`, e.g. */etc/mmcblk1p2.key*
+
