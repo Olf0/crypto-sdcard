@@ -77,7 +77,10 @@ then
   done
   if rmdir ${OLD_MOUNT_PATH}
   then ln -s /run/media/${DEVICEUSER} ${OLD_MOUNT_PATH}
-  else echo "Warning: Files or non-empty directories exist in ${OLD_MOUNT_PATH}, hence cannot create compatibility symlink."
+  else
+    echo "[crypto-sdcard] Warning:"
+    echo "${OLD_MOUNT_PATH} does either not exist, is not a directory or contains files or non-empty directories."
+    echo "Thus omitting creation of compatibility symlink ${OLD_MOUNT_PATH} -> /run/media/${DEVICEUSER}!"
   fi
 fi
 
