@@ -48,16 +48,34 @@ cp -R systemd polkit-1 udev %{buildroot}%{_sysconfdir}/
 
 %post
 if [ "$1" = "1" ] 
-# First install
-then rm -f \
-%{_sysconfdir}/udev/rules.d/81-crypto-sd.rules \
-%{_sysconfdir}/udev/rules.d/82-crypto-sd.rules \
-%{_sysconfdir}/polkit-1/localauthority/50-local.d/80-crypto-sd-udisks.pkla \
-%{_sysconfdir}/polkit-1/localauthority/50-local.d/69-crypto-sd-udisks.pkla \
-%{_sysconfdir}/systemd/system/crypto-sd-luks@.service \
-%{_sysconfdir}/systemd/system/crypto-sd-luks-udisks@.service \
-%{_sysconfdir}/systemd/system/crypto-sd-plain@.service \
-%{_sysconfdir}/systemd/system/crypto-sd-plain-udisks@.service \
-%{_sysconfdir}/systemd/system/crypto-sd-symlink@.service
+# First install 
+then
+  # Delete manually installed files from versions before 0.4 and pre-releases on TJC
+  rm -f \
+  %{_sysconfdir}/udev/rules.d/81-crypto-sd.rules \
+  %{_sysconfdir}/udev/rules.d/82-crypto-sd.rules \
+  %{_sysconfdir}/polkit-1/localauthority/50-local.d/80-crypto-sd-udisks.pkla \
+  %{_sysconfdir}/polkit-1/localauthority/50-local.d/69-crypto-sd-udisks.pkla \
+  %{_sysconfdir}/systemd/system/crypto-sd-luks@.service \
+  %{_sysconfdir}/systemd/system/crypto-sd-luks-udisks@.service \
+  %{_sysconfdir}/systemd/system/crypto-sd-plain@.service \
+  %{_sysconfdir}/systemd/system/crypto-sd-plain-udisks@.service \
+  %{_sysconfdir}/systemd/system/crypto-sd-symlink@.service
+fi 
+# Replay enhanced git.merproject.org/udisks2/udisks2-symlink-mount-path
+OLD_MOUNT_PATH=/media/sdcard
+if [ ! -L $OLD_MOUNT_PATH ] 
+then
+  DEF_UID=$(grep "^UID_MIN" /etc/login.defs |  tr -s " " | cut -d " " -f2)
+  DEVICEUSER=$(getent passwd $DEF_UID | sed 's/:.*//')
+  for path in ${OLD_MOUNT_PATH}/*
+  do
+    if [ -L $path ]
+    then rm -f ${path}
+    else rmdir ${path}
+    fi
+  done
+  rmdir ${OLD_MOUNT_PATH} && ln -s /run/media/${DEVICEUSER} ${OLD_MOUNT_PATH}
 fi
+
 
