@@ -47,7 +47,7 @@ cp -R systemd polkit-1 udev %{buildroot}%{_sysconfdir}/
 %dir %{_sysconfdir}/%{name}
 
 %post
-if [ "$1" = "1" ] 
+if [ "$1" = "1" ]
 # First install 
 then
   # Delete manually installed files from versions before 0.4 and pre-releases on TJC
@@ -61,7 +61,7 @@ then
   %{_sysconfdir}/systemd/system/crypto-sd-plain@.service \
   %{_sysconfdir}/systemd/system/crypto-sd-plain-udisks@.service \
   %{_sysconfdir}/systemd/system/crypto-sd-symlink@.service
-fi 
+fi
 # Replay adapted git.merproject.org/Olf0/udisks2/udisks2-symlink-mount-path
 OLD_MOUNT_PATH=/media/sdcard
 if [ ! -L ${OLD_MOUNT_PATH} ] 
