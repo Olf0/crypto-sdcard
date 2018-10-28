@@ -64,8 +64,8 @@ then
   %{_sysconfdir}/systemd/system/crypto-sd-plain@.service \
   %{_sysconfdir}/systemd/system/crypto-sd-plain-udisks@.service \
   %{_sysconfdir}/systemd/system/crypto-sd-symlink@.service
-fi 
-# Replay enhanced git.merproject.org/udisks2/udisks2-symlink-mount-path
+fi
+# Replay adapted git.merproject.org/Olf0/udisks2/udisks2-symlink-mount-path
 OLD_MOUNT_PATH=/media/sdcard
 if [ ! -L ${OLD_MOUNT_PATH} ] 
 then
