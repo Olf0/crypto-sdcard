@@ -50,7 +50,7 @@ cp -R systemd polkit-1 udev %{buildroot}%{_sysconfdir}/
 %dir %{_sysconfdir}/%{name}
 
 %post
-if [ "$1" = "1" ] 
+if [ "$1" = "1" ]
 # First install 
 then
   # Delete manually installed files from versions before 0.4 and pre-releases on TJC
