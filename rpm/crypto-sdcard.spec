@@ -64,18 +64,20 @@ then
 fi 
 # Replay enhanced git.merproject.org/udisks2/udisks2-symlink-mount-path
 OLD_MOUNT_PATH=/media/sdcard
-if [ ! -L $OLD_MOUNT_PATH ] 
+if [ ! -L ${OLD_MOUNT_PATH} ] 
 then
   DEF_UID=$(grep "^UID_MIN" /etc/login.defs |  tr -s " " | cut -d " " -f2)
   DEVICEUSER=$(getent passwd $DEF_UID | sed 's/:.*//')
   for path in ${OLD_MOUNT_PATH}/*
   do
-    if [ -L $path ]
+    if [ -L ${path} ]
     then rm -f ${path}
     else rmdir ${path}
     fi
   done
-  rmdir ${OLD_MOUNT_PATH} && ln -s /run/media/${DEVICEUSER} ${OLD_MOUNT_PATH}
+  if rmdir ${OLD_MOUNT_PATH}
+  then ln -s /run/media/${DEVICEUSER} ${OLD_MOUNT_PATH}
+  else echo "Warning: Files or non-empty directories exist in ${OLD_MOUNT_PATH}, hence cannot create compatibility symlink."
+  fi
 fi
-
 
