@@ -1,8 +1,7 @@
 Name:       	crypto-sdcard
 Summary:    	Configuration files for unlocking and mounting encrypted SD-cards automatically
 Version:    	0.4
-Release:    	11
-# Release:   	10sbj
+Release:    	12
 Group:      	System/Base
 Distribution:	SailfishOS
 Vendor:     	olf
@@ -19,8 +18,8 @@ Requires:   	udisks2
 Requires:   	cryptsetup >= 1.4.0
 Requires:   	sailfish-version >= 2.2.0
 Requires:   	sailfish-version < 3.0.0
-# Requires:  	sailfish-version = 2.2.0
-# Requires:  	sbj-version  # Filters for Jolla 1 phone
+# Filter for Jolla 1 phones ("sbj"):
+# Conflicts:  	sbj-version
 
 %description
 %{summary}
@@ -66,24 +65,24 @@ then
   %{_sysconfdir}/systemd/system/crypto-sd-symlink@.service
 fi
 # Replay adapted https://git.merproject.org/olf/udisks2/blob/master/rpm/udisks2-symlink-mount-path
-OLD_MOUNT_PATH=/media/sdcard
-if [ ! -L ${OLD_MOUNT_PATH} ] 
+OLD_MOUNT_PATH="/media/sdcard"
+if [ ! -L "$OLD_MOUNT_PATH" ] 
 then
-  DEF_UID=$(grep "^UID_MIN" /etc/login.defs |  tr -s " " | cut -d " " -f2)
-  DEVICEUSER=$(getent passwd $DEF_UID | sed 's/:.*//')
-  for path in ${OLD_MOUNT_PATH}/*
+  DEF_UID="$(grep '^UID_MIN' /etc/login.defs | tr -s ' ' | cut -f 2 -d ' ')"
+  DEVICEUSER="$(getent passwd $DEF_UID | sed 's/:.*//')"
+  for path in "$OLD_MOUNT_PATH"/*
   do
-    if [ -L ${path} ]
-    then rm -f ${path}
-    else rmdir ${path}
+    if [ -L "$path" ]
+    then rm -f "$path"
+    else rmdir "$path"
     fi
   done
-  if rmdir ${OLD_MOUNT_PATH}
-  then ln -s /run/media/${DEVICEUSER} ${OLD_MOUNT_PATH}
+  if rmdir "$OLD_MOUNT_PATH"
+  then ln -s "/run/media/$DEVICEUSER" "$OLD_MOUNT_PATH"
   else
-    echo "[%{name}] Warning:"
-    echo "${OLD_MOUNT_PATH} does either not exist, is not a directory or contains files or non-empty directories."
-    echo "Thus omitting creation of compatibility symlink ${OLD_MOUNT_PATH} -> /run/media/${DEVICEUSER}!"
+    echo '[%{name}] Warning:'
+    echo "$OLD_MOUNT_PATH does either not exist, is not a directory or contains files or non-empty directories."
+    echo "Thus omitting creation of compatibility symlink $OLD_MOUNT_PATH -> /run/media/${DEVICEUSER}!"
   fi
 fi
 
