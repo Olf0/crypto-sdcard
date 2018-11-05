@@ -1,7 +1,7 @@
 Name:       	crypto-sdcard
 Summary:    	Configuration files for unlocking and mounting encrypted SD-cards automatically
 Version:    	0.5
-Release:    	2
+Release:    	3
 Group:      	System/Base
 Distribution:	SailfishOS
 Vendor:     	olf
@@ -24,7 +24,7 @@ Conflicts:    crypto-sdcard_sbj
 
 %description
 %{summary}
-"Key"-file naming scheme: /etc/crypto-sdcard/crypto_{luks|plain}_<UUID>.key
+"Key"-file naming scheme: /etc/%{name}/crypto_{luks|plain}_<UUID>.key
 
 %prep
 %setup -q -n %{name}-%{version}-%{release}
