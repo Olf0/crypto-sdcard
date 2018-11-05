@@ -24,7 +24,7 @@ Conflicts:    crypto-sdcard_sbj
 
 %description
 %{summary}
-"Key"-file naming scheme: /etc/crypto-sd/crypto_{luks|plain}_<UUID>.key
+"Key"-file naming scheme: /etc/crypto-sdcard/crypto_{luks|plain}_<UUID>.key
 
 %prep
 %setup -q -n %{name}-%{version}-%{release}
@@ -51,7 +51,7 @@ cp -R systemd polkit-1 udev %{buildroot}%{_sysconfdir}/
 
 %post
 if [ "$1" = "1" ]
-# First install 
+# First install
 then
   # Delete manually installed files from versions before 0.4 and pre-releases on TJC
   rm -f \
