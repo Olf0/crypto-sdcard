@@ -17,7 +17,8 @@ Requires:   	polkit
 Requires:   	udisks2
 Requires:   	cryptsetup >= 1.4.0
 Requires:   	sailfish-version >= 2.2.0
-Requires:   	sailfish-version < 3.0.1
+# Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
+# Requires:   	sailfish-version < 3.0.1
 # Filter for Jolla 1 phones ("sbj"):
 # Conflicts:  	sbj-version
 Conflicts:    crypto-sdcard_sbj
