@@ -14,6 +14,7 @@ Thus **crypto-sdcard** solely protects "data at rest" on SD-cards and other remo
 Features:
 * These configuration files do not alter, replace or delete any extant files.
 * Support of encrypted partitions and whole devices.
+* Support for (µ)SD-cards and USB-attached storage (if supported by device hardware and Operating System).
 * Support for Cryptsetup LUKS and Cryptsetup "plain".
    * Note that SailfishOS (by providing Cryptsetup v1.x.y) supports only LUKSv1 headers.
    * Default parameters for Cryptsetup "plain" are "*-h sha1 -s 256 -c aes-xts-plain*".
