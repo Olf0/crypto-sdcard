@@ -3,8 +3,8 @@ Configuration files for unlocking and mounting encrypted SD-cards, using udev, u
 
 Note that for devices (e.g. Jolla 1 phones aka "sbj"), which need Qualcomm's `qcrypto` kernel module to be loaded in order to support modern cryptographic schemes as e.g. XTS, a [separate edition is provided](https://github.com/Olf0/crypto-sdcard_sbj).
 
-Extensively tested with systend 225 (which includes udev), udisks2 2.7.5 and polkit 0.104.<br />
-RPM spec file is for SailfishOS 2.2, which provides aforementioned environment.<br />
+Extensively tested with systemd 225 (which includes udev), udisks2 2.7.5 and polkit 0.104.<br />
+RPM spec file is for SailfishOS 2.2 / 3.0, which provides aforementioned environment.<br />
 RPMs built for SailfishOS are available at [OpenRepos](https://openrepos.net/content/olf/crypto-sdcard).
 
 The necessary steps to prepare an SD-card (or any other removable storage) are described at [Together.Jolla.com](https://together.jolla.com/question/179054/how-to-creating-partitions-on-sd-card-optionally-encrypted/).<br />
