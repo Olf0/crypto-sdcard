@@ -1,7 +1,7 @@
 Name:       	crypto-sdcard
 Summary:    	Configuration files for unlocking and mounting encrypted SD-cards automatically
 Version:    	0.5
-Release:    	7
+Release:    	8
 Group:      	System/Base
 Distribution:	SailfishOS
 Vendor:     	olf
