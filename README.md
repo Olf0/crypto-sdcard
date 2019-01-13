@@ -6,7 +6,6 @@ Note that for devices (e.g. Jolla 1 phones aka "sbj"), which need Qualcomm's `qc
 Extensively tested with systemd 225 (which includes udev), udisks2 2.7.5 and polkit 0.104 (e.g. SailfishOS 2.2 / 3.0, which provides aforementioned environment).<br />
 Built RPMs are available in the [release section](https://github.com/Olf0/crypto-sdcard/releases) and for easy installation under SailfishOS at [OpenRepos](https://openrepos.net/content/olf/crypto-sdcard).
 
-
 The necessary steps to prepare an SD-card (or any other removable storage) are described at [Together.Jolla.com](https://together.jolla.com/question/195850/quick-guide-creating-partitions-on-sd-card-optionally-encrypted/).<br />
 Note that the "key"-files reside unencrypted on fixed, internal mass storage, as mobile devices usually have only a single user, who unlocks the whole device.<br />
 Thus **crypto-sdcard** solely protects "data at rest" on SD-cards and other removable storage, i.e. specifically when the device is locked or switched off (and the SD-card may be taken out).
@@ -33,10 +32,10 @@ Version history:
   Optimised configuration file names.<br />
   RPM spec file provided.
 * v0.3<br />
-  Switched to a UUID-based "key"-file naming scheme to allow for swapping encrypted SD-cards easily and moved "key"-files into a directory.<br /> 
+  Switched to a UUID-based "key"-file naming scheme to allow for swapping encrypted SD-cards easily and moved "key"-files into a directory.   Missed to properly implement this change for "plain" partitions, as they have no UUID!<br /> 
   Hence the "key"-file format has changed again (please rename your "key"-files accordingly): 
     * For Cryptsetup LUKS: `/etc/crypto-sdcard/crypto_luks_<UUID>.key`
-    * For Cryptsetup "plain": `/etc/crypto-sdcard/crypto_plain_<UUID>.key`
+    * For Cryptsetup "plain": `/etc/crypto-sdcard/crypto_plain_.key`
 * v0.2<br />
   Fixed automatic mounting of DM-Crypt "plain" partitions.<br />
   "Key"-file format has changed (please rename your "key"-files accordingly):
