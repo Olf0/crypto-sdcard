@@ -32,7 +32,7 @@ Version history:
   Optimised configuration file names.<br />
   RPM spec file provided.
 * v0.3<br />
-  Switched to a UUID-based "key"-file naming scheme to allow for swapping encrypted SD-cards easily and moved "key"-files into a directory.   Missed to properly implement this change for "plain" partitions, as they have no UUID!<br /> 
+  Switched to a UUID-based "key"-file naming scheme for LUKS partitions to allow for swapping encrypted SD-cards easily and moved "key"-files into a directory.   Missed to properly implement this change for "plain" partitions, as they have no UUID!<br /> 
   Hence the "key"-file format has changed again (please rename your "key"-files accordingly): 
     * For Cryptsetup LUKS: `/etc/crypto-sdcard/crypto_luks_<UUID>.key`
     * For Cryptsetup "plain": `/etc/crypto-sdcard/crypto_plain_.key`
