@@ -20,7 +20,7 @@ Conflicts:    crypto-sdcard_sbj
 
 %description
 %{summary}
-"Key"-file naming scheme: /etc/%{name}/crypto_{luks|plain}_<UUID>.key
+"Key"-file naming scheme: /etc/%{name}/crypto_luks_<UUID>.key rsp. /etc/%{name}/crypto_plain_<device-name>.key
 
 %prep
 %setup -q -n %{name}-%{version}-%{release}
