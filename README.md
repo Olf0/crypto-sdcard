@@ -24,7 +24,7 @@ Nevertheless, these configuration files are also applicable to devices without A
 * Boot time is not significantly prolonged, as unlocking encrypted partitions per Cryptsetup occurs in parallel to starting udisks2; after both succeeded, all mount operations are also started concurrently.
 
 Version history:
-* v0.9<br />
+* v1.0<br />
   Due to another round of significant spec-file changes (completely removed SalifishOS dependencies and all %post scriptlets), increasing the version number again.
 * v0.6<br />
   A few small, but significant enhancements (since v0.5-5) are finally reflected in another version number increase.<br />
