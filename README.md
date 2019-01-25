@@ -1,5 +1,5 @@
 # crypto-sdcard
-Configuration files for unlocking and mounting encrypted SD-cards, using udev, udisks2, polkit and systemd.
+#### Configuration files for unlocking and mounting encrypted SD-cards, using udev, udisks2, polkit and systemd.
 
 Note that for devices (e.g. Jolla 1 phones aka "sbj"), which need Qualcomm's `qcrypto` kernel module to be loaded in order to support modern cryptographic schemes as e.g. XTS, a [separate edition is provided](https://github.com/Olf0/crypto-sdcard_sbj).
 
