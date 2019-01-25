@@ -15,8 +15,8 @@ Features:
 * Support of encrypted partitions and whole devices.
 * Support for (µ)SD-cards and USB-attached storage (if supported by device hardware and Operating System).
 * Support for Cryptsetup LUKS and Cryptsetup "plain".
-   * Note that SailfishOS (by providing Cryptsetup v1.x.y) supports only LUKSv1 headers.
-   * Default parameters for Cryptsetup "plain" are "*-h sha1 -s 256 -c aes-xts-plain*".
+  * Note that SailfishOS (by providing Cryptsetup v1.x.y) supports only LUKSv1 headers.
+  * Default parameters for Cryptsetup "plain" are "*-h sha1 -s 256 -c aes-xts-plain*".
 * Start mounting encrypted (partitions on) SD-card via udisks at the earliest sensible time: Right after udisks2.service has started.
 * Unmount before udisks2 begins stopping, hence achieving a clean unmount.
 * Ensure, that AlienDalvik (specifically *alien-service-manager.service*) begins starting after mounting succeeded, to allow for [android_storage on SD-card](https://together.jolla.com/question/179060/how-to-externalising-android_storage-and-other-directories-files-to-sd-card/#179060-2-externalising-homenemoandroid_storage).  Even more importantly this also ensures, that unmounting occurs only after AlienDalvik is completely stopped.<br />
@@ -40,13 +40,13 @@ Version history:
 * v0.3<br />
   Switched to a UUID-based "key"-file naming scheme for LUKS partitions to allow for swapping encrypted SD-cards easily and moved "key"-files into a directory.  Missed to properly implement this change for "plain" partitions, as they have no UUID!<br /> 
   Hence the "key"-file format has changed again (please rename your "key"-files accordingly): 
-    * For Cryptsetup LUKS: `/etc/crypto-sdcard/crypto_luks_<UUID>.key`
-    * For Cryptsetup "plain": `/etc/crypto-sdcard/crypto_plain_.key`
+  * For Cryptsetup LUKS: `/etc/crypto-sdcard/crypto_luks_<UUID>.key`
+  * For Cryptsetup "plain": `/etc/crypto-sdcard/crypto_plain_.key`
 * v0.2<br />
   Fixed automatic mounting of DM-Crypt "plain" partitions.<br />
   "Key"-file format has changed (please rename your "key"-files accordingly):
-    * For Cryptsetup LUKS: `/etc/crypto_luks_<device>.key`, e.g. */etc/crypto_luks_mmcblk1p2.key*
-    * For Cryptsetup "plain": `/etc/crypto_plain_<device>.key`, e.g. */etc/crypto_plain_mmcblk1p2.key*
+  * For Cryptsetup LUKS: `/etc/crypto_luks_<device>.key`, e.g. */etc/crypto_luks_mmcblk1p2.key*
+  * For Cryptsetup "plain": `/etc/crypto_plain_<device>.key`, e.g. */etc/crypto_plain_mmcblk1p2.key*
 * v0.1<br />
   Initial check-in of the [last version at TJC](https://together.jolla.com/question/179054/how-to-creating-partitions-on-sd-card-optionally-encrypted/?answer=189813#post-id-189813).<br />
   "Key"-file format is `/etc/<device>.key`, e.g. */etc/mmcblk1p2.key*

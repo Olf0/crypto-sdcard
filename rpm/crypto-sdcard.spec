@@ -1,29 +1,28 @@
 Name:       	crypto-sdcard
 Summary:    	Configuration files for unlocking and mounting encrypted SD-cards automatically
 Version:    	0.6
-Release:    	1
+Release:    	2
 Group:      	System/Base
 Distribution:	SailfishOS
 Vendor:     	olf
 Packager:   	olf
 License:    	MIT
 URL:        	https://github.com/Olf0/%{name}
-Source0:    	%{name}-%{version}-%{release}.tar.gz
+Source:     	%{name}-%{version}-%{release}.tar.gz
 Source1:    	https://github.com/Olf0/%{name}/archive/%{version}-%{release}.tar.gz
 BuildArch:  	noarch
-BuildRequires:	systemd
 Requires:   	systemd
 Requires:   	polkit
 Requires:   	udisks2
 Requires:   	cryptsetup >= 1.4.0
-Conflicts:    crypto-sdcard_sbj
+Conflicts:  	crypto-sdcard_sbj
 
 %description
 %{summary}
 "Key"-file naming scheme: /etc/%{name}/crypto_luks_<UUID>.key rsp. /etc/%{name}/crypto_plain_<device-name>.key
 
 %prep
-%setup -q -n %{name}-%{version}-%{release}
+%setup -n %{name}-%{version}-%{release}
 
 %build
 
