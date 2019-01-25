@@ -43,3 +43,4 @@ cp -R systemd polkit-1 udev %{buildroot}%{_sysconfdir}/
 # Extraordinary files / dirs:
 %defattr(0640,root,root,0750)
 %dir %{_sysconfdir}/%{name}
+
