@@ -3,9 +3,8 @@ Configuration files for unlocking and mounting encrypted SD-cards, using udev, u
 
 Note that for devices (e.g. Jolla 1 phones aka "sbj"), which need Qualcomm's `qcrypto` kernel module to be loaded in order to support modern cryptographic schemes as e.g. XTS, a [separate edition is provided](https://github.com/Olf0/crypto-sdcard_sbj).
 
-Extensively tested with systemd 225 (which includes udev), udisks2 2.7.5 and polkit 0.104.<br />
-RPM spec file is for SailfishOS 2.2 / 3.0, which provides aforementioned environment.<br />
-RPMs built for SailfishOS are available at [OpenRepos](https://openrepos.net/content/olf/crypto-sdcard).
+Extensively tested with systemd 225 (which includes udev), udisks2 2.7.5 and polkit 0.104 (e.g. SailfishOS 2.2 / 3.0, which provides aforementioned environment).<br />
+Built RPMs are available in the [release section](https://github.com/Olf0/crypto-sdcard/releases) and for easy installation under SailfishOS at [OpenRepos](https://openrepos.net/content/olf/crypto-sdcard).
 
 The necessary steps to prepare an SD-card (or any other removable storage) are described at [Together.Jolla.com](https://together.jolla.com/question/195850/guide-creating-partitions-on-sd-card-optionally-encrypted/).<br />
 Note that the "key"-files reside unencrypted on fixed, internal mass storage, as mobile devices usually have only a single user, who unlocks the whole device.<br />
@@ -23,14 +22,15 @@ Features:
 * Ensure, that AlienDalvik (specifically *alien-service-manager.service*) begins starting after mounting succeeded, to allow for [android_storage on SD-card](https://together.jolla.com/question/179060/how-to-externalising-android_storage-and-other-directories-files-to-sd-card/#179060-2-externalising-homenemoandroid_storage).  Even more importantly this also ensures, that unmounting occurs only after AlienDalvik is completely stopped.<br />
 Nevertheless, these configuration files are also applicable to devices without AlienDalvik installed.
 * Boot time is not significantly prolonged, as unlocking encrypted partitions per Cryptsetup occurs in parallel to starting udisks2; after both succeeded, all mount operations are also started concurrently.
-* Create / try to rectify the "compatibility symlink" in order to allow older apps seamlessly accessing encrypted (partitions on) SD-cards at their new (since SailfishOS 2.2.0) mount point.
 
 Version history:
-* v0.6<br /> 
-  A few small, but significant enhancements (since v0.5-5) are finally reflected in another version number increase.<br /> 
-  "Key"-file format is:  
-  * For Cryptsetup LUKS: `/etc/crypto-sdcard/crypto_luks_<UUID>.key` (since v0.3)   
-  * For Cryptsetup "plain": `/etc/crypto-sdcard/crypto_plain_<device-name>.key` (since v0.5-7)  
+* v1.0<br />
+  Due to another round of significant spec-file changes (completely removed SalifishOS dependencies and all %post scriptlets), increasing the version number again.
+* v0.6<br />
+  A few small, but significant enhancements (since v0.5-5) are finally reflected in another version number increase.<br />
+  "Key"-file format is: 
+  * For Cryptsetup LUKS: `/etc/crypto-sdcard/crypto_luks_<UUID>.key` (since v0.3)  
+  * For Cryptsetup "plain": `/etc/crypto-sdcard/crypto_plain_<device-name>.key` (since v0.5-7) 
   * A specific `<UUID>` can be obtained by executing `blkid -c /dev/null -s UUID -o value /dev/<device-name>` with e.g. `mmcblk1p2` as `<device-name>`.
 * v0.5<br />
   Although the installed configuration files are unaltered since v0.4-3, the spec-file ("RPM packaging") changes have been significant, so it ultimately earns an increased version number.
