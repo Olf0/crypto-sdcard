@@ -28,7 +28,7 @@ Version history:
   Due to another round of significant spec-file changes (completely removed SalifishOS dependencies and all %post scriptlets), increasing the version number again.
 * v0.6<br />
   A few small, but significant enhancements (since v0.5-5) are finally reflected in another version number increase.<br />
-  "Key"-file format is:
+  "Key"-file path and names are now:
   * For Cryptsetup LUKS: `/etc/crypto-sdcard/crypto_luks_<UUID>.key` (since v0.3)
   * For Cryptsetup "plain": `/etc/crypto-sdcard/crypto_plain_<device-name>.key` (since v0.5-7)
   * A specific `<UUID>` can be obtained by executing `blkid -c /dev/null -s UUID -o value /dev/<device-name>` with e.g. `mmcblk1p2` as `<device-name>`.
@@ -39,14 +39,14 @@ Version history:
   RPM spec file provided.
 * v0.3<br />
   Switched to a UUID-based "key"-file naming scheme for LUKS partitions to allow for swapping encrypted SD-cards easily and moved "key"-files into a directory.  Missed to properly implement this change for "plain" partitions, as they have no UUID!<br />
-  Hence the "key"-file format has changed again (please rename your "key"-files accordingly):
+  Hence the "key"-file path and names have changed again (please rename your "key"-files accordingly):
   * For Cryptsetup LUKS: `/etc/crypto-sdcard/crypto_luks_<UUID>.key`
   * For Cryptsetup "plain": `/etc/crypto-sdcard/crypto_plain_.key`
 * v0.2<br />
   Fixed automatic mounting of DM-Crypt "plain" partitions.<br />
-  "Key"-file format has changed (please rename your "key"-files accordingly):
+  "Key"-file path and names are altered (please rename your "key"-files accordingly):
   * For Cryptsetup LUKS: `/etc/crypto_luks_<device>.key`, e.g. */etc/crypto_luks_mmcblk1p2.key*
   * For Cryptsetup "plain": `/etc/crypto_plain_<device>.key`, e.g. */etc/crypto_plain_mmcblk1p2.key*
 * v0.1<br />
   Initial check-in of the [last version at TJC](https://together.jolla.com/question/179054/how-to-creating-partitions-on-sd-card-optionally-encrypted/?answer=189813#post-id-189813).<br />
-  "Key"-file format is `/etc/<device>.key`, e.g. */etc/mmcblk1p2.key*
+  "Key"-file path and names are `/etc/<device>.key`, e.g. */etc/mmcblk1p2.key*
