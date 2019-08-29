@@ -15,8 +15,11 @@ Features:
 * Support of encrypted partitions and whole devices.
 * Support for (µ)SD-cards and USB-attached storage (if supported by device hardware and Operating System).
 * Support for Cryptsetup LUKS and Cryptsetup "plain".
-  * Note that SailfishOS (by providing Cryptsetup v1.x.y) supports only LUKSv1 headers.
-  * Default parameters for Cryptsetup "plain" are "*-h sha1 -s 256 -c aes-xts-plain*".
+  * Note that SailfishOS just recently ([with v3.0.3](https://together.jolla.com/question/203846/changelog-303-hossa/#203846-cryptsetup)) switched to Cryptsetup **2**, and so did most (desktop) Linux distributions.
+    For interoperability with extant Linux installations and commonality with SailfishOS before v3.0.3, which provide Cryptsetup **1.x** (therefore only support LUKSv1 headers), [the "partitioning  guide"](https://together.jolla.com/question/195850/guide-creating-partitions-on-sd-card-optionally-encrypted/#195850-43-dm-crypt-encrypted) aims at creating LUKSv1 headers.
+  * As Cryptsetup reads the cryptography parameters from the LUKS header and Cryptsetup **2** supports both v1 and v2 headers, **crypto-sdcard** shall work fine with any LUKS header version and parameters, which are valid for the installed Cryptsetup version.
+  * For Cryptsetup "plain" (only to be used, when "plausible deniability" is a must), **crypto-sdcard** has to provide the cryptography parameters and uses "*-h sha1 -s 256 -c aes-xts-plain*" by default.
+    While these parameters are optimised for speed, low power consumption, interoperability and sufficiently strong security for the next decade (including the specific use of SHA1 for hashing a pass-file down to 160 bits), other parameters may be set for unlocking Cryptsetup "plain" in */etc/systemd/system/cryptosd-plain\@.service*
 * Start mounting encrypted (partitions on) SD-card via udisks at the earliest sensible time: Right after udisks2.service has started.
 * Unmount before udisks2 begins stopping, hence achieving a clean unmount.
 * Ensure, that AlienDalvik (specifically *alien-service-manager.service*) begins starting after mounting succeeded, to allow for [android_storage on SD-card](https://together.jolla.com/question/203539/guide-externalising-android_storage-and-other-directories-files-to-sd-card/#203539-2-externalising-homenemoandroid_storage).  Even more importantly this also ensures, that unmounting occurs only after AlienDalvik is completely stopped.<br />
