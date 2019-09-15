@@ -1,7 +1,7 @@
 Name:          crypto-sdcard
 Summary:       Configuration files for unlocking and mounting encrypted SD-cards automatically
 Version:       1.1
-Release:       1
+Release:       2
 Group:         System/Base
 Distribution:  SailfishOS
 Vendor:        olf
@@ -9,7 +9,7 @@ Packager:      olf
 License:       MIT
 URL:           https://github.com/Olf0/%{name}
 Source:        %{name}-%{version}-%{release}.tar.gz
-Source1:       https://github.com/Olf0/%{name}/archive/%{version}-%{release}.tar.gz
+# Source1:     https://github.com/Olf0/%{name}/archive/%{version}-%{release}.tar.gz
 BuildArch:     noarch
 Requires:      systemd
 Requires:      polkit
