@@ -8,8 +8,7 @@ Vendor:        olf
 Packager:      olf
 License:       MIT
 URL:           https://github.com/Olf0/%{name}
-Source:        %{name}-%{version}-%{release}.tar.gz
-# Source1:     https://github.com/Olf0/%{name}/archive/%{version}-%{release}/%{name}-%{version}-%{release}.tar.gz
+Source:        https://github.com/Olf0/%{name}/archive/%{version}-%{release}/%{name}-%{version}-%{release}.tar.gz
 BuildArch:     noarch
 Requires:      systemd
 Requires:      polkit
