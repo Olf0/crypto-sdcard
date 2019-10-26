@@ -1,7 +1,7 @@
 Name:          crypto-sdcard
 Summary:       Configuration files for unlocking and mounting encrypted SD-cards automatically
-Version:       1.0
-Release:       4
+Version:       1.1
+Release:       1
 Group:         System/Base
 Distribution:  SailfishOS
 Vendor:        olf
@@ -15,6 +15,9 @@ Requires:      polkit
 Requires:      udisks2
 Requires:      cryptsetup >= 1.4.0
 Conflicts:     crypto-sdcard_sbj
+Requires:      sailfish-version >= 3.2.0
+# Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
+# Requires:     sailfish-version < 3.9.9
 
 %description
 %{summary}
