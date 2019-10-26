@@ -1,7 +1,7 @@
 [Unit]
 Description=Mount "plain" encrypted SD-card (%I) with udisks
 Documentation=https://github.com/Olf0/crypto-sdcard
-After=udisks2.service cryptosd-plain@%i.service dev-mapper-%i.device
+After=udisks2.service cryptosd-plain@%i.service dev-mapper-%i.device start-user-session.service
 BindsTo=udisks2.service cryptosd-plain@%i.service dev-mapper-%i.device
 # Ensure that this Unit is processed before alien-service-manager
 # is started (and even more importantly that it is shut down, *after*
@@ -10,7 +10,6 @@ BindsTo=udisks2.service cryptosd-plain@%i.service dev-mapper-%i.device
 Before=alien-service-manager.service
 
 [Service]
-User=nemo
 Type=oneshot
 RemainAfterExit=yes
 # "udisksctl mount" (below) often fails when issued right after
@@ -18,6 +17,6 @@ RemainAfterExit=yes
 # udisks object for an encrypted partition has not been created yet.
 # Hence giving udisksd a second to settle:
 ExecStartPre=/bin/sleep 1
-ExecStart=/usr/bin/udisksctl mount -b /dev/mapper/%I
-ExecStop=/usr/bin/udisksctl unmount -b /dev/mapper/%I
+ExecStart=/usr/bin/udisksctl-user mount -b /dev/mapper/%I
+ExecStop=/usr/bin/udisksctl-user unmount -b /dev/mapper/%I
 
