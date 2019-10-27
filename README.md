@@ -28,7 +28,8 @@ Nevertheless, these configuration files are also applicable to devices without A
 
 Version history:
 * v1.1<br />
-  Following the [changes in SFOS-next](https://git.sailfishos.org/mer-core/udisks2/commit/bcc6437ff35a3cc1e8c4777ee80d85a9c112e63e) to allow any interactive user (i.e., not just *nemo*) to mount an SD-card.
+  Following the [changes in SFOS-next](https://git.sailfishos.org/mer-core/udisks2/commit/bcc6437ff35a3cc1e8c4777ee80d85a9c112e63e) to allow any interactive user (i.e., not just *nemo*) to mount an SD-card.<br />
+  Note that mounting is still restricted to users, who belong to the Unix-group **system**, in contrast to e.g. [mount-sdcard](https://github.com/Olf0/mount-sdcard).
 * v1.0<br />
   Due to another round of significant spec-file changes (completely removed SalifishOS dependencies and all %post scriptlets), increasing the version number again.
 * v0.6<br />
