@@ -15,7 +15,7 @@ Requires:      polkit
 Requires:      udisks2
 Requires:      cryptsetup >= 1.4.0
 Conflicts:     crypto-sdcard_sbj
-Requires:      sailfish-version >= 3.2.0
+Requires:      sailfish-version >= 3.2.1
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
 # Requires:     sailfish-version < 3.9.9
 
