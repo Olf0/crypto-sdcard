@@ -1,6 +1,6 @@
 Name:          crypto-sdcard
 Summary:       Configuration files for unlocking and mounting encrypted SD-cards automatically
-Version:       1.2.0
+Version:       1.2.1
 # Stop evaluating the "Release:" field (per %{release}) and cease including it in git tags since v1.2.0, 
 # in order to satisfy OBS and consequently switching to a three field semantic versioning scheme for
 # releases and their git tags.
@@ -8,7 +8,7 @@ Version:       1.2.0
 # the third field of %{version}.
 # But %{release} is now used to merely counting up monotonically through *all* releases (starting from 1).
 # Note that no other release identifiers shall be used.
-Release:       41
+Release:       42
 Group:         System/Base
 Distribution:  SailfishOS
 Vendor:        olf
@@ -31,7 +31,7 @@ Requires:      sailfish-version >= 3.2.1
 "Key"-file naming scheme: /etc/%{name}/crypto_luks_<UUID>.key rsp. /etc/%{name}/crypto_plain_<device-name>.key
 
 %prep
-%setup -n %{name}-%{version}
+%setup
 
 %build
 
