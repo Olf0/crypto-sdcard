@@ -27,6 +27,8 @@ Nevertheless, these configuration files are also applicable to devices without A
 * Boot time is not significantly prolonged, as unlocking encrypted partitions per Cryptsetup occurs in parallel to starting udisks2; after both succeeded, all mount operations are also started concurrently.
 
 Version history:
+* v1.2<br />
+  Significantly altered versioning scheme, git tags naming and archive file names.  For details see the [release information](https://github.com/Olf0/crypto-sdcard_sbj/releases/tag/1.2.0).
 * v1.1<br />
   Following the [changes in SFOS-next](https://git.sailfishos.org/mer-core/udisks2/commit/bcc6437ff35a3cc1e8c4777ee80d85a9c112e63e) to allow any interactive user (i.e., not just *nemo*) to mount an SD-card.
   Hence v1.1 requires at least [SailfishOS 3.2.1](https://together.jolla.com/question/217840/changelog-321-nuuksio/#217840-udisks2).<br />
