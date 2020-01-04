@@ -24,13 +24,13 @@ BuildArch:     noarch
 Requires:      systemd
 Requires:      polkit
 Requires:      udisks2 >= 2.8.1+git5-1.12.1.jolla
-Requires:      cryptsetup >= 1.4.0
-Conflicts:     crypto-sdcard_sbj
-# Better use specific dependencies than generic ones (the line above versus the one below), but
+# Better use direct dependencies than indirect ones (here: the line above versus the one below), but
 # ultimately decided to use both in this case:
 Requires:      sailfish-version >= 3.2.1
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
 # Requires:     sailfish-version < 3.9.9
+Requires:      cryptsetup >= 1.4.0
+Conflicts:     crypto-sdcard_sbj
 
 %description
 %{summary}
