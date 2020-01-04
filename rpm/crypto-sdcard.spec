@@ -1,6 +1,6 @@
 Name:          crypto-sdcard
 Summary:       Configuration files for unlocking and mounting encrypted SD-cards automatically
-Version:       1.2.1
+Version:       1.2.2
 # Stop evaluating the Release tag content (only set it) and cease including it in git tags since v1.2.0, 
 # in order to satisfy OBS and consequently switching to a three field semantic versioning scheme for
 # releases and their git tags.
@@ -8,7 +8,7 @@ Version:       1.2.1
 # the third field of the Version.
 # But the Release tag is now merely used to monotonically count up through all releases (starting from 1).
 # Note that no other release identifiers shall be used.
-Release:       42
+Release:       43
 Group:         System/Base
 Distribution:  SailfishOS
 Vendor:        olf
