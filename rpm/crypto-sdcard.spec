@@ -19,7 +19,7 @@ Source:        https://github.com/Olf0/%{name}/archive/%{version}/%{name}-%{vers
 # rpmbuild (as of v4.14.1) handles the Icon tag awkwardly and in contrast to the Source tag(s):
 # It only accepts a GIF or XPM file (successfully tested GIF89a and XPMv3) in the SOURCE directory
 # (but not in the tarball)!  Hence only to be used, when the file is put there:
-# Icon:         smartmedia_mount.128x128.gif
+# Icon:         smartmedia_mount.256x256.gif
 BuildArch:     noarch
 Requires:      systemd
 Requires:      polkit
