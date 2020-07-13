@@ -17,6 +17,6 @@ RemainAfterExit=yes
 # udisks object for an encrypted partition has not been created yet.
 # Hence giving udisksd a second to settle:
 ExecStartPre=/bin/sleep 1
-ExecStart=/usr/bin/udisksctl-user mount -b /dev/mapper/%I
+ExecStart=/usr/bin/udisksctl-user mount -o lazytime -b /dev/mapper/%I
 ExecStop=/usr/bin/udisksctl-user unmount -b /dev/mapper/%I
 
