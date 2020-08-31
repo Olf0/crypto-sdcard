@@ -17,8 +17,8 @@ License:       MIT
 URL:           https://github.com/Olf0/%{name}
 Source:        https://github.com/Olf0/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 # rpmbuild (as of v4.14.1) handles the Icon tag awkwardly and in contrast to the Source tag(s):
-# It only accepts a file path to a GIF or XPM file (successfully tested GIF89a and XPMv3) rooted
-# in the SOURCE directory (but not in the tarball)!
+# It only accepts a GIF or XPM file (successfully tested GIF89a and XPMv3, but an XPM icon results
+# in a bad visual quality and large file size) in the SOURCE directory (but not in the tarball)!
 # Hence only to be used, when the file is put there:
 # Icon:         smartmedia_mount.256x256.gif
 BuildArch:     noarch
