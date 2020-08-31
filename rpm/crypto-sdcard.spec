@@ -17,10 +17,11 @@ License:       MIT
 URL:           https://github.com/Olf0/%{name}
 Source:        https://github.com/Olf0/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 # rpmbuild (as of v4.14.1) handles the Icon tag awkwardly and in contrast to the Source tag(s):
-# It only accepts a GIF or XPM file (successfully tested GIF89a and XPMv3, but an XPM icon results
-# in a bad visual quality and large file size) in the SOURCE directory (but not in the tarball)!
+# It only accepts a GIF or XPM file (a path is stripped to its basename) in the SOURCE directory
+# (but not in the tarball)!  Successfully tested GIF89a and XPMv3, but an XPM icon results in
+# bad visual quality and large file size.
 # Hence only to be used, when the file is put there:
-# Icon:         smartmedia_mount.256x256.gif
+#Icon:          smartmedia_mount.256x256.gif
 BuildArch:     noarch
 Requires:      systemd
 Requires:      polkit
@@ -29,7 +30,7 @@ Requires:      udisks2 >= 2.8.1+git5-1.12.1.jolla
 # ultimately decided to use both in this case:
 Requires:      sailfish-version >= 3.2.1
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
-# Requires:     sailfish-version < 3.9.9
+# Requires:      sailfish-version < 3.9.9
 Requires:      cryptsetup >= 1.4.0
 Conflicts:     crypto-sdcard_sbj
 
