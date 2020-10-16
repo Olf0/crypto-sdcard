@@ -1,6 +1,6 @@
 Name:          crypto-sdcard
 Summary:       Configuration files for unlocking and mounting encrypted SD-cards automatically
-Version:       1.2.5
+Version:       1.3.0
 # Stop evaluating the Release tag content (only set it) and cease including it in git tags since v1.2.0, 
 # in order to satisfy OBS' git_tar.  Consequently switch to a three field semantic versioning scheme for
 # releases and their git tags.
@@ -8,7 +8,7 @@ Version:       1.2.5
 # the third field of the Version.
 # But the Release tag is now merely used to monotonically count up through all releases (starting from 1).
 # Note that no other release identifiers shall be used.
-Release:       46
+Release:       47
 Group:         System/Base
 Distribution:  SailfishOS
 Vendor:        olf
@@ -28,7 +28,7 @@ Requires:      polkit
 Requires:      udisks2 >= 2.8.1+git5-1.12.1.jolla
 # Better use direct dependencies than indirect ones (here: the line above versus the one below), but
 # ultimately decided to use both in this case:
-Requires:      sailfish-version >= 3.2.1
+Requires:      sailfish-version >= 3.4.0
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
 # Requires:      sailfish-version < 3.9.9
 Requires:      cryptsetup >= 1.4.0
