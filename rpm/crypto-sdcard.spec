@@ -8,7 +8,7 @@ Version:       1.3.1
 # the third field of the Version.
 # But the Release tag is now merely used to monotonically count up through all releases (starting from 1).
 # Note that no other release identifiers shall be used.
-Release:       sfos321
+Release:       1.sfos321
 Group:         System/Base
 Distribution:  SailfishOS
 Vendor:        olf
