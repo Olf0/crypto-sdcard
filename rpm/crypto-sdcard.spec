@@ -9,12 +9,11 @@ Version:       1.3.1
 #   This number may be prefixed by one of {alpha,beta,stable}, e.g. "alpha13".
 # - The second field indicates the minimal required SailfishOS version A.B.C.X in the format "sfosABC";
 #   the fourth field of a SailfishOS version ("X") is neither depended upon or denoted.
-# - Additional information may be appended to the second field prefixed by a "+", e.g. "+qcrypto" here
-#   or "+special+something".
+# - A single, additional word may be directly appended to the second field, resulting in e.g. "sfosABCqcrypto".
 # - An optional third field might be used by downstream packagers, who alter the package but want to
 #   retain the exact version number.  It shall consist of the packager's name appended with a natural 
 #   number greater than zero, e.g "joe8".
-Release:       1.sfos321+qcrypto
+Release:       1.sfosABCqcrypto
 Group:         System/Base
 Distribution:  SailfishOS
 Vendor:        olf
