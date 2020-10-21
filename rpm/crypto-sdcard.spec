@@ -13,7 +13,7 @@ Version:       1.3.1
 # - An optional third field might be used by downstream packagers, who alter the package but want to
 #   retain the exact version number.  It shall consist of the packager's name appended with a natural 
 #   number greater than zero, e.g "joe8".
-Release:       1.sfos321qcrypto
+Release:       2.sfos321qcrypto
 Group:         System/Base
 Distribution:  SailfishOS
 Vendor:        olf
