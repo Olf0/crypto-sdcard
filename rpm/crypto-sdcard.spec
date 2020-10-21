@@ -36,7 +36,8 @@ Requires:      sailfish-version >= 3.4.0
 Requires:      cryptsetup >= 1.4.0
 # Should not provide the file qcrypto.ko, check: find /lib/modules/ -name qcrypto.ko; rpm -qf $(find /lib/modules/ -name qcrypto.ko)
 Conflicts:     kernel-adaptation-sbj
-# Conflicts:     (kernel-adaptation-sbj or droid-hal-l500d or XYZ)
+# Conflicts:     droid-hal-l500d
+# Conflicts:     XYZ
 Conflicts:     crypto-sdcard_sbj
 
 %description
