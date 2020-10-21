@@ -10,7 +10,7 @@ Version:       1.3.1
 # - An optional third field might be used by downstream packagers, who alter the package but want to
 #   retain the exact version number.  It shall consist of the packager's name appended with a natural 
 #   number greater than zero, e.g "joe8".
-Release:       3.sfos340qcrypto
+Release:       1.sfosABCqcrypto
 Group:         System/Base
 Distribution:  SailfishOS
 Vendor:        olf
@@ -34,9 +34,11 @@ Requires:      sailfish-version >= 3.4.0
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
 # Requires:      sailfish-version < 3.9.9
 Requires:      cryptsetup >= 1.4.0
-# Provides the file $(find /lib/modules/ -name qcrypto.ko) on a Jolla 1:
+# Must provide the file qcrypto.ko, check: find /lib/modules/ -name qcrypto.ko; rpm -qf $(find /lib/modules/ -name qcrypto.ko)
+# On a Jolla 1 (sbj) this file is deployed by the following RPM; feedback is required for the Jolla C / Intex Aquafish (l500d),
+# Inoi R7 (p4903), Jala Accione and Accione P, which may also have qcrypto.ko installed and then should use it (is faster and uses less energy).
 Requires:      kernel-adaptation-sbj
-# Requires:      (kernel-adaptation-sbj or droid-hal-l500d or XYZ)
+# Requires:      (kernel-adaptation-sbj or droid-hal-l500d or XYZ or ...)
 Conflicts:     crypto-sdcard_sbj
 Obsoletes:     crypto-sdcard_sbj
 Provides:      crypto-sdcard_sbj
