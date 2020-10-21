@@ -33,7 +33,7 @@ Requires:      polkit
 Requires:      udisks2 >= 2.8.1+git5-1.12.1.jolla
 # Better use direct dependencies than indirect ones (here: the line above versus the one below), but
 # ultimately decided to use both in this case:
-Requires:      sailfish-version >= 3.2.1
+Requires:      sailfish-version >= 3.4.0
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
 Requires:      sailfish-version < 3.4.0
 Requires:      cryptsetup >= 1.4.0
