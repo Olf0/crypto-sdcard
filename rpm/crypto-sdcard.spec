@@ -36,7 +36,7 @@ Requires:      udisks2 >= 2.8.1+git5-1.12.1.jolla
 # ultimately decided to use both in this case:
 Requires:      sailfish-version >= 3.2.1
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
-# Requires:      sailfish-version < 3.9.9
+Requires:      sailfish-version < 3.4.0
 Requires:      cryptsetup >= 1.4.0
 # Provides the file $(find /lib/modules/ -name qcrypto.ko) on a Jolla 1:
 Requires:  kernel-adaptation-sbj
