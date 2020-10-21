@@ -39,8 +39,8 @@ Requires:      sailfish-version >= 3.2.1
 # Requires:      sailfish-version < 3.9.9
 Requires:      cryptsetup >= 1.4.0
 # Provides the file $(find /lib/modules/ -name qcrypto.ko) on a Jolla 1:
-Requires:  kernel-adaptation-sbj
-# Requires:  (kernel-adaptation-sbj or droid-hal-l500d or XYZ)
+Requires:      kernel-adaptation-sbj
+# Requires:      (kernel-adaptation-sbj or droid-hal-l500d or XYZ)
 Conflicts:     crypto-sdcard_sbj
 Obsoletes:     crypto-sdcard_sbj
 Provides:      crypto-sdcard_sbj
