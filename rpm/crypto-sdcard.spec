@@ -38,7 +38,7 @@ Requires:      cryptsetup >= 1.4.0
 # On a Jolla 1 (sbj) this file is deployed by the following RPM; feedback is required for the Jolla C / Intex Aquafish (l500d),
 # Inoi R7 (p4903), Jala Accione and Accione P, which may also have qcrypto.ko installed and then should use it (is faster and uses less energy).
 Requires:      kernel-adaptation-sbj
-# Requires:      (kernel-adaptation-sbj or droid-hal-l500d or XYZ)
+# Requires:      (kernel-adaptation-sbj or droid-hal-l500d or XYZ or ...)
 Conflicts:     crypto-sdcard_sbj
 Obsoletes:     crypto-sdcard_sbj
 Provides:      crypto-sdcard_sbj
