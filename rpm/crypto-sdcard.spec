@@ -34,9 +34,11 @@ Requires:      sailfish-version >= 3.2.1
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
 # Requires:      sailfish-version < 3.9.9
 Requires:      cryptsetup >= 1.4.0
-# Should not provide the file qcrypto.ko, check: find /lib/modules/ -name qcrypto.ko; rpm -qf $(find /lib/modules/ -name qcrypto.ko)
-Conflicts:     kernel-adaptation-sbj
-# Conflicts:     (kernel-adaptation-sbj or droid-hal-l500d or XYZ)
+# Must provide the file qcrypto.ko, check: find /lib/modules/ -name qcrypto.ko; rpm -qf $(find /lib/modules/ -name qcrypto.ko)
+# On a Jolla 1 (sbj) this file is deployed by the following RPM; feedback is required for the Jolla C / Intex Aquafish (l500d),
+# Inoi R7 (p4903), Jala Accione and Accione P, which may also have qcrypto.ko installed and then should use it (is faster and uses less energy).
+Requires:      kernel-adaptation-sbj
+# Requires:      (kernel-adaptation-sbj or droid-hal-l500d or XYZ)
 Conflicts:     crypto-sdcard_sbj
 
 %description
