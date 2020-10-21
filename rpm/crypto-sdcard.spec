@@ -2,14 +2,11 @@ Name:          crypto-sdcard
 Summary:       Configuration files for unlocking and mounting encrypted SD-cards automatically
 Version:       1.3.1
 # Since v1.3.1, the release version consists of two or three fields, separated by a dot ("."):
-# - The first field must contain a natural number greater than zero.  This number is usually "1",
-#   because the spec file is part of the tarball and hence any change to the spec file (as to any
-#   other file of this project, which is packaged for and deployed by RPM) shall trigger a version
-#   increase of the next git tag and new tarball created later.
+# - The first field must contain a natural number greater than zero.
 #   This number may be prefixed by one of {alpha,beta,stable}, e.g. "alpha13".
 # - The second field indicates the minimal required SailfishOS version A.B.C.X in the format "sfosABC";
 #   the fourth field of a SailfishOS version ("X") is neither depended upon or denoted.
-# - A single, additional word may be directly appended to the second field, resulting in e.g. "sfosABCqcrypto".
+#   A single, additional word may be directly appended to the second field, resulting in e.g. "sfosABCqcrypto".
 # - An optional third field might be used by downstream packagers, who alter the package but want to
 #   retain the exact version number.  It shall consist of the packager's name appended with a natural 
 #   number greater than zero, e.g "joe8".
