@@ -34,7 +34,7 @@ Requires:      sailfish-version >= 3.2.1
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
 Requires:      sailfish-version < 3.4.0
 Requires:      cryptsetup >= 1.4.0
-# Should not provide the file qcrypto.ko (check: find /lib/modules/ -name qcrypto.ko):
+# Should not provide the file qcrypto.ko, check: find /lib/modules/ -name qcrypto.ko; rpm -qf $(find /lib/modules/ -name qcrypto.ko)
 Conflicts:     kernel-adaptation-sbj
 # Conflicts:     (kernel-adaptation-sbj or droid-hal-l500d or XYZ)
 Conflicts:     crypto-sdcard_sbj
