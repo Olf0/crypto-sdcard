@@ -1,4 +1,4 @@
-# crypto-sdcard
+# crypto-sdcard (regular edition)
 #### Configuration files for unlocking and mounting encrypted SD-cards, using udev, udisks2, polkit and systemd.
 
 Note that for devices (e.g. Jolla 1 phones (aka "sbj"), but maybe also other older devices using Qualcomm SoCs as the Jolla C / Intex Aquafish (l500d), Inoi R7 (p4903), Jala Accione and Accione P), which need Qualcomm's `qcrypto` kernel module to be loaded in order to support modern cryptographic schemes as e.g. XTS (plus it is faster and more energy efficient), a [separate "qcrypto edition" is provided](https://github.com/Olf0/crypto-sdcard/tree/qcrypto).
