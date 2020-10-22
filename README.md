@@ -1,10 +1,15 @@
-# crypto-sdcard (regular edition)
+# crypto-sdcard (qcrypto edition)
 #### Configuration files for unlocking and mounting encrypted SD-cards, using udev, udisks2, polkit and systemd.
 
-Note that for devices (e.g. Jolla 1 phones (aka "sbj"), but maybe also other older devices using Qualcomm SoCs as the Jolla C / Intex Aquafish (l500d), Inoi R7 (p4903), Jala Accione and Accione P), which need Qualcomm's `qcrypto` kernel module to be loaded in order to support modern cryptographic schemes as e.g. XTS (plus it is faster and more energy efficient), a [separate "qcrypto edition" is provided](https://github.com/Olf0/crypto-sdcard/tree/qcrypto).
+This edition is provided specifically for devices (e.g. Jolla 1 phones aka "sbj", but maybe also other older devices using Qualcomm SoCs), which need Qualcomm's `qcrypto` kernel module to be loaded in order to support modern cryptographic schemes as e.g. XTS, plus it is faster and more energy efficient.  Currently only the Jolla 1 is supported, because I own one and hence can test on it.<br />
+The Jolla C / Intex Aquafish (l500d), Inoi R7 (p4903), Jala Accione and Accione P may also be able to load the `qcrypto` kernel module, but I need the output of these commands (can be done as a regular user, no need for root) to correctly define a dependency to the RPM (for each of these devices, as I do not have access to any of these), which contains `qcrypto.ko`:<br />
+`find /lib/modules/ -name qcrypto.ko`<br />
+`rpm -qf $(find /lib/modules/ -name qcrypto.ko)`<br />
+`ssu s  # Delete your "Device UID" before posting!`<br />
+For all other devices (i.e., on those where `find /lib/modules/ -name qcrypto.ko` yields nothing), the [regular edition](https://github.com/Olf0/crypto-sdcard) shall be used.
 
 Extensively tested with systemd 225 (which includes udev), udisks2 2.7.5 and polkit 0.104 (e.g. SailfishOS 2.2 / 3.x, which provides aforementioned environment).<br />
-Built RPMs are available in the [release section](https://github.com/Olf0/crypto-sdcard/releases) and for easy installation under SailfishOS at [OpenRepos](https://openrepos.net/content/olf/crypto-sdcard).
+Built RPMs are available in the [release section](https://github.com/Olf0/crypto-sdcard/releases) and for easy installation under SailfishOS at [OpenRepos](https://openrepos.net/content/olf/crypto-sdcard_sbj).
 
 The necessary steps to prepare an SD-card (or any other removable storage) are described at [Together.Jolla.com](https://together.jolla.com/question/195850/guide-creating-partitions-on-sd-card-optionally-encrypted/).<br />
 Note that the "key"-files reside unencrypted on fixed, internal mass storage, as mobile devices usually have only a single user, who unlocks the whole device.<br />
