@@ -10,7 +10,7 @@ Version:       1.3.1
 # - An optional third field might be used by downstream packagers, who alter the package but want to
 #   retain the exact version number.  It shall consist of the packager's name appended with a natural 
 #   number greater than zero, e.g "joe8".
-Release:       3.sfos340regular
+Release:       1.sfosABCregular
 Group:         System/Base
 Distribution:  SailfishOS
 Vendor:        olf
@@ -32,7 +32,7 @@ Requires:      udisks2 >= 2.8.1+git5-1.12.1.jolla
 # ultimately decided to use both in this case:
 Requires:      sailfish-version >= 3.4.0
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
-# Requires:      sailfish-version < 3.9.9
+Requires:      sailfish-version < 3.4.0
 Requires:      cryptsetup >= 1.4.0
 # Should not provide the file qcrypto.ko, check: find /lib/modules/ -name qcrypto.ko; rpm -qf $(find /lib/modules/ -name qcrypto.ko)
 Conflicts:     kernel-adaptation-sbj
