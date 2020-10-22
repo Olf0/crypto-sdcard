@@ -6,7 +6,8 @@ Version:       1.3.1
 #   This number may be prefixed by one of {alpha,beta,stable}, e.g. "alpha13".
 # - The second field indicates the minimal required SailfishOS version A.B.C.X in the format "sfosABC";
 #   the fourth field of a SailfishOS version ("X") is neither depended upon or denoted.
-#   A single, additional word may be directly appended to the second field, resulting in e.g. "sfosABCqcrypto".
+#   A single, additional word out of {regular,qcrypto} is directly appended, resulting in the whole
+#   second field containing e.g., "sfosABCregular".
 # - An optional third field might be used by downstream packagers, who alter the package but want to
 #   retain the exact version number.  It shall consist of the packager's name appended with a natural 
 #   number greater than zero, e.g "joe8".
