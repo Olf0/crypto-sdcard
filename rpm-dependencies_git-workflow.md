@@ -46,7 +46,9 @@ common "head" branch -------------------------------> release branch non-A, non-
 * Changes (i.e., commits), which are applicable to all variants of the program (i.e., shall end up in all release branches) are comitted to the "common head branch".
 * Feature specific changes are comitted to the corresponding "feature branch".
 * Changes, which are specific to a certain release branch, are (certainly) committed directly to it.
-* Before tagging a new release in every "release branch" (in order to release, package and distribute a new version of the program), the changes have to be pushed forward, starting by merging the commits (per pull-request) from the "common head branch" to the "feature branches" (for picking up the new feature specific commits on the way), and then merging the "feature branches" into the "release branches", while keeping the third bullet point (conflicts) in mind throughout the whole process.  This can also be done between releases, when a set of commits (e.g., multiple commits establishing a new feature) was accumulated.  The process can also be partially executed, i.e. only from a "feature branch" to its "release branches", but always obey the second bullet point ("forward only")!
+* Before tagging a new release in every "release branch" (in order to release, package and distribute a new version of the program), the changes have to be pushed forward, starting by merging the commits (per pull-request) from the "common head branch" to the "feature branches" (for picking up the new feature specific commits on the way), and then merging the "feature branches" into the "release branches", while keeping the third bullet point (conflicts) in mind throughout the whole process.<br />
+  This can also be done between releases, when a set of commits (e.g., multiple commits establishing a new feature) was accumulated.<br />
+  The process can also be partially executed, i.e. only from a "feature branch" to its "release branches", but always obey the second bullet point ("forward only")!
 
 #### Implementation
 For *crypto-sdcard*, starting with versions 1.3.1, 
