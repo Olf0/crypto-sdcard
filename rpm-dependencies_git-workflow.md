@@ -8,9 +8,9 @@ Releases from each of these release branches are tagged in git, from which tarba
 1. The names of the automatically generated tarballs for git tags must differ, hence they must include sub-strings (i.e., "release branch identifiers") which allow to differentiate releases from each of the release branches.  Because these releases carry the same program name and version, they must differ in their release string.<br />
    Consequently the git tags must include the release string, i.e. adhere to the format `<version>-<release>`.  Furthermore the git tags themselves (for releases) must carry different, release branch specific names anyway, which is provided this way. 
 2. Thus the RPM spec file must define the tarball name in the format `<name>-<version>-<release>` by a `%setup -n %{name}-%{version}-%{release}` statement in the `%prep` section, because this is the tarballs' auto-generated, fixed name (e.g., at Github). 
-3. All RPMs for a single version built from the release tarballs must contain mutually exclusive dependecies, otherwise the dependecy resolver on a target system might pick a wrong RPM to install.<br />
+3. All RPMs for a single version built from the release tarballs must contain mutually exclusive dependencies, otherwise the dependency resolver on a target system might pick a wrong RPM to install.<br />
    Thus the spec file must include "dependency pairs" differenciating between the target systems.<br />
-   Multiple "dependecy pairs" may be used as a single differentiator for the release branches, but there  must be at least one "dependency pair" for each distiguishing property / feature.<br />
+   Multiple "dependency pairs" may be used as a single differentiator for the release branches, but there  must be at least one "dependency pair" for each distiguishing property / feature.<br />
    These mutually exclusive "dependency pairs" can be:
    1. `Requires: <pkg-name>`  /  `Conflicts: <pkg-name>`
    2. `Requires: <pkg-name> >= <version[-release]>`  /  `Requires: <pkg-name> < <version[-release]>`
