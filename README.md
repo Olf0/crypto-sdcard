@@ -1,7 +1,8 @@
 # crypto-sdcard (regular edition)
 #### Configuration files for unlocking and mounting encrypted SD-cards, using udev, udisks2, polkit and systemd.
 
-Note that for devices, which need to load Qualcomm's `qcrypto` kernel module in order to support modern cryptographic schemes as e.g. XTS (plus it is faster and more energy efficient), a [separate "qcrypto edition" is provided](https://github.com/Olf0/crypto-sdcard/tree/qcrypto).  Only SailfishOS on the Jolla 1 (sbj) is known to provide the `qcrypto.ko`, hence currently it is the only device supported by the "qcrypto edition".
+Note that for devices, which need to load Qualcomm's `qcrypto` kernel module in order to support modern cryptographic schemes as e.g. XTS (plus it is faster and more energy efficient), a [separate "qcrypto edition" is provided](https://github.com/Olf0/crypto-sdcard/tree/qcrypto).  Only SailfishOS on the Jolla 1 (sbj) is known to provide the `qcrypto.ko`, hence currently it is the only device supported by the "qcrypto edition".<br />
+Thus for all other devices (i.e., on those where `find /lib/modules/ -name qcrypto.ko` yields nothing), this regular edition shall be used.
 
 Extensively tested with systemd 225 (which includes udev), udisks2 2.7.5 and polkit 0.104 (e.g. SailfishOS 2.2 / 3.x, which provides aforementioned environment).<br />
 Built RPMs are available in the [release section](https://github.com/Olf0/crypto-sdcard/releases) and for easy installation under SailfishOS at [OpenRepos](https://openrepos.net/content/olf/crypto-sdcard).
