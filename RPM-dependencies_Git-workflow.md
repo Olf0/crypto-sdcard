@@ -42,7 +42,7 @@ common "head" branch -------------------------------> release branch non-A, non-
 ```
 * In practice it is much easier to work with an inverted scheme, i.e. the "head" branch contains all current features activated and the "feature branches" become "non-A" and "non-Z" (instead of "A" and "Z"), then.
 * It is crucial to always create pull-requests between these branches in a strictly unidirectional ("forward only") manner, or git-hell will be unleashed.
-* The usual precautions for merge conflicts must be applied: If a merge conflict is forseeable or arises (either technically or just "oh, this commit(s) does not belong in the target branch"), do not merge directly, instead create a new branch from the target branch, merge the commit set from the originating branch into this new branch, resolve the merge conflict(s) in the new branch and ultimately merge the new branch into the target branch.
+* The usual precautions for merge conflicts must be applied: If a merge conflict is forseeable or arises (either technically or just "oh, this line(s) does not belong in the target branch"), do not merge directly, instead create a new branch from the target branch, merge the commit set from the originating branch into this new branch, resolve the merge conflict(s) in the new branch and ultimately merge the new branch into the target branch.
 * Changes (i.e., commits), which are applicable to all variants of the program (i.e., shall end up in all release branches) are comitted to the "common head branch".
 * Feature specific changes are comitted to the corresponding "feature branch".
 * Changes, which are specific to a certain release branch, are (certainly) committed directly to it.
@@ -68,4 +68,4 @@ For *crypto-sdcard*, starting with versions 1.3.1, ...
            |                  |
            -----------> sfos321  (second field of release string: sfos321regular)
   ```
-  I may convert this to the full, generic scheme, but AFAICS there is litte to be gained, as there are no regular commits directly to the *sfos321* "feature & release" branch (in contrast to the *qcrypto* "feature branch"), after the initial commit creating it.  Consequently the flow (merge) from the *sfos321* to the *sfos321+qcrypto* branch only happened once.
+  I may convert this to the full, generic scheme, but AFAICS there is little to be gained, as there are no regular commits directly to the *sfos321* "feature & release" branch (in contrast to the *qcrypto* "feature branch"), after the initial commit creating it.  Consequently the flow (merge) from the *sfos321* to the *sfos321+qcrypto* branch only happened once.
