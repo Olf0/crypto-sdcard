@@ -1,12 +1,8 @@
 # crypto-sdcard (qcrypto edition)
 #### Configuration files for unlocking and mounting encrypted SD-cards, using udev, udisks2, polkit and systemd.
 
-This edition is provided specifically for devices (e.g. Jolla 1 phones aka "sbj", but maybe also other older devices using Qualcomm SoCs), which need Qualcomm's `qcrypto` kernel module to be loaded in order to support modern cryptographic schemes as e.g. XTS, plus it is faster and more energy efficient.  Currently only the Jolla 1 is supported, because I own one and hence can test on it.<br />
-The Jolla C / Intex Aquafish (l500d), Inoi R7 (p4903), Jala Accione and Accione P may also be able to load the `qcrypto` kernel module, but I need the output of these commands (can be done as a regular user, no need for root) to correctly define a dependency to the RPM (for each of these devices, as I do not have access to any of these), which contains `qcrypto.ko`:<br />
-`find /lib/modules/ -name qcrypto.ko`<br />
-`rpm -qf $(find /lib/modules/ -name qcrypto.ko)`<br />
-`ssu s  # Delete your "Device UID" before posting!`<br />
-For all other devices (i.e., on those where `find /lib/modules/ -name qcrypto.ko` yields nothing), the [regular edition](https://github.com/Olf0/crypto-sdcard) shall be used.
+This edition is provided specifically for devices, which need to load Qualcomm's `qcrypto` kernel module in order to support modern cryptographic schemes as e.g. XTS, plus it is faster and more energy efficient.  Only SailfishOS on the Jolla 1 (*sbj*) is known to provide (per its *kernel-adaptation-sbj* RPM) and need the `qcrypto.ko`, hence currently it is the only device supported by the "qcrypto edition".  SailfishOS on the Intex Aquafish / Jolla C (*l500d* / *JP-1601*) does not provide `qcrypto.ko`, for the Inoi R7 (*p4903*), Jala Accione and Accione P this is unknown (but `qcrypto.ko` is likely not provided), and on Sony's Xperias `qcrypto.ko` is definitely not provided.
+Hence for all other devices (i.e., on those where `find /lib/modules/ -name qcrypto.ko` yields nothing), the [regular edition](https://github.com/Olf0/crypto-sdcard) shall be used.
 
 Extensively tested with systemd 225 (which includes udev), udisks2 2.7.5 and polkit 0.104 (e.g. SailfishOS 2.2 / 3.x, which provides aforementioned environment).<br />
 Built RPMs are available in the [release section](https://github.com/Olf0/crypto-sdcard/releases) and for easy installation under SailfishOS at [OpenRepos](https://openrepos.net/content/olf/crypto-sdcard_sbj).
