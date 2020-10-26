@@ -18,7 +18,7 @@ Releases from each of these release branches are tagged in git, from which tarba
    <br />
    
    * This list may not be exhaustive (i.e., there may be more practically usable forms), but I do not think that pairs using only "Conflicts" (i.e., `Conflicts: <pkg-name> < <version[-release]>` / `Conflicts: <pkg-name> >= <version[-release]>`, or `Conflicts: <pkg-name> <= <version[-release]>` / `Conflicts: <pkg-name> > <version[-release]>`) would be working well (I have not tried that, though).
-   * Above "dependency pair" forms 2 and 3 can be "chained" to create more than two different releases depending on versions of another RPM (becoming "dependency triples", quadruples etc.), e.g. for three different, version dependent releases (with `<versionB[-releaseY]>` being larger than `<versionA[-releaseX]>`):<br />
+   * Above "dependency pair" forms 2 and 3 can be "chained" to create more than two different releases depending on versions of another RPM (becoming a "dependency triple", quadruple etc.), e.g. for three different, version dependent releases (with `<versionB[-releaseY]>` being larger than `<versionA[-releaseX]>`):<br />
      `Requires: <pkg-name> >= <versionB[-releaseY]>`<br />
      / `Requires: <pkg-name> < <versionB[-releaseY]>` & `Requires: <pkg-name> >= <versionA[-releaseX]>`<br />
      / `Requires: <pkg-name> < <versionA[-releaseX]>`<br />
@@ -43,7 +43,7 @@ common "head" branch -------------------------------> release branch non-A, non-
 * In practice it is much easier to work with an inverted scheme, i.e. the "head" branch contains all current features activated and the "feature branches" become "non-A" and "non-Z" (instead of "A" and "Z"), then.
 * It is crucial to always create pull-requests between these branches in a strictly unidirectional ("forward only") manner, or git-hell will be unleashed.
 * The usual precautions for merge conflicts must be applied: If a merge conflict is forseeable or arises (either technically or just "oh, this line(s) does not belong in the target branch"), do not merge directly, instead create a new branch from the target branch, merge the commit set from the originating branch into this new branch, resolve the merge conflict(s) in the new branch and ultimately merge the new branch into the target branch (after that, the new branch can be deleted).
-* All branches in the diagram should be configured as "protected branches" to avoid mishaps.  At Github, see *\<Repository\> -> Settings -> Branches -> Add rule -> \<No need to add extra restrictions, except for* ***Include administrators*** *\> -> Create*.
+* All branches in the diagram should be configured as "protected branches" to avoid mishaps.  At Github, see *\<Repository\> -> Settings -> Branches -> Add rule -> \<No need to add extra restrictions, except for "Include administrators"\> -> Create*.
 * Changes (i.e., commits), which are applicable to all variants of the program (i.e., shall end up in all release branches) are comitted to the "common head branch".
 * Feature specific changes are comitted to the corresponding "feature branch".
 * Changes, which are specific to a certain release branch, are (certainly) committed directly to it.
