@@ -11,13 +11,13 @@ Releases from each of these release branches are tagged in git, from which tarba
 3. All RPMs for a single version built from the release tarballs must contain mutually exclusive dependencies, otherwise the dependency resolver on a target system might pick a wrong RPM to install.<br />
    Thus the spec file must include "dependency pairs" differenciating between the target systems.<br />
    Multiple "dependency pairs" may be used as a single differentiator for the release branches, but there  must be at least one "dependency pair" for each distiguishing property / feature.<br />
-   These mutually exclusive "dependency pairs" can be:
+   These mutually exclusive "dependency pairs" are in one of three forms:
    1. `Requires: <pkg-name>`  /  `Conflicts: <pkg-name>`
    2. `Requires: <pkg-name> >= <version[-release]>`  /  `Requires: <pkg-name> < <version[-release]>`
    3. `Requires: <pkg-name> > <version[-release]>`  /  `Requires: <pkg-name> <= <version[-release]>`
    <br />
    
-   * This list may not be exhaustive, but I do not think that pairs using only "Conflicts" (i.e., `Conflicts: <pkg-name> < <version[-release]>` / `Conflicts: <pkg-name> >= <version[-release]>`, or `Conflicts: <pkg-name> <= <version[-release]>` / `Conflicts: <pkg-name> > <version[-release]>`) would be working well (I have not tried that, though).
+   * This list may not be exhaustive (i.e., there may be more practically usable forms), but I do not think that pairs using only "Conflicts" (i.e., `Conflicts: <pkg-name> < <version[-release]>` / `Conflicts: <pkg-name> >= <version[-release]>`, or `Conflicts: <pkg-name> <= <version[-release]>` / `Conflicts: <pkg-name> > <version[-release]>`) would be working well (I have not tried that, though).
    * Above "dependency pair" forms 2 and 3 can be "chained" to create more than two different releases depending on versions of another RPM (becoming "dependency triples", quadruples etc.), e.g. for three different, version dependent releases (with `<versionB[-releaseY]>` being larger than `<versionA[-releaseX]>`):<br />
      `Requires: <pkg-name> >= <versionB[-releaseY]>`<br />
      / `Requires: <pkg-name> < <versionB[-releaseY]>` & `Requires: <pkg-name> >= <versionA[-releaseX]>`<br />
