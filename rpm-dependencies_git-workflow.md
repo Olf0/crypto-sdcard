@@ -2,7 +2,7 @@
 
 #### Goal
 To maintain multiple release branches in a git repository, fed from a "head" branch with common changes (i.e., git commits).<br />
-Releases from each of these release branches are tagged in git, from which tarballs are generated, which then are packaged as RPMs and uploaded in a single RPM repository.
+Releases from each of these release branches are tagged in git, from which tarballs are generated, which then are packaged as RPMs and uploaded to a single RPM repository.
 
 #### Requirements
 1. The names of the automatically generated tarballs for git tags must differ, hence they must include sub-strings (i.e., "release branch identifiers") which allow to differentiate releases from each of the release branches.  Because these releases carry the same program name and version, they must differ in their release string.<br />
