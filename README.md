@@ -28,14 +28,14 @@ Nevertheless, these configuration files are also applicable to devices without A
 
 Version history:
 * v1.3<br />
-  Mounting is now restricted to users, who belong to the Unix-group **media_rw**, which is the case for the user *nemo* since some SailfishOS release before v3.2.1 and after v2.2.1 (unable to assess which one), or the *default-user* on freshly installed devices (since SailfishOS 3.4.0).<br />
-  Significantly altered versioning scheme, git tags naming and archive file (tarball) names, again; this time to acomodate for multiple release variants per version in order to serve different SailfisOS releases from one repository easily.  For details see the [release information](https://github.com/Olf0/crypto-sdcard/releases/tag/1.3.1-1.sfos321).
+  Mounting is now restricted to users, who belong to the Unix-group **media_rw**, which is the case for the user *nemo* since some SailfishOS release before v3.2.1 and after v2.2.1 (unable to assess which one), or the *defaultuser* on freshly installed devices (since SailfishOS 3.4.0).<br />
+  Significantly altered versioning scheme, git tags naming and archive file (tarball) names, again: This time to accommodate for multiple release variants per version in order to serve different SailfisOS releases from one repository easily.  For details see the [document "Release version format, RPM dependencies and Git workflow"](https://github.com/Olf0/crypto-sdcard/blob/master/RPM-dependencies_Git-workflow.md).
 * v1.2<br />
   Significantly altered versioning scheme, git tags naming and archive file names.  For details see the [release information](https://github.com/Olf0/crypto-sdcard/releases/tag/1.2.0).
 * v1.1<br />
   Following the [changes in SFOS-next](https://git.sailfishos.org/mer-core/udisks2/commit/bcc6437ff35a3cc1e8c4777ee80d85a9c112e63e) to allow any interactive user (i.e., not just *nemo*) to mount an SD-card.
   Hence v1.1 requires at least [SailfishOS 3.2.1](https://together.jolla.com/question/217840/changelog-321-nuuksio/#217840-udisks2).<br />
-  Note that mounting is still restricted to users, who belong to the Unix-group **system**, in contrast to e.g. [mount-sdcard](https://github.com/Olf0/mount-sdcard).
+  Note that mounting is still restricted to users, who belong to the Unix-group **system**, in contrast to e.g., [mount-sdcard](https://github.com/Olf0/mount-sdcard).
 * v1.0<br />
   Due to another round of significant spec-file changes (completely removed SalifishOS dependencies and all %post scriptlets), increasing the version number again.
 * v0.6<br />
