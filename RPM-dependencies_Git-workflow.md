@@ -68,4 +68,4 @@ For *crypto-sdcard*, starting with versions 1.3.1, ...
            |                  |
            -----------> sfos321  (second field of release string: sfos321regular)
   ```
-  I may convert this to the full, generic scheme, but AFAICS there is little to be gained, as there are no regular commits directly to the *sfos321* "feature & release" branch (in contrast to the *qcrypto* "feature branch"), after the initial commit creating it.  Consequently the flow (merge) from the *sfos321* to the *sfos321+qcrypto* branch only happened once.
+  I may convert this to the full, generic scheme, but AFAICS there is little to be gained, as there are no regular commits directly to the *sfos321* "feature & release" branch (in contrast to the *qcrypto* "feature branch"), after the initial commit creating it.  Consequently the flow (merge) from the *sfos321* to the *sfos321+qcrypto* branch only happened once (which is nice, because it is implicitly a merge with conflicts).
