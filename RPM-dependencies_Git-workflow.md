@@ -56,7 +56,7 @@ For *crypto-sdcard*, starting with versions 1.3.1, ...
   Each of those two may be used to distinguish between more than two features / properties in the future: By defining more SailfishOS releases to differentiate for, or by extending the list of specified appendices denoting mutually ecxlusive features / properties of a target system.<br />
   Additionally a third (or more) distinguishing identifier ("differentiator") may be defined, but that would require some visual separator for more sub-fields in the second field of the release string other than the dot (`.`) and dash (`-`, minus, hyphen), or introducing a new, third field (moving the extant one to the fourth position).  Both possibilities are not nice, e.g. a `+` as a separator conflicts with the set of allowed characters for git tags (at least at Github), the tilde (`~`) is also likely to cause issues, only the underscore (`_`) likely works (but is visually the ugliest option, IMO), and four or even more fields separated by dots in the release string may infringe some convention.  Hence I will try to avoid this, although the `_` or another, additional field (i.e., not a sub-field of the second field) might provide viable paths for extending this scheme.
 * the properties used as differentiators are the availability of the *kernel-adaptation-sbj* RPM (using form 1, above) and the version of the *sailfish-version* RPM (using form 2).
-* the git worflow is a slightly collapsed variant of aforementioned, generic scheme: It omits the second feature branch.
+* the git workflow is a slightly collapsed variant of aforementioned, generic scheme: It omits the second feature branch.
   ```
   master -------------> sfos340  (second field of release string: sfos340regular)
            |
