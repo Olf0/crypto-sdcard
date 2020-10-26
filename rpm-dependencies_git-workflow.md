@@ -22,7 +22,7 @@ Releases from each of these release branches are tagged in git, from which tarba
      `Requires: <pkg-name> >= <versionB[-releaseY]>`<br />
      / `Requires: <pkg-name> < <versionB[-releaseY]>` & `Requires: <pkg-name> >= <versionA[-releaseX]>`<br />
      / `Requires: <pkg-name> < <versionA[-releaseX]>`<br />
-     (there are other viable variants)
+     (there might be other, also viable variants of this scheme)
    * The crucial point is that all dependencies on a specific package (i.e., all elements of a "dependency pair" or "chain"), which are utilised to distinguish between release branches, have to be mutually exclusive.
    * Do not omit one side of a "dependency pair" (or triple, quadruple etc.) of all three, aforementioned, basic forms (e.g. the "Conflicts:" side of the first form) in any of the generated RPMs for a specific program version: This might confuse the resolver of the target system, so it tries to install the wrong RPM (but in this case that will likely fail due to an unmet dependency)!
 4. I have the impression, that the order of the RPM packages' names for a single program version is relevant, but this may be an incorrect observation due to on non-exhaustive testing.  But specifically for *crypto-sdcard* the dependency resolver appeared to be misled by the second field of the release string (i.e., the only thing different between the RPM names) set to {*sfos340*, *sfos321*, *sfos340qcrypto*, *sfos321qcrypto*}.  When I changed these to {*sfos340regular*, *sfos321regular*, *sfos340qcrypto*, *sfos321qcrypto*} (note that *r..* is "larger" than *q..* and *40* is larger than *21*) it was installing the correct RPM release version.  But in its current state this is rather hinting at some requirement than being one.
