@@ -1,4 +1,4 @@
-### Release version format, RPM dependencies and git workflow
+### Release version format, RPM dependencies and Git workflow
 
 #### Goal
 To maintain multiple release branches in a git repository, fed from a "head" branch with common changes (i.e., git commits).<br />
