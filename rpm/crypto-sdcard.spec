@@ -36,7 +36,7 @@ Requires:      sailfish-version >= 3.4.0
 # Requires:      sailfish-version < 3.9.9
 Requires:      cryptsetup >= 1.4.0
 # Must provide Qualcomm's qcrypto kernel module, check: find /lib/modules/ -name qcrypto.ko; rpm -qf $(find /lib/modules/ -name qcrypto.ko)
-# On a Jolla 1 (sbj) qcrypto.ko is deployed by the following RPM, no other SailfishOS device adaption is known to provide it.
+# On a Jolla 1 (sbj) qcrypto.ko is deployed by the following RPM, currently no other SailfishOS device adaption is known to provide it.
 Requires:      kernel-adaptation-sbj
 Conflicts:     crypto-sdcard_sbj
 Obsoletes:     crypto-sdcard_sbj
