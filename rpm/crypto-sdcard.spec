@@ -33,14 +33,11 @@ Requires:      udisks2 >= 2.8.1+git5-1.12.1.jolla
 # ultimately decided to use both in this case:
 Requires:      sailfish-version >= 3.4.0
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
-# Requires:      sailfish-version < 3.9.9
+Requires:      sailfish-version < 3.4.0
 Requires:      cryptsetup >= 1.4.0
-# Must provide the file qcrypto.ko, check: find /lib/modules/ -name qcrypto.ko; rpm -qf $(find /lib/modules/ -name qcrypto.ko)
-# On a Jolla 1 (sbj) this file is deployed by the following RPM; feedback is required for the Jolla C / Intex Aquafish (l500d),
-# Inoi R7 (p4903), Jala Accione and Accione P, which may also have qcrypto.ko installed and then should use it, because it is 
-# faster and more energy efficient.
+# Must provide Qualcomm's qcrypto kernel module, check: find /lib/modules/ -name qcrypto.ko; rpm -qf $(find /lib/modules/ -name qcrypto.ko)
+# On a Jolla 1 (sbj) qcrypto.ko is deployed by the following RPM, currently no other SailfishOS device adaption is known to provide it.
 Requires:      kernel-adaptation-sbj
-# Requires:      (kernel-adaptation-sbj or droid-hal-l500d or XYZ or ...)
 Conflicts:     crypto-sdcard_sbj
 Obsoletes:     crypto-sdcard_sbj
 Provides:      crypto-sdcard_sbj
