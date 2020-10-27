@@ -35,7 +35,7 @@ Requires:      sailfish-version >= 3.4.0
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
 Requires:      sailfish-version < 3.4.0
 Requires:      cryptsetup >= 1.4.0
-# Necessary counter-dependency to https://github.com/Olf0/crypto-sdcard/blob/qcrypto/rpm/crypto-sdcard.spec#L42
+# Necessary counter-dependency to https://github.com/Olf0/crypto-sdcard/blob/qcrypto/rpm/crypto-sdcard.spec#L40
 Conflicts:     kernel-adaptation-sbj
 # For details see requirement 3 at https://github.com/Olf0/crypto-sdcard/blob/master/RPM-dependencies_Git-workflow.md#requirements
 Conflicts:     crypto-sdcard_sbj
