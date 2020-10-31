@@ -48,15 +48,15 @@ Nevertheless, these configuration files are also applicable to devices without A
 * v0.5<br />
   Although the installed configuration files are unaltered since v0.4-3, the spec-file ("RPM packaging") changes have been significant, so it ultimately earns an increased version number.
 * v0.4<br />
-  Optimised configuration file names.<br />
-  RPM spec file provided.
+  Optimise configuration file names.<br />
+  Provide RPM spec file.
 * v0.3<br />
-  Switched to a UUID-based "key"-file naming scheme for LUKS partitions to allow for swapping encrypted SD-cards easily and moved "key"-files into a directory.  Missed to properly implement this change for "plain" partitions, as they have no UUID!<br />
+  Switch to a UUID-based "key"-file naming scheme for LUKS partitions to allow for swapping encrypted SD-cards easily and moved "key"-files into a directory.  Missed to properly implement this change for "plain" partitions, as they have no UUID!<br />
   Hence the "key"-file path and names have changed again (please rename your "key"-files accordingly):
   * For Cryptsetup LUKS: `/etc/crypto-sdcard/crypto_luks_<UUID>.key`
   * For Cryptsetup "plain": `/etc/crypto-sdcard/crypto_plain_.key`
 * v0.2<br />
-  Fixed automatic mounting of DM-Crypt "plain" partitions.<br />
+  Fix automatic mounting of DM-Crypt "plain" partitions.<br />
   "Key"-file path and names are altered (please rename your "key"-files accordingly):
   * For Cryptsetup LUKS: `/etc/crypto_luks_<device>.key`, e.g. */etc/crypto_luks_mmcblk1p2.key*
   * For Cryptsetup "plain": `/etc/crypto_plain_<device>.key`, e.g. */etc/crypto_plain_mmcblk1p2.key*
