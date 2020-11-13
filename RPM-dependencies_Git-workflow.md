@@ -6,8 +6,9 @@ Releases from each of these release branches are tagged in git, from which tarba
 
 #### Requirements
 1. The names of the automatically generated tarballs for git tags must differ, hence they must include sub-strings (i.e., "release branch identifiers") which allow to differentiate releases from each of the release branches.  Because these releases carry the same program name and version, they must differ in their release string.<br />
-   Consequently the git tags must include the release string, i.e. adhere to the format `<version>-<release>`.  Furthermore the git tags themselves (for releases) must carry different, release branch specific names anyway, which is provided this way. 
-2. Thus the RPM spec file must define the tarball name in the format `<name>-<version>-<release>`, e.g. by a `%setup -n %{name}-%{version}-%{release}` statement in the `%prep` section, because this is the tarballs' auto-generated, fixed name (e.g., at Github). 
+   Consequently the git tags must include the release string, i.e. adhere to the format `<version>-<release>`.  Furthermore the git tags themselves (for releases) must carry different, release branch specific names anyway, which is provided this way.<br />
+   Hence the auto-generated release tarballs are named `<name>-<version>-<release>.tar.gz`, and equally the single top level directory of ("within" / "inside") such a tar archive is called `<name>-<version>-<release>`.  At Github both seem to be constructed from the git tag appended to the project name in a fixed manner (i.e., not configurable).
+2. Thus the RPM spec file must define the tarball name as `<name>-<version>-<release>.tar.gz` in a `Source:` statement, plus declare the top level directory of the archive to be called `<name>-<version>-<release>`, e.g. by a `%setup -n %{name}-%{version}-%{release}` macro call in the `%prep` section.
 3. All RPMs for a single version built from the release tarballs must contain mutually exclusive dependencies, otherwise the dependency resolver on a target system might pick a wrong RPM to install.<br />
    Thus the spec file must include "dependency pairs" differenciating between the target systems.<br />
    Multiple "dependency pairs" may be used as a single differentiator for the release branches, but there  must be at least one "dependency pair" for each distiguishing property / feature.<br />
