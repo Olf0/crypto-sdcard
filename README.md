@@ -21,10 +21,12 @@ Thus **crypto-sdcard** solely protects "data at rest" on SD-cards and other remo
   * As Cryptsetup reads the cryptography parameters from the LUKS header and Cryptsetup **2** supports both v1 and v2 headers, **crypto-sdcard** shall work fine with any LUKS header version and parameters, which are valid for the installed Cryptsetup version.
   * For Cryptsetup "plain" (only to be used, when "plausible deniability" is a must), **crypto-sdcard** has to provide the cryptography parameters and uses "*-h sha1 -s 256 -c aes-xts-plain*" by default.
     While these parameters are optimised for speed, low power consumption, interoperability and sufficiently strong security for the next decade (including the specific use of SHA1 for hashing a pass-file down to 160 bits), other parameters may be set for unlocking Cryptsetup "plain" in */etc/systemd/system/cryptosd-plain\@.service*
-* Start mounting encrypted (partitions on) SD-card via udisks at the earliest sensible time: Right after udisks2.service has started.
-* Unmount before udisks2 begins stopping, hence achieving a clean unmount.
-* Ensure, that AlienDalvik (specifically *alien-service-manager.service*) begins starting after mounting succeeded, to allow for [android_storage on SD-card](https://together.jolla.com/question/203539/guide-externalising-android_storage-and-other-directories-files-to-sd-card/#203539-2-externalising-homenemoandroid_storage).  Even more importantly this also ensures, that unmounting occurs only after AlienDalvik is completely stopped.<br />
-Nevertheless, these configuration files are also applicable to devices without AlienDalvik installed.
+* Start mounting encrypted (partitions on) SD-card via udisks at the earliest sensible time: Right after *udisks2.service* has started.
+* Unmount before *udisks2.service* begins stopping, hence achieving a clean unmount.
+* Also do not use SailfishOS' *udisksctl-user* script for unmounting (because this cannot work, at the time ExecStop is executed), which is installed and used by SailfishOS since its release 3.2.1, and was also used by *crypto-sdcard* versions 1.1-1 to 1.3.1-5; see [details here](https://github.com/Olf0/crypto-sdcard/pull/28).
+* Ensure, that AlienDalvik (specifically *alien-service-manager.service*) begins starting after mounting succeeded, to allow for [android_storage on SD-card](https://together.jolla.com/question/203539/guide-externalising-android_storage-and-other-directories-files-to-sd-card/#203539-2-externalising-homenemoandroid_storage).<br />
+  Even more importantly (i.e., also relevant for devices without "android_storage on SD-card") this also ensures, that unmounting occurs only after AlienDalvik has completely stopped.<br />
+  Nevertheless, these configuration files are also applicable to devices without AlienDalvik installed.
 * Boot time is not significantly prolonged, as unlocking encrypted partitions per Cryptsetup occurs in parallel to starting udisks2; after both succeeded, all mount operations are also started concurrently.
 
 #### Version history
