@@ -3,6 +3,7 @@ Description=Open DM-Crypt LUKS on SD-card %I
 Documentation=https://github.com/Olf0/crypto-sdcard
 After=systemd-udevd.service systemd-udev-settle.service dev-%i.device
 BindsTo=dev-%i.device
+PartOf=cryptsetup.target
 Conflicts=rescue.target actdead.target factory-test.target
 AssertFileNotEmpty=/etc/crypto-sdcard/%I.key
 
