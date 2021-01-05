@@ -18,5 +18,5 @@ RemainAfterExit=yes
 # Hence giving udisksd a second to settle:
 ExecStartPre=/bin/sleep 1
 ExecStart=/usr/bin/udisksctl-user mount -b /dev/mapper/%I
-ExecStop=/usr/bin/udisksctl-user unmount -b /dev/mapper/%I
+ExecStop=/usr/bin/udisksctl unmount -b /dev/mapper/%I
 
