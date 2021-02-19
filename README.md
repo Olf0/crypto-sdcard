@@ -6,7 +6,7 @@ Only SailfishOS on the Jolla 1 (sbj) is known to provide (per its *kernel-adapta
 Thus for all other devices (i.e., on those where `find /lib/modules/ -name qcrypto.ko` yields nothing), the [regular edition](https://github.com/Olf0/crypto-sdcard) shall be used.
 
 Extensively tested with systemd 225 (which includes udev), udisks2 2.7.5 and polkit 0.104 (e.g. SailfishOS since version 2.2, which provides aforementioned software or newer versions).<br />
-Built RPMs are available in the [release section](https://github.com/Olf0/crypto-sdcard/releases) and for easy installation under SailfishOS at [OpenRepos](https://openrepos.net/content/olf/crypto-sdcard).
+Built RPMs are available in the [release section](https://github.com/Olf0/crypto-sdcard/releases) and for easy installation under SailfishOS at [OpenRepos](https://openrepos.net/content/olf/crypto-sdcard-sbj-edition).
 
 The necessary steps to prepare an SD-card (or any other removable storage) are described at [Together.Jolla.com](https://together.jolla.com/question/195850/guide-creating-partitions-on-sd-card-optionally-encrypted/).<br />
 Note that the "key"-files reside unencrypted on fixed, internal mass storage, as mobile devices usually have only a single user, who unlocks the whole device.<br />
