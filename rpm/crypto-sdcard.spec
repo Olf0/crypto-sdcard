@@ -11,7 +11,7 @@ Version:       1.3.3
 # - An optional third field might be used by downstream packagers, who alter the package but want to
 #   retain the exact version number.  It shall consist of the packager's name appended with a natural 
 #   number greater than zero, e.g "joe8".
-Release:       1.sfosABCregular
+Release:       1.sfosABCqcrypto
 Group:         System/Base
 Distribution:  SailfishOS
 Vendor:        olf
@@ -35,10 +35,12 @@ Requires:      sailfish-version >= 3.4.0
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
 Requires:      sailfish-version < 3.4.0
 Requires:      cryptsetup >= 1.4.0
-# Necessary counter-dependency to https://github.com/Olf0/crypto-sdcard/blob/qcrypto/rpm/crypto-sdcard.spec#L40
-Conflicts:     kernel-adaptation-sbj
-# ..., see requirement 3 at https://github.com/Olf0/crypto-sdcard/blob/master/RPM-dependencies_Git-workflow.md#requirements
+# Must provide Qualcomm's qcrypto kernel module, check: find /lib/modules/ -name qcrypto.ko; rpm -qf $(find /lib/modules/ -name qcrypto.ko)
+# On a Jolla 1 (sbj) qcrypto.ko is deployed by the following RPM, currently no other SailfishOS device adaption is known to provide it.
+Requires:      kernel-adaptation-sbj
 Conflicts:     crypto-sdcard_sbj
+Obsoletes:     crypto-sdcard_sbj
+Provides:      crypto-sdcard_sbj
 
 %description
 %{summary}
