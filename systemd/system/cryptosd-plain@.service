@@ -12,7 +12,7 @@ Type=oneshot
 RemainAfterExit=yes
 StandardInput=file:/etc/crypto-sdcard/%I.key 
 # For devices, which need the qcrypto kernel module loaded to support modern cryptographic schemes as e.g. XTS:
-# ExecStartPre=/sbin/modprobe qcrypto
+ExecStartPre=/sbin/modprobe qcrypto
 ExecStart=/usr/sbin/cryptsetup -d - -h sha1 -s 256 -c aes-xts-plain --allow-discards --type plain open /dev/%I %I
 ExecStop=/usr/sbin/cryptsetup close %I
 
