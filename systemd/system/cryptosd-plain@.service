@@ -10,9 +10,9 @@ AssertFileNotEmpty=/etc/crypto-sdcard/%I.key
 [Service]
 Type=oneshot
 RemainAfterExit=yes
+StandardInput=file:/etc/crypto-sdcard/%I.key 
 # For devices, which need the qcrypto kernel module loaded to support modern cryptographic schemes as e.g. XTS:
 ExecStartPre=/sbin/modprobe qcrypto
-ExecStart=/bin/sh -c 'cat /etc/crypto-sdcard/%I.key | /usr/sbin/cryptsetup -h sha1 -s 256 -c aes-xts-plain --allow-discards --type plain open /dev/%I %I'
-# ExecStartPost=chgrp disk /dev/mapper/%I  # Moved to udev rules 96-cryptosd
+ExecStart=/usr/sbin/cryptsetup -d - -h sha1 -s 256 -c aes-xts-plain --allow-discards --type plain open /dev/%I %I
 ExecStop=/usr/sbin/cryptsetup close %I
 
