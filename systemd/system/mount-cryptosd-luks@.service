@@ -22,9 +22,9 @@ RemainAfterExit=yes
 # udisks object for an encrypted partition has not been created yet.
 # Hence giving udisksd a second to settle:
 ExecStartPre=/bin/sleep 1
-EnvironmentFile=-/var/lib/environment/udisks2/%p.conf
+EnvironmentFile=-/var/lib/environment/udisks2/%p@.conf
 EnvironmentFile=-/var/lib/environment/udisks2/%p@%I.conf
 ExecStart=/usr/bin/udisksctl-user mount $UDISKS2_MOUNT_OPTIONS -b /dev/mapper/%I
 ExecStop=/usr/bin/udisksctl unmount -b /dev/mapper/%I
-ExecStopPost=/bin/umount -vfrq /dev/%I
+ExecStopPost=/bin/umount -vrq /dev/%I
 
