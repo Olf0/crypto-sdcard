@@ -10,8 +10,8 @@ Requires=udisks2.service cryptosd-plain@%i.service
 Conflicts=umount.target actdead.target factory-test.target
 # Ensure that this Unit is processed before alien-service-manager
 # is started (and even more importantly that it is shut down, *after*
-# alien-service-manager is shut down), to allow for android_storage
-# on encrypted SD-card:
+# alien-service-manager is shut down), to allow for e.g. (and more),
+# android_storage on encrypted SD-card:
 Before=alien-service-manager.service
 
 [Service]
