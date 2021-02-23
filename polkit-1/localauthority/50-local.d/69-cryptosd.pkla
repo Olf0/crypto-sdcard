@@ -1,4 +1,4 @@
-[Allow nemo and Android mounting encrypted SD-cards]
+[Allow nemo or defaultuser to mount encrypted SD-cards]
 Identity=unix-group:media_rw
 Action=org.freedesktop.udisks2.filesystem-mount-system
 ResultAny=yes
