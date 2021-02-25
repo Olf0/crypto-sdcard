@@ -5,23 +5,23 @@ After=udisks2.service cryptosd-plain@%i.service cryptsetup.target dev-mapper-%i.
 BindsTo=cryptsetup.target dev-mapper-%i.device
 Requires=udisks2.service cryptosd-plain@%i.service
 # Allow for rescue.target and conflict with umount.target (see
-# man 7 systemd.special; needed expicitly for the new ExecStopPost
+# man 7 systemd.special; needed explicitly for the new ExecStopPost
 # statement as this a mounting unit, though not a mount unit):
 Conflicts=umount.target actdead.target factory-test.target
 # Ensure that this Unit is processed before alien-service-manager
 # is started (and even more importantly that it is shut down, *after*
-# alien-service-manager is shut down), to allow for android_storage
-# on encrypted SD-card:
+# alien-service-manager is shut down), to allow for e.g. (and more),
+# android_storage on encrypted SD-card:
 Before=alien-service-manager.service
 
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-# "udisksctl mount" (below) often fails when issued right after
+# "udisksctl mount" (below) sometimes fails when issued right after
 # "udisksd" (per "udisks2.service") has finished starting, as the
 # udisks object for an encrypted partition has not been created yet.
-# Hence giving udisksd a second to settle:
-ExecStartPre=/bin/sleep 1
+# Hence one might give udisksd a second to settle:
+# ExecStartPre=/bin/sleep 1
 EnvironmentFile=-/var/lib/environment/udisks2/%p@.conf
 EnvironmentFile=-/var/lib/environment/udisks2/%p@%I.conf
 ExecStart=/usr/bin/udisksctl-user mount $UDISKS2_MOUNT_OPTIONS -b /dev/mapper/%I
