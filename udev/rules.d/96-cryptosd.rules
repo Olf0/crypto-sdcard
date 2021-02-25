@@ -7,8 +7,8 @@ KERNEL=="mmcblk1*|sd[a-z]*", SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ENV{ID_FS
 KERNEL=="mmcblk1*|sd[a-z]*", SUBSYSTEM=="block", ENV{DEVTYPE}=="partition", ENV{ID_FS_USAGE}!="?*", ENV{ID_FS_TYPE}!="?*", ACTION=="add", SYMLINK+="crypto_plain_%k", TAG+="systemd", ENV{SYSTEMD_USER_WANTS}="", PROGRAM=="/usr/bin/systemd-escape --template=cryptosd-plain@.service crypto_plain_%k", ENV{SYSTEMD_WANTS}="'%c'"
 
 # Carefully match resulting virtual node dm-* to trigger mounting it; see /lib/udev/rules.d/10-dm.rules for details
-KERNEL=="dm-[0-9]*", SUBSYSTEM=="block", SYMLINK=="mapper/crypto_luks_*", ENV{ID_FS_USAGE}=="filesystem", ENV{DM_UDEV_RULES_VSN}=="[1-9]*", ACTION=="change", ENV{DM_UDEV_PRIMARY_SOURCE_FLAG}=="1", ENV{DM_ACTIVATION}=="1", ENV{DM_SUSPENDED}=="0", GROUP="disk", TAG+="systemd", PROGRAM=="/usr/bin/systemd-escape --template=mount-cryptosd-luks@.service %E{DM_NAME}", ENV{SYSTEMD_WANTS}="'%c'"
+KERNEL=="dm-[0-9]*", SUBSYSTEM=="block", SYMLINK=="mapper/crypto_luks_*", ENV{ID_FS_USAGE}=="filesystem", ENV{DM_UDEV_RULES_VSN}=="[1-9]*", ACTION=="change", ENV{DM_UDEV_PRIMARY_SOURCE_FLAG}=="1", ENV{DM_ACTIVATION}=="1", ENV{DM_SUSPENDED}=="0", TAG+="systemd", PROGRAM=="/usr/bin/systemd-escape --template=mount-cryptosd-luks@.service %E{DM_NAME}", ENV{SYSTEMD_WANTS}="'%c'"
 
 # Ditto for DM-Crypt "plain":
-KERNEL=="dm-[0-9]*", SUBSYSTEM=="block", SYMLINK=="mapper/crypto_plain_*", ENV{ID_FS_USAGE}=="filesystem", ENV{DM_UDEV_RULES_VSN}=="[1-9]*", ACTION=="change", ENV{DM_UDEV_PRIMARY_SOURCE_FLAG}=="1", ENV{DM_ACTIVATION}=="1", ENV{DM_SUSPENDED}=="0", GROUP="disk", TAG+="systemd", PROGRAM=="/usr/bin/systemd-escape --template=mount-cryptosd-plain@.service %E{DM_NAME}", ENV{SYSTEMD_WANTS}="'%c'"
+KERNEL=="dm-[0-9]*", SUBSYSTEM=="block", SYMLINK=="mapper/crypto_plain_*", ENV{ID_FS_USAGE}=="filesystem", ENV{DM_UDEV_RULES_VSN}=="[1-9]*", ACTION=="change", ENV{DM_UDEV_PRIMARY_SOURCE_FLAG}=="1", ENV{DM_ACTIVATION}=="1", ENV{DM_SUSPENDED}=="0", TAG+="systemd", PROGRAM=="/usr/bin/systemd-escape --template=mount-cryptosd-plain@.service %E{DM_NAME}", ENV{SYSTEMD_WANTS}="'%c'"
 
