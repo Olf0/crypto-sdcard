@@ -11,7 +11,7 @@ Version:       1.4.0
 # - An optional third field might be used by downstream packagers, who alter the package but want to
 #   retain the exact version number.  It shall consist of the packager's name appended with a natural 
 #   number greater than zero, e.g "joe8".
-Release:       1.sfos321regular
+Release:       1.sfos220regular
 Group:         System/Base
 Distribution:  SailfishOS
 Vendor:        olf
@@ -28,12 +28,12 @@ Source:        https://github.com/Olf0/%{name}/archive/%{version}-%{release}/%{n
 BuildArch:     noarch
 Requires:      systemd
 Requires:      polkit
-Requires:      udisks2 >= 2.8.1+git5-1.12.1.jolla
+Requires:      udisks2
 # Better use direct dependencies than indirect ones (here: the line above versus the one below), but
 # ultimately decided to use both in this case:
-Requires:      sailfish-version >= 3.2.1
+Requires:      sailfish-version >= 2.2.0
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
-Requires:      sailfish-version < 3.4.0
+Requires:      sailfish-version < 3.2.1
 Requires:      cryptsetup >= 1.4.0
 # Necessary counter-dependency to https://github.com/Olf0/crypto-sdcard/blob/qcrypto/rpm/crypto-sdcard.spec#L40
 Conflicts:     kernel-adaptation-sbj
