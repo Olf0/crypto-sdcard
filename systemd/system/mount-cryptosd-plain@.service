@@ -1,7 +1,7 @@
 [Unit]
 Description=Mount "plain" encrypted SD-card (%I) with udisks
 Documentation=https://github.com/Olf0/crypto-sdcard
-After=udisks2.service cryptosd-plain@%i.service cryptsetup.target dev-mapper-%i.device start-user-session.service
+After=udisks2.service cryptosd-plain@%i.service cryptsetup.target dev-mapper-%i.device
 BindsTo=cryptsetup.target dev-mapper-%i.device
 Requires=udisks2.service cryptosd-plain@%i.service
 # Allow for rescue.target and conflict with umount.target (see
@@ -15,16 +15,17 @@ Conflicts=umount.target actdead.target factory-test.target
 Before=alien-service-manager.service
 
 [Service]
+User=nemo
 Type=oneshot
 RemainAfterExit=yes
 # "udisksctl mount" (below) sometimes fails when issued right after
 # "udisksd" (per "udisks2.service") has finished starting, as the
 # udisks object for an encrypted partition has not been created yet.
 # Hence one might give udisksd a second to settle:
-# ExecStartPre=/bin/sleep 1
+ExecStartPre=/bin/sleep 1
 EnvironmentFile=-/var/lib/environment/udisks2/%p@.conf
 EnvironmentFile=-/var/lib/environment/udisks2/%p@%I.conf
-ExecStart=/usr/bin/udisksctl-user mount $UDISKS2_MOUNT_OPTIONS -b /dev/mapper/%I
+ExecStart=/usr/bin/udisksctl mount $UDISKS2_MOUNT_OPTIONS -b /dev/mapper/%I
 ExecStop=/usr/bin/udisksctl unmount -b /dev/mapper/%I
 ExecStopPost=/bin/umount -vrq /dev/%I
 
