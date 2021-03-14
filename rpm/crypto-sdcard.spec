@@ -1,6 +1,6 @@
 Name:          crypto-sdcard
 Summary:       Configuration files for unlocking and mounting encrypted SD-cards automatically
-Version:       1.4.0
+Version:       1.4.2
 # Since v1.3.1, the release version consists of two or three fields, separated by a dot ("."):
 # - The first field must contain a natural number greater than zero.
 #   This number may be prefixed by one of {alpha,beta,stable}, e.g. "alpha13".
@@ -20,10 +20,10 @@ License:       MIT
 URL:           https://github.com/Olf0/%{name}
 Source:        https://github.com/Olf0/%{name}/archive/%{version}-%{release}/%{name}-%{version}-%{release}.tar.gz
 # rpmbuild (as of v4.14.1) handles the Icon tag awkwardly and in contrast to the Source tag(s):
-# It only accepts a GIF or XPM file (a path is stripped to its basename) in the SOURCE directory
-# (but not in the tarball)!  Successfully tested GIF89a and XPMv3, but an XPM icon results in
-# bad visual quality and large file size.
-# Hence only to be used, when the file is put there:
+# It only accepts a GIF or XPM file (a path is stripped to its basename) in the SOURCES directory
+# (but not inside a tarball there)!  Successfully tested GIF89a and XPMv3, but an XPM icon results
+# in bad visual quality and large file size.
+# Hence only to be used, when the file (or a symlink to it) is put there:
 #Icon:          smartmedia_mount.256x256.gif
 BuildArch:     noarch
 Requires:      systemd
