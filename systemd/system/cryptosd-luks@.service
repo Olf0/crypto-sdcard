@@ -5,6 +5,7 @@ After=systemd-udevd.service dev-%i.device
 BindsTo=dev-%i.device
 PartOf=cryptsetup.target
 Conflicts=actdead.target factory-test.target
+IgnoreOnIsolate=true
 AssertFileNotEmpty=/etc/crypto-sdcard/%I.key
 
 [Service]
