@@ -33,7 +33,7 @@ Requires:      udisks2 >= 2.8.1+git5-1.12.1.jolla
 # ultimately decided to use both in this case:
 Requires:      sailfish-version >= 3.4.0
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
-Requires:      sailfish-version < 4.0.1
+Requires:      sailfish-version < 4.0.0
 Requires:      cryptsetup >= 1.4.0
 # Must provide Qualcomm's qcrypto kernel module, check: find /lib/modules/ -name qcrypto.ko; rpm -qf $(find /lib/modules/ -name qcrypto.ko)
 # On a Jolla 1 (sbj) qcrypto.ko is deployed by the following RPM, currently no other SailfishOS device adaption is known to provide it.
