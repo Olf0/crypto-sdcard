@@ -53,7 +53,7 @@ Thus *crypto-sdcard* solely protects "data at rest" on SD-cards and other remova
   "Key"-file path and names are now:
   * For Cryptsetup LUKS: `/etc/crypto-sdcard/crypto_luks_<UUID>.key` (since v0.3)
   * For Cryptsetup "plain": `/etc/crypto-sdcard/crypto_plain_<device-name>.key` (since v0.5-7)
-  * A specific `<UUID>` can be obtained by executing `blkid -c /dev/null -s UUID -o value /dev/<device-name>` with e.g. `mmcblk1p2` as `<device-name>`.
+  * A specific `<UUID>` can be obtained by executing `blkid -s UUID -o value /dev/<device-name>` with e.g. `mmcblk1p2` as `<device-name>`.
 * v0.5<br />
   Although the installed configuration files are unaltered since v0.4-3, the spec-file ("RPM packaging") changes have been significant, so it ultimately earns an increased version number.
 * v0.4<br />
