@@ -18,11 +18,6 @@ Before=alien-service-manager.service
 User=nemo
 Type=oneshot
 RemainAfterExit=yes
-# "udisksctl mount" (below) sometimes fails when issued right after
-# "udisksd" (per "udisks2.service") has finished starting, as the
-# udisks object for an encrypted partition has not been created yet.
-# Hence one might give udisksd a second to settle:
-# ExecStartPre=/bin/sleep 1
 EnvironmentFile=-/var/lib/environment/udisks2/%p@.conf
 EnvironmentFile=-/var/lib/environment/udisks2/%p@%I.conf
 ExecStart=/usr/bin/udisksctl mount $UDISKS2_MOUNT_OPTIONS -b /dev/mapper/%I
