@@ -12,7 +12,7 @@ Conflicts=umount.target actdead.target factory-test.target
 # is started (and even more importantly that it is shut down, *after*
 # alien-service-manager is shut down), to allow for e.g. (and more),
 # android_storage on encrypted SD-card:
-Before=alien-service-manager.service
+Before=alien-service-manager.service umount.target
 
 [Service]
 Type=oneshot
