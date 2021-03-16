@@ -18,6 +18,7 @@ Before=alien-service-manager.service umount.target
 Type=oneshot
 RemainAfterExit=yes
 EnvironmentFile=-/var/lib/environment/udisks2/%p@.conf
+EnvironmentFile=-/var/lib/environment/udisks2/%N.conf
 EnvironmentFile=-/var/lib/environment/udisks2/%p@%I.conf
 ExecStart=/usr/bin/udisksctl-user mount $UDISKS2_MOUNT_OPTIONS -b /dev/mapper/%I
 ExecStop=/usr/bin/udisksctl unmount -b /dev/mapper/%I
