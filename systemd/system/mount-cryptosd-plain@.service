@@ -1,8 +1,8 @@
 [Unit]
 Description=Mount "plain" encrypted SD-card (%I) with udisks
 Documentation=https://github.com/Olf0/crypto-sdcard
-After=udisks2.service cryptosd-plain@%i.service cryptsetup.target dev-mapper-%i.device start-user-session.service
-BindsTo=cryptsetup.target dev-mapper-%i.device
+After=udisks2.service cryptosd-plain@%i.service dev-mapper-%i.device start-user-session.service
+Requisite=dev-mapper-%i.device
 Requires=udisks2.service cryptosd-plain@%i.service
 # Allow for rescue.target and conflict with umount.target (see
 # man 7 systemd.special; needed explicitly for the new ExecStopPost
@@ -12,7 +12,7 @@ Conflicts=umount.target actdead.target factory-test.target
 # is started (and even more importantly that it is shut down, *after*
 # alien-service-manager is shut down), to allow for e.g. (and more),
 # android_storage on encrypted SD-card:
-Before=alien-service-manager.service
+Before=alien-service-manager.service umount.target
 
 [Service]
 Type=oneshot
@@ -21,5 +21,5 @@ EnvironmentFile=-/var/lib/environment/udisks2/%p@.conf
 EnvironmentFile=-/var/lib/environment/udisks2/%p@%I.conf
 ExecStart=/usr/bin/udisksctl-user mount $UDISKS2_MOUNT_OPTIONS -b /dev/mapper/%I
 ExecStop=/usr/bin/udisksctl unmount -b /dev/mapper/%I
-ExecStopPost=/bin/umount -vrq /dev/%I
+ExecStopPost=/bin/umount -vrq /dev/mapper/%I
 
