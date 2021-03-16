@@ -3,7 +3,6 @@ Description=Open DM-Crypt "plain" on SD-card %I
 Documentation=https://github.com/Olf0/crypto-sdcard
 After=systemd-udevd.service dev-%i.device
 BindsTo=dev-%i.device
-PartOf=cryptsetup.target
 Conflicts=actdead.target factory-test.target
 IgnoreOnIsolate=true
 AssertFileNotEmpty=/etc/crypto-sdcard/%I.key
