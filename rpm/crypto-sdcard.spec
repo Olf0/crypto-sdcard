@@ -16,7 +16,7 @@ Group:         System/Base
 Distribution:  SailfishOS
 Vendor:        olf
 Packager:      olf
-License:       MIT
+License:       LGPL-2.1-only
 URL:           https://github.com/Olf0/%{name}
 Source:        https://github.com/Olf0/%{name}/archive/%{version}-%{release}/%{name}-%{version}-%{release}.tar.gz
 # rpmbuild (as of v4.14.1) handles the Icon tag awkwardly and in contrast to the Source tag(s):
