@@ -1,5 +1,5 @@
 [Unit]
-Description=Open DM-Crypt LUKS on SD-card %I
+Description=Opening %I
 Documentation=https://github.com/Olf0/crypto-sdcard
 DefaultDependencies=no
 After=sysinit.target dev-%i.device
