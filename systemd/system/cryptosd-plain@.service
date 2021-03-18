@@ -14,8 +14,11 @@ AssertFileNotEmpty=/etc/crypto-sdcard/%I.key
 Type=oneshot
 RemainAfterExit=yes
 StandardInput=file:/etc/crypto-sdcard/%I.key 
-# For devices, which need the qcrypto kernel module loaded to support modern cryptographic schemes as e.g. XTS:
+# For devices, which need the qcrypto kernel module loaded to support modern cryptographic
+# schemes as e.g. XTS:
 # ExecStartPre=/sbin/modprobe qcrypto
+# "udisksctl unlock --key-file" does only work with LUKS "containers", not with "plain" ones,
+# thus call cryptsetup directly:
 ExecStart=/usr/sbin/cryptsetup -d - -h sha1 -s 256 -c aes-xts-plain --allow-discards --type plain open /dev/%I %I
 # "udisksctl mount" (in mount-cryptosd-luks@.service) sometimes fails when issued right after
 # "udisksd" (per "udisks2.service") has finished starting, because the udisks object for this
