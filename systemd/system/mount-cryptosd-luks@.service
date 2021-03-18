@@ -1,5 +1,5 @@
 [Unit]
-Description=Mount LUKS encrypted SD-card (%I) with udisks
+Description=Mounting %I per udisks
 Documentation=https://github.com/Olf0/crypto-sdcard
 After=udisks2.service cryptosd-luks@%i.service dev-mapper-%i.device start-user-session.service
 Requisite=dev-mapper-%i.device
