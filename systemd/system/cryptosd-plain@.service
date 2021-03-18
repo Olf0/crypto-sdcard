@@ -1,5 +1,5 @@
 [Unit]
-Description=Opening %I
+Description=Opening %I per cryptsetup
 Documentation=https://github.com/Olf0/crypto-sdcard
 DefaultDependencies=no
 After=sysinit.target dev-%i.device
