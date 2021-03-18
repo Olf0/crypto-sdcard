@@ -25,7 +25,7 @@ ExecStart=/usr/sbin/cryptsetup -d - -h sha1 -s 256 -c aes-xts-plain --allow-disc
 # dependent units sleep for a second by an "ExecStartPre=/bin/sleep 1" in them would
 # unnecessarily waste this second most of the time; that is avoided this way.
 # Note that using ExecStop= for this is futile (because it is not relevant for dependencies,
-# see https://www.freedesktop.org/software/systemd/man/systemd.service.html#Type=# ), but
+# see https://www.freedesktop.org/software/systemd/man/systemd.service.html#Type= ), but
 # (only) units of the Type=oneshot may use multiple ExecStart= lines and / or commands.  Side
 # note: For non-oneshot units a solution is to move the ExecStart= command to ExecStartPre=
 # (that is equivalent!) and ... 
