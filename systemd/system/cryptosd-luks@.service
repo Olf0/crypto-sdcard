@@ -18,8 +18,8 @@ ExecStartPre=/sbin/modprobe qcrypto
 # For various reasons (dependency on udisks2, allow discards etc.), do not use "udisksctl unlock --key-file", call cryptsetup directly:
 ExecStart=/usr/sbin/cryptsetup --allow-discards -d /etc/crypto-sdcard/%I.key luksOpen /dev/%I %I
 # "udisksctl mount" (in mount-cryptosd-luks@.service) sometimes fails when issued right after
-# "udisksd" (per "udisks2.service") has finished starting, because the udisks object for this
-# unlocked device has not been created yet.
+# this unit (instance) and "udisksd" (per "udisks2.service") have finished starting, because
+# the udisks object for this unlocked device has not been created yet.
 # Hence one might give udisksd a second to recognise the fresh device, before starting units
 # dependent on this unit instance and "udisks2.service" / "udisksd".  Side note: Letting
 # dependent units sleep for a second by an "ExecStartPre=/bin/sleep 1" in them would
