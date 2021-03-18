@@ -17,5 +17,18 @@ StandardInput=file:/etc/crypto-sdcard/%I.key
 # For devices, which need the qcrypto kernel module loaded to support modern cryptographic schemes as e.g. XTS:
 # ExecStartPre=/sbin/modprobe qcrypto
 ExecStart=/usr/sbin/cryptsetup -d - -h sha1 -s 256 -c aes-xts-plain --allow-discards --type plain open /dev/%I %I
+# "udisksctl mount" (in mount-cryptosd-luks@.service) sometimes fails when issued right after
+# "udisksd" (per "udisks2.service") has finished starting, because the udisks object for this
+# unlocked device has not been created yet.
+# Hence one might give udisksd a second to recognise the fresh device, before starting units
+# dependent on this unit instance and "udisks2.service" / "udisksd".  Side note: Letting
+# dependent units sleep for a second by an "ExecStartPre=/bin/sleep 1" in them would
+# unnecessarily waste this second most of the time; that is avoided this way.
+# Note that using ExecStop= for this is futile (because it is not relevant for dependencies,
+# see https://www.freedesktop.org/software/systemd/man/systemd.service.html#Type=# ), but
+# (only) units of the Type=oneshot may use multiple ExecStart= lines and / or commands.  Side
+# note: For non-oneshot units a solution is to move the ExecStart= command to ExecStartPre=
+# (that is equivalent!) and ... 
+ExecStart=/bin/sleep 1
 ExecStop=/usr/sbin/cryptsetup close %I
 
