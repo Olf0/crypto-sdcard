@@ -13,10 +13,12 @@ AssertFileNotEmpty=/etc/crypto-sdcard/%I.key
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-StandardInput=file:/etc/crypto-sdcard/%I.key
 # For devices, which need the qcrypto kernel module loaded to support modern cryptographic
 # schemes as e.g. XTS:
 # ExecStartPre=/sbin/modprobe qcrypto
+# With workaround for https://github.com/systemd/systemd/issues/14560 :
+StandardInput=file:/etc/crypto-sdcard/%I.key
+StandardOutput=journal
 # "udisksctl unlock --key-file" does only work with LUKS "containers", not with "plain" ones,
 # thus call cryptsetup directly:
 ExecStart=/usr/sbin/cryptsetup -d - -h sha1 -s 256 -c aes-xts-plain --allow-discards --type plain open /dev/%I %I
