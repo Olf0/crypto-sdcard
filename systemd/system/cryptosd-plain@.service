@@ -13,7 +13,7 @@ AssertFileNotEmpty=/etc/crypto-sdcard/%I.key
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-StandardInput=file:/etc/crypto-sdcard/%I.key 
+StandardInput=file:/etc/crypto-sdcard/%I.key
 # For devices, which need the qcrypto kernel module loaded to support modern cryptographic
 # schemes as e.g. XTS:
 # ExecStartPre=/sbin/modprobe qcrypto
@@ -31,7 +31,7 @@ ExecStart=/usr/sbin/cryptsetup -d - -h sha1 -s 256 -c aes-xts-plain --allow-disc
 # https://www.freedesktop.org/software/systemd/man/systemd.service.html#Type= ), but (only)
 # units of the Type=oneshot may use multiple ExecStart= lines and / or commands.  Side note:
 # For non-oneshot units a solution is to move the ExecStart= command to ExecStartPre= (that
-# is functionally equivalent!) and ... 
+# is functionally equivalent!) and ...
 ExecStart=/bin/sleep 1
 ExecStop=/usr/sbin/cryptsetup close %I
 
