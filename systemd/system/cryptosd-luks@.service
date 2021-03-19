@@ -26,11 +26,11 @@ ExecStart=/usr/sbin/cryptsetup --allow-discards -d /etc/crypto-sdcard/%I.key luk
 # dependent on this unit instance and "udisks2.service" / "udisksd".  Side note: Letting
 # dependent units sleep for a second by an "ExecStartPre=/bin/sleep 1" in them would
 # unnecessarily waste this second most of the time; that is avoided this way.
-# Note that using ExecStop= for this is futile (because it is not relevant for dependencies,
-# see https://www.freedesktop.org/software/systemd/man/systemd.service.html#Type= ), but
-# (only) units of the Type=oneshot may use multiple ExecStart= lines and / or commands.  Side
-# note: For non-oneshot units a solution is to move the ExecStart= command to ExecStartPre=
-# (that is equivalent!) and ... 
+# Note that using ExecStartPost= for this is futile (as irrelevant for dependencies, see
+# https://www.freedesktop.org/software/systemd/man/systemd.service.html#Type= ), but (only)
+# units of the Type=oneshot may use multiple ExecStart= lines and / or commands.  Side note:
+# For non-oneshot units a solution is to move the ExecStart= command to ExecStartPre= (that
+# is functionally equivalent!) and ... 
 ExecStart=/bin/sleep 1
 ExecStop=/usr/sbin/cryptsetup close %I
 
