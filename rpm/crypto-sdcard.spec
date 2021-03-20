@@ -1,6 +1,6 @@
 Name:          crypto-sdcard
 Summary:       Configuration files for unlocking and mounting encrypted SD-cards automatically
-Version:       1.4.3
+Version:       1.5.0
 # Since v1.3.1, the release version consists of two or three fields, separated by a dot ("."):
 # - The first field must contain a natural number greater than zero.
 #   This number may be prefixed by one of {alpha,beta,stable}, e.g. "alpha13".
