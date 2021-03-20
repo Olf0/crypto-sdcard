@@ -4,10 +4,9 @@ Documentation=https://github.com/Olf0/crypto-sdcard
 After=udisks2.service cryptosd-plain@%i.service dev-mapper-%i.device start-user-session.service
 Requisite=dev-mapper-%i.device
 Requires=udisks2.service cryptosd-plain@%i.service
-# Allow for rescue.target and conflict with umount.target (see
-# man 7 systemd.special; needed explicitly for the new ExecStopPost
-# statement as this a mounting unit, though not a mount unit):
-Conflicts=umount.target actdead.target factory-test.target
+# Also conflict with umount.target (see man 7 systemd.special), as
+# this is a mounting unit, though not a mount unit:
+Conflicts=umount.target rescue.target actdead.target factory-test.target
 # Ensure that this Unit is processed before alien-service-manager
 # is started (and even more importantly that it is shut down, *after*
 # alien-service-manager is shut down), to allow for e.g. (and more),
