@@ -2,8 +2,9 @@
 Description=Mount %I per udisks
 Documentation=https://github.com/Olf0/crypto-sdcard
 After=udisks2.service cryptosd-plain@%i.service dev-mapper-%i.device start-user-session.service
-Requisite=dev-mapper-%i.device
 Requires=udisks2.service cryptosd-plain@%i.service
+# This is not neccessary here, and prevents this unit from auto-starting its dependencies:
+# Requisite=dev-mapper-%i.device
 # Also conflict with umount.target (see man 7 systemd.special), as
 # this is a mounting unit, though not a mount unit:
 Conflicts=umount.target rescue.target actdead.target factory-test.target
