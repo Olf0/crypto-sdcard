@@ -29,8 +29,9 @@ BuildArch:     noarch
 Requires:      systemd
 Requires:      polkit
 Requires:      udisks2
-# Better use direct dependencies on specific versions than indirect ones (here: the line above versus
-# the one below) in general, but ultimately decided not to do so in this special case (for uniformity):
+# Better use direct dependencies on specific versions than indirect ones (here: the line above
+# versus the one below) in general, but ultimately decided not to do so in this special case
+# (for commonality across release versions):
 Requires:      sailfish-version >= 3.4.0
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
 Requires:      sailfish-version < 3.4.0
