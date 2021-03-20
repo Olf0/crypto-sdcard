@@ -28,9 +28,9 @@ Source:        https://github.com/Olf0/%{name}/archive/%{version}-%{release}/%{n
 BuildArch:     noarch
 Requires:      systemd
 Requires:      polkit
-Requires:      udisks2 >= 2.8.1+git5-1.12.1.jolla
-# Better use direct dependencies than indirect ones (here: the line above versus the one below), but
-# ultimately decided to use both in this case:
+Requires:      udisks2
+# Better use direct dependencies on specific versions than indirect ones (here: the line above versus
+# the one below) in general, but ultimately decided not to do so in this special case (for uniformity):
 Requires:      sailfish-version >= 3.4.0
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
 Requires:      sailfish-version < 3.4.0
