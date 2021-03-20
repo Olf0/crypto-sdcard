@@ -10,7 +10,7 @@ Before=umount.target shutdown.target mount-cryptosd-luks@%i.service
 # That would allow this unit to keep on running, when switching to e.g., rescue.target
 # (but never for the SFOS recovery!).  While having an unlocked device around should be
 # harmless, disable it as long as benefits and potential consequences for the SFOS updater
-# were not evaluated:
+# are not properly evaluated:
 # IgnoreOnIsolate=true
 AssertFileNotEmpty=/etc/crypto-sdcard/%I.key
 
