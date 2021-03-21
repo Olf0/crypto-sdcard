@@ -55,11 +55,10 @@ mkdir -p %{buildroot}%{_sysconfdir}/%{name}
 cp -R systemd polkit-1 udev %{buildroot}%{_sysconfdir}/
 
 %files
-%defattr(-,root,root,-)
-# Files which may be altered by user:
-%config %{_sysconfdir}/systemd/system/cryptosd-plain@.service
 # Regular files:
+%defattr(-,root,root,-)
 %{_sysconfdir}/systemd/system/cryptosd-luks@.service
+%{_sysconfdir}/systemd/system/cryptosd-plain@.service
 %{_sysconfdir}/systemd/system/mount-cryptosd-luks@.service
 %{_sysconfdir}/systemd/system/mount-cryptosd-plain@.service
 %{_sysconfdir}/polkit-1/localauthority/50-local.d/69-cryptosd.pkla
@@ -67,4 +66,5 @@ cp -R systemd polkit-1 udev %{buildroot}%{_sysconfdir}/
 # Extraordinary files / dirs:
 %defattr(0640,root,root,0750)
 %dir %{_sysconfdir}/%{name}
+%config %{_sysconfdir}/systemd/system/cryptosd.conf
 
