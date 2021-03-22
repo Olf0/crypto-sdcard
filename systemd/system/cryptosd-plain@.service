@@ -28,7 +28,7 @@ StandardInput=file:/etc/crypto-sdcard/%I.key
 StandardOutput=journal
 # "udisksctl unlock --key-file" does only work with LUKS "containers", not with "plain" ones,
 # thus call cryptsetup directly:
-ExecStart=/usr/sbin/cryptsetup -d - -h $CRYPTO_PLAIN_PASSPHRASE_HASH -s $CRYPTO_PLAIN_KEYLENGTH -c $CRYPTO_PLAIN_CIPHER --allow-discards --type plain open /dev/%I %I
+ExecStart=/usr/sbin/cryptsetup -d - -h ${CRYPTO_PLAIN_PASSPHRASE_HASH} -s ${CRYPTO_PLAIN_KEYLENGTH} -c ${CRYPTO_PLAIN_CIPHER} --allow-discards --type plain open /dev/%I %I
 # "udisksctl mount" (in mount-cryptosd-luks@.service) sometimes fails when issued right after
 # this unit (instance) and "udisksd" (per "udisks2.service") have finished starting, because
 # the udisks object for this unlocked device has not been created yet.
