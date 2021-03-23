@@ -1,6 +1,6 @@
 Name:          crypto-sdcard
 Summary:       Configuration files for unlocking and mounting encrypted SD-cards automatically
-Version:       1.5.0
+Version:       1.5.1
 # Since v1.3.1, the release version consists of two or three fields, separated by a dot ("."):
 # - The first field must contain a natural number greater than zero.
 #   This number may be prefixed by one of {alpha,beta,stable}, e.g. "alpha13".
@@ -28,9 +28,10 @@ Source:        https://github.com/Olf0/%{name}/archive/%{version}-%{release}/%{n
 BuildArch:     noarch
 Requires:      systemd
 Requires:      polkit
-Requires:      udisks2 >= 2.8.1+git5-1.12.1.jolla
-# Better use direct dependencies than indirect ones (here: the line above versus the one below), but
-# ultimately decided to use both in this case:
+Requires:      udisks2
+# Better use direct dependencies on specific versions than indirect ones (here: the line above
+# versus the one below) in general, but ultimately decided not to do so in this special case
+# (for commonality across release versions):
 Requires:      sailfish-version >= 3.4.0
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
 Requires:      sailfish-version < 4.0.0
@@ -54,11 +55,10 @@ mkdir -p %{buildroot}%{_sysconfdir}/%{name}
 cp -R systemd polkit-1 udev %{buildroot}%{_sysconfdir}/
 
 %files
-%defattr(-,root,root,-)
-# Files which may be altered by user:
-%config %{_sysconfdir}/systemd/system/cryptosd-plain@.service
 # Regular files:
+%defattr(-,root,root,-)
 %{_sysconfdir}/systemd/system/cryptosd-luks@.service
+%{_sysconfdir}/systemd/system/cryptosd-plain@.service
 %{_sysconfdir}/systemd/system/mount-cryptosd-luks@.service
 %{_sysconfdir}/systemd/system/mount-cryptosd-plain@.service
 %{_sysconfdir}/polkit-1/localauthority/50-local.d/69-cryptosd.pkla
@@ -66,4 +66,5 @@ cp -R systemd polkit-1 udev %{buildroot}%{_sysconfdir}/
 # Extraordinary files / dirs:
 %defattr(0640,root,root,0750)
 %dir %{_sysconfdir}/%{name}
+%config %{_sysconfdir}/systemd/system/cryptosd.conf
 
