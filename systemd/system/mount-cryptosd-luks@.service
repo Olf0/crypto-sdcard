@@ -2,12 +2,13 @@
 Description=Mount %I per udisks
 Documentation=https://github.com/Olf0/crypto-sdcard
 After=udisks2.service cryptosd-luks@%i.service dev-mapper-%i.device start-user-session.service
-Requisite=dev-mapper-%i.device
 Requires=udisks2.service cryptosd-luks@%i.service
-# Allow for rescue.target and conflict with umount.target (see
-# man 7 systemd.special; needed explicitly for the new ExecStopPost
-# statement as this a mounting unit, though not a mount unit):
-Conflicts=umount.target actdead.target factory-test.target
+# This is not neccessary here, and prevents this unit from auto-starting
+# its dependencies, when called manually:
+# Requisite=dev-mapper-%i.device
+# Also conflict with umount.target (see man 7 systemd.special), as
+# this is a mounting unit, though not a mount unit:
+Conflicts=umount.target rescue.target actdead.target factory-test.target
 # Ensure that this Unit is processed before alien-service-manager
 # is started (and even more importantly that it is shut down, *after*
 # alien-service-manager is shut down), to allow for e.g. (and more),
@@ -17,9 +18,9 @@ Before=alien-service-manager.service umount.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-EnvironmentFile=-/var/lib/environment/udisks2/%p@.conf
-EnvironmentFile=-/var/lib/environment/udisks2/%N.conf
-EnvironmentFile=-/var/lib/environment/udisks2/%p@%I.conf
+EnvironmentFile=/etc/systemd/system/cryptosd.conf
+EnvironmentFile=-/etc/crypto-sdcard/cryptosd.conf
+EnvironmentFile=-/etc/crypto-sdcard/cryptosd@%I.conf
 ExecStart=/usr/bin/udisksctl-user mount $UDISKS2_MOUNT_OPTIONS -b /dev/mapper/%I
 ExecStop=/usr/bin/udisksctl unmount -b /dev/mapper/%I
 ExecStopPost=/bin/umount -vrq /dev/mapper/%I
