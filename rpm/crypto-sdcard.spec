@@ -11,7 +11,7 @@ Version:       1.5.1
 # - An optional third field might be used by downstream packagers, who alter the package but want to
 #   retain the exact version number.  It shall consist of the packager's name appended with a natural 
 #   number greater than zero, e.g "joe8".
-Release:       1.sfosABCqcrypto
+Release:       1.sfos220qcrypto
 Group:         System/Base
 Distribution:  SailfishOS
 Vendor:        olf
@@ -32,9 +32,9 @@ Requires:      udisks2
 # Better use direct dependencies on specific versions than indirect ones (here: the line above
 # versus the one below) in general, but ultimately decided not to do so in this special case
 # (for commonality across release versions):
-Requires:      sailfish-version >= 3.4.0
+Requires:      sailfish-version >= 2.2.0
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
-Requires:      sailfish-version < 3.4.0
+Requires:      sailfish-version < 3.2.1
 Requires:      cryptsetup >= 1.4.0
 # Must provide Qualcomm's qcrypto kernel module, check: find /lib/modules/ -name qcrypto.ko; rpm -qf $(find /lib/modules/ -name qcrypto.ko)
 # On a Jolla 1 (sbj) qcrypto.ko is deployed by the following RPM, currently no other SailfishOS device adaption is known to provide it.
