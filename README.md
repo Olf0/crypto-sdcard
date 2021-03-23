@@ -4,7 +4,7 @@
 Note that for devices, which need to load Qualcomm's `qcrypto` kernel module in order to support modern cryptographic schemes as e.g. XTS (plus it is faster and more energy efficient), a [separate "qcrypto edition" is provided](https://github.com/Olf0/crypto-sdcard/tree/qcrypto).  Only SailfishOS on the Jolla 1 (sbj) is known to provide the `qcrypto.ko`, hence currently it is the only device supported by the "qcrypto edition".<br />
 Thus for all other devices (i.e., on those where `find /lib/modules/ -name qcrypto.ko` yields nothing), this regular edition shall be used.
 
-Extensively tested with systemd 225 (which includes udev), udisks2 2.7.5 and polkit 0.104 (e.g. SailfishOS since version 2.2, which provides aforementioned software or newer versions).<br />
+Extensively tested with systemd 225 (which includes udev), udisks2 2.7.5 and polkit 0.104 (e.g., SailfishOS since version 2.2.0, which provides aforementioned software) and newer versions.<br />
 Built RPMs are available in the [release section](https://github.com/Olf0/crypto-sdcard/releases) and for easy installation under SailfishOS at [OpenRepos](https://openrepos.net/content/olf/crypto-sdcard).
 
 The necessary steps to prepare an SD-card (or any other removable storage) are described at [Together.Jolla.com](https://together.jolla.com/question/195850/guide-creating-partitions-on-sd-card-optionally-encrypted/).<br />
@@ -27,9 +27,7 @@ Thus *crypto-sdcard* solely protects "data at rest" on SD-cards and other remova
 * Start mounting encrypted (partitions on) SD-card via udisks at the earliest sensible time: Right after *udisks2.service* has started.
 * Unmount before *udisks2.service* begins stopping, hence achieving a clean unmount.
 * Also do not use SailfishOS' *udisksctl-user* script for unmounting (because it cannot work at the time ExecStop is executed), which is installed and used by SailfishOS since its release 3.2.1, and was also used by *crypto-sdcard* versions 1.1-1 to 1.3.1-5; see [details here](https://github.com/Olf0/crypto-sdcard/pull/28).
-* Since v1.3.4 the [Systemd EnvironmentFiles](https://www.freedesktop.org/software/systemd/man/systemd.exec.html#EnvironmentFile=) `mount-cryptosd-luks@.conf` and `mount-cryptosd-luks@crypto_luks_<UUID>.conf` (in this order), respectively `mount-cryptosd-plain@.conf` and `mount-cryptosd-plain@crypto_plain_<device-name>.conf`, in */var/lib/environment/udisks2/* are evaluated for additional mount options, if they exist (one or both).
-  Take a look at `ls /dev/mapper/crypto*` for the partition specific part (between the `@` and the `.conf` extension) of the file names for the partition specific configuration files.<br />
-  These configuration files can be created by a system administrator (i.e., you), so if you want to add restricting mount options, see [here for details](https://github.com/Olf0/mount-sdcard/releases/tag/1.3.2).
+* Since [v1.3.4](https://github.com/Olf0/mount-sdcard/releases/tag/1.3.2), overhauled in [v1.5.1](https://github.com/Olf0/crypto-sdcard/blob/33b1d18380e88c3bbffc709cb1a02b09212eb1e1/systemd/system/cryptosd.conf): Use [Systemd EnvironmentFiles](https://www.freedesktop.org/software/systemd/man/systemd.exec.html#EnvironmentFile=), allowing administrators to [easily set options](https://github.com/Olf0/crypto-sdcard/blob/master/systemd/system/cryptosd.conf#L2).
 * Ensure, that AlienDalvik (specifically *alien-service-manager.service*) begins starting after mounting succeeded, to allow for [android_storage on SD-card](https://together.jolla.com/question/203539/guide-externalising-android_storage-and-other-directories-files-to-sd-card/#203539-2-externalising-homenemoandroid_storage).<br />
   Even more importantly (i.e., also relevant for devices without "android_storage on SD-card") this also ensures, that unmounting occurs only after AlienDalvik has completely stopped.<br />
   Nevertheless, these configuration files are also applicable to devices without AlienDalvik installed.
