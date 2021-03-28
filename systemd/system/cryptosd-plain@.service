@@ -1,9 +1,9 @@
 [Unit]
-Description=Open %I per cryptsetup
+Description=Open crypto_plain_%I per cryptsetup
 Documentation=https://github.com/Olf0/crypto-sdcard
 DefaultDependencies=no
-After=sysinit.target dev-%i.device
-Requisite=dev-%i.device
+After=sysinit.target dev-crypto_plain_%i.device
+Requisite=dev-crypto_plain_%i.device
 Requires=sysinit.target
 Conflicts=umount.target shutdown.target actdead.target factory-test.target
 Before=umount.target shutdown.target mount-cryptosd-plain@%i.service
@@ -12,23 +12,23 @@ Before=umount.target shutdown.target mount-cryptosd-plain@%i.service
 # harmless, disable it as long as benefits and potential consequences for the SFOS updater
 # are not properly evaluated:
 # IgnoreOnIsolate=true
-AssertFileNotEmpty=/etc/crypto-sdcard/%I.key
+AssertFileNotEmpty=/etc/crypto-sdcard/crypto_plain_%I.key
 
 [Service]
 Type=oneshot
 RemainAfterExit=yes
 EnvironmentFile=/etc/systemd/system/cryptosd.conf
 EnvironmentFile=-/etc/crypto-sdcard/cryptosd.conf
-EnvironmentFile=-/etc/crypto-sdcard/cryptosd@%I.conf
+EnvironmentFile=-/etc/crypto-sdcard/cryptosd@crypto_plain_%I.conf
 # For devices, which need the qcrypto kernel module loaded to support modern cryptographic
 # schemes as e.g. XTS:
 # ExecStartPre=/sbin/modprobe qcrypto
 # With workaround for https://github.com/systemd/systemd/issues/14560 :
-StandardInput=file:/etc/crypto-sdcard/%I.key
+StandardInput=file:/etc/crypto-sdcard/crypto_plain_%I.key
 StandardOutput=journal
 # "udisksctl unlock --key-file" does only work with LUKS "containers", not with "plain" ones,
 # thus call cryptsetup directly:
-ExecStart=/usr/sbin/cryptsetup -d - -h ${CRYPTO_PLAIN_PASSPHRASE_HASH} -s ${CRYPTO_PLAIN_KEYLENGTH} -c ${CRYPTO_PLAIN_CIPHER} --allow-discards --type plain open /dev/%I %I
+ExecStart=/usr/sbin/cryptsetup -d - -h ${CRYPTO_PLAIN_PASSPHRASE_HASH} -s ${CRYPTO_PLAIN_KEYLENGTH} -c ${CRYPTO_PLAIN_CIPHER} --allow-discards --type plain open /dev/crypto_plain_%I crypto_plain_%I
 # "udisksctl mount" (in mount-cryptosd-luks@.service) sometimes fails when issued right after
 # this unit (instance) and "udisksd" (per "udisks2.service") have finished starting, because
 # the udisks object for this unlocked device has not been created yet.
@@ -42,5 +42,5 @@ ExecStart=/usr/sbin/cryptsetup -d - -h ${CRYPTO_PLAIN_PASSPHRASE_HASH} -s ${CRYP
 # For non-oneshot units a solution is to move the ExecStart= command to ExecStartPre= (that
 # is functionally equivalent!) and ...
 ExecStart=/bin/sleep 1
-ExecStop=/usr/sbin/cryptsetup close %I
+ExecStop=/usr/sbin/cryptsetup close crypto_plain_%I
 
