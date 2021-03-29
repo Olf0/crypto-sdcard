@@ -1,11 +1,11 @@
 [Unit]
-Description=Mount crypto_plain_%I per udisks
+Description=Mount %I per udisks
 Documentation=https://github.com/Olf0/crypto-sdcard
-After=udisks2.service cryptosd-plain@crypto_plain_%i.service dev-mapper-crypto_plain_%i.device start-user-session.service
-Requires=udisks2.service cryptosd-plain@crypto_plain_%i.service
+After=udisks2.service cryptosd-plain@%i.service dev-mapper-%i.device start-user-session.service
+Requires=udisks2.service cryptosd-plain@%i.service
 # This is not neccessary here, and prevents this unit from auto-starting
 # its dependencies, when called manually:
-# Requisite=dev-mapper-crypto_plain_%i.device
+# Requisite=dev-mapper-%i.device
 # Also conflict with umount.target (see man 7 systemd.special), as
 # this is a mounting unit, though not a mount unit:
 Conflicts=umount.target rescue.target actdead.target factory-test.target
@@ -20,8 +20,8 @@ Type=oneshot
 RemainAfterExit=yes
 EnvironmentFile=/etc/systemd/system/cryptosd.conf
 EnvironmentFile=-/etc/crypto-sdcard/cryptosd.conf
-EnvironmentFile=-/etc/crypto-sdcard/cryptosd@crypto_plain_%I.conf
-ExecStart=/usr/bin/udisksctl-user mount $UDISKS2_MOUNT_OPTIONS -b /dev/mapper/crypto_plain_%I
-ExecStop=/usr/bin/udisksctl unmount -b /dev/mapper/crypto_plain_%I
-ExecStopPost=/bin/umount -vrq /dev/mapper/crypto_plain_%I
+EnvironmentFile=-/etc/crypto-sdcard/cryptosd@%I.conf
+ExecStart=/usr/bin/udisksctl-user mount $UDISKS2_MOUNT_OPTIONS -b /dev/mapper/%I
+ExecStop=/usr/bin/udisksctl unmount -b /dev/mapper/%I
+ExecStopPost=/bin/umount -vrq /dev/mapper/%I
 
