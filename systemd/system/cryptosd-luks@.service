@@ -2,8 +2,8 @@
 Description=Open %I per cryptsetup
 Documentation=https://github.com/Olf0/crypto-sdcard
 DefaultDependencies=no
-After=sysinit.target dev-%i.device
-Requisite=dev-%i.device
+After=sysinit.target dev-disk-by\x2duuid-%i.device
+Requisite=dev-disk-by\x2duuid-%i.device
 Requires=sysinit.target
 Conflicts=umount.target shutdown.target actdead.target factory-test.target
 Before=umount.target shutdown.target mount-cryptosd-luks@%i.service
@@ -12,7 +12,7 @@ Before=umount.target shutdown.target mount-cryptosd-luks@%i.service
 # harmless, disable it as long as benefits and potential consequences for the SFOS updater
 # are not properly evaluated:
 # IgnoreOnIsolate=true
-AssertFileNotEmpty=/etc/crypto-sdcard/%I.key
+AssertFileNotEmpty=/etc/crypto-sdcard/crypto_luks_%I.key
 
 [Service]
 Type=oneshot
@@ -22,7 +22,7 @@ RemainAfterExit=yes
 ExecStartPre=/sbin/modprobe qcrypto
 # For various reasons (avoid (temporal) dependency on udisks2, allow for discards etc.), do
 # not use "udisksctl unlock --key-file", instead call cryptsetup directly:
-ExecStart=/usr/sbin/cryptsetup --allow-discards -d /etc/crypto-sdcard/%I.key luksOpen /dev/%I %I
+ExecStart=/usr/sbin/cryptsetup --allow-discards -d /etc/crypto-sdcard/crypto_luks_%I.key luksOpen /dev/disk/by-uuid/%I %I
 # "udisksctl mount" (in mount-cryptosd-luks@.service) sometimes fails when issued right after
 # this unit (instance) and "udisksd" (per "udisks2.service") have finished starting, because
 # the udisks object for this unlocked device has not been created yet.
