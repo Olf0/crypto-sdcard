@@ -12,7 +12,7 @@ Before=umount.target shutdown.target mount-cryptosd-plain@%i.service
 # harmless, disable it as long as benefits and potential consequences for the SFOS updater
 # are not properly evaluated:
 # IgnoreOnIsolate=true
-AssertFileNotEmpty=/etc/crypto-sdcard/%I.key
+AssertFileNotEmpty=/etc/crypto-sdcard/crypto_plain_%I.key
 
 [Service]
 Type=oneshot
@@ -24,7 +24,7 @@ EnvironmentFile=-/etc/crypto-sdcard/cryptosd@%I.conf
 # schemes as e.g. XTS:
 # ExecStartPre=/sbin/modprobe qcrypto
 # With workaround for https://github.com/systemd/systemd/issues/14560 :
-StandardInput=file:/etc/crypto-sdcard/%I.key
+StandardInput=file:/etc/crypto-sdcard/crypto_plain_%I.key
 StandardOutput=journal
 # "udisksctl unlock --key-file" does only work with LUKS "containers", not with "plain" ones,
 # thus call cryptsetup directly:
