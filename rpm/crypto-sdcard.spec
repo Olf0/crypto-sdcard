@@ -54,7 +54,7 @@ Provides:      crypto-sdcard_sbj
 
 %install
 mkdir -p %{buildroot}%{_sysconfdir}/%{name}
-cp -R systemd udev %{buildroot}%{_sysconfdir}/
+cp -R systemd polkit-1 udev %{buildroot}%{_sysconfdir}/
 
 %files
 # Regular files:
@@ -63,6 +63,7 @@ cp -R systemd udev %{buildroot}%{_sysconfdir}/
 %{_sysconfdir}/systemd/system/cryptosd-plain@.service
 %{_sysconfdir}/systemd/system/mount-cryptosd-luks@.service
 %{_sysconfdir}/systemd/system/mount-cryptosd-plain@.service
+%{_sysconfdir}/polkit-1/localauthority/50-local.d/69-cryptosd.pkla
 %{_sysconfdir}/udev/rules.d/96-cryptosd.rules
 # Extraordinary files / dirs:
 %defattr(0640,root,root,0750)
