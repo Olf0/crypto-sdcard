@@ -13,8 +13,8 @@ KERNEL=="mmcblk1*|sd[a-z][0-9]", ENV{CRYPTOSD_TYPE}=="LUKS", ACTION=="remove", E
 
 # For DM-Crypt "plain", also match sda0 to mmcblk1 (*) to SUBSYSTEM=="block", but ensure (by ENV{ID_*}!= statements) that it appears to be unused space
 # Two rules, one for partitions and a tighter one for whole disks:
-KERNEL=="mmcblk1*|sd[a-z][0-9]", SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ENV{ID_FS_USAGE}=="", ENV{ID_FS_TYPE}=="", ENV{ID_PART_TABLE_TYPE}=="", ACTION=="add|change", PROGRAM=="/usr/bin/head -c 1 /etc/crypto-sdcard/crypto_luks_%E{ID_FS_UUID}", RESULT=="?", ENV{CRYPTOSD_TYPE}="PLAIN"
-KERNEL=="mmcblk1*|sd[a-z][0-9]", SUBSYSTEM=="block", ENV{DEVTYPE}=="partition", ENV{ID_FS_USAGE}=="", ENV{ID_FS_TYPE}=="", ACTION=="add|change", PROGRAM=="/usr/bin/head -c 1 /etc/crypto-sdcard/crypto_luks_%E{ID_FS_UUID}", RESULT=="?", ENV{CRYPTOSD_TYPE}="PLAIN"
+KERNEL=="mmcblk1*|sd[a-z][0-9]", SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ENV{ID_FS_USAGE}!="?*", ENV{ID_FS_TYPE}!="?*", ENV{ID_PART_TABLE_TYPE}!="?*", ACTION=="add|change", PROGRAM=="/usr/bin/head -c 1 /etc/crypto-sdcard/crypto_luks_%E{ID_FS_UUID}", RESULT=="?", ENV{CRYPTOSD_TYPE}="PLAIN"
+KERNEL=="mmcblk1*|sd[a-z][0-9]", SUBSYSTEM=="block", ENV{DEVTYPE}=="partition", ENV{ID_FS_USAGE}!="?*", ENV{ID_FS_TYPE}!="?*", ACTION=="add|change", PROGRAM=="/usr/bin/head -c 1 /etc/crypto-sdcard/crypto_luks_%E{ID_FS_UUID}", RESULT=="?", ENV{CRYPTOSD_TYPE}="PLAIN"
 KERNEL=="mmcblk1*|sd[a-z][0-9]", ENV{CRYPTOSD_TYPE}=="PLAIN", MODE="0660", TAG+="systemd", ENV{SYSTEMD_WANTS}="'cryptosd-plain@%k.service'"
 # When above detected and assigned devices are removed
 KERNEL=="mmcblk1*|sd[a-z][0-9]", ENV{CRYPTOSD_TYPE}=="PLAIN", ACTION=="remove", ENV{CRYPTOSD_TYPE}="removed", ENV{SYSTEMD_WANTS}="", ENV{SYSTEMD_USER_WANTS}="", RUN{program}+="/usr/bin/systemctl stop cryptosd-plain@%k.service"
