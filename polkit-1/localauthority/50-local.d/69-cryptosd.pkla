@@ -1,0 +1,7 @@
+[Placeholder for allowing udisks2 to "eject" media (SD-cards and USB-storage devices)]
+[Identity=unix-group:system / media-rw (SFOS3.2.1.+)]
+[Action=org.freedesktop.udisks2.XXXX]
+[ResultAny=yes]
+[ResultInactive=yes]
+[ResultActive=yes]
+
