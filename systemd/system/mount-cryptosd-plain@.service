@@ -1,7 +1,6 @@
 [Unit]
 Description=Mount %I per udisks
 Documentation=https://github.com/Olf0/crypto-sdcard
-# SPDX-License-Identifier: LGPL-2.1-only
 After=udisks2.service cryptosd-plain@%i.service dev-mapper-%i.device start-user-session.service
 Requires=udisks2.service cryptosd-plain@%i.service
 # This is not neccessary here, and prevents this unit from auto-starting
