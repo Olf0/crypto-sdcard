@@ -1,6 +1,7 @@
 [Unit]
 Description=Open %I per cryptsetup
 Documentation=https://github.com/Olf0/crypto-sdcard
+# SPDX-License-Identifier: LGPL-2.1-only
 DefaultDependencies=no
 After=systemd-udevd.service systemd-udev-trigger.service dev-disk-by\x2duuid-%i.device systemd-journald.service local-fs.target cryptsetup-pre.target
 Requisite=dev-disk-by\x2duuid-%i.device
