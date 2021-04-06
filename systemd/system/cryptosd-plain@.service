@@ -2,9 +2,8 @@
 Description=Open %I per cryptsetup
 Documentation=https://github.com/Olf0/crypto-sdcard
 DefaultDependencies=no
-After=sysinit.target dev-%i.device
+After=systemd-udevd.service systemd-udev-trigger.service dev-%i.device
 Requisite=dev-%i.device
-Requires=sysinit.target
 Conflicts=umount.target shutdown.target actdead.target factory-test.target
 Before=umount.target shutdown.target mount-cryptosd-plain@%i.service
 # That would allow this unit to keep on running, when switching to e.g., rescue.target
@@ -28,7 +27,7 @@ StandardInput=file:/etc/crypto-sdcard/crypto_plain_%I.key
 StandardOutput=journal
 # "udisksctl unlock --key-file" does only work with LUKS "containers", not with "plain" ones,
 # thus call cryptsetup directly:
-ExecStart=/usr/sbin/cryptsetup -d - -h ${CRYPTO_PLAIN_PASSPHRASE_HASH} -s ${CRYPTO_PLAIN_KEYLENGTH} -c ${CRYPTO_PLAIN_CIPHER} --allow-discards --type plain open /dev/%I %I
+ExecStart=/usr/sbin/cryptsetup -d - -o ${CRYPTO_PLAIN_OFFSET} -h ${CRYPTO_PLAIN_PASSPHRASE_HASH} -s ${CRYPTO_PLAIN_KEYLENGTH} -c ${CRYPTO_PLAIN_CIPHER} --allow-discards --type plain open /dev/%I %I
 # "udisksctl mount" (in mount-cryptosd-luks@.service) sometimes fails when issued right after
 # this unit (instance) and "udisksd" (per "udisks2.service") have finished starting, because
 # the udisks object for this unlocked device has not been created yet.
