@@ -18,10 +18,10 @@ KERNEL!="mmcblk[1-9]*|sd*|sr*", GOTO="cryptosd_unlock_end"
 # by setting these anew / clobbering these for *all suitable* devices.
 ENV{DEVTYPE}=="disk", ENV{MMC_TYPE}!="?*", ENV{ID_DRIVE_FLASH_SD}="1", ENV{ID_DRIVE_MEDIA_FLASH_SD}="1"
 # Unset that for storage, which is "rotational":
-KERNEL=="sd*|sr*", ENV{DEVTYPE}=="disk", ATTR{queue/rotational}=="1", ENV{ID_DRIVE_FLASH_SD}="0", ENV{ID_DRIVE_MEDIA_FLASH_SD}="0"
+#KERNEL=="sd*|sr*", ENV{DEVTYPE}=="disk", ATTR{queue/rotational}=="1", ENV{ID_DRIVE_FLASH_SD}="0", ENV{ID_DRIVE_MEDIA_FLASH_SD}="0"
 
 # Set UDISKS_CAN_POWER_OFF for all devices dealt with, here:
-ENV{DEVTYPE}=="disk", ENV{UDISKS_CAN_POWER_OFF}="1"
+#ENV{DEVTYPE}=="disk", ENV{UDISKS_CAN_POWER_OFF}="1"
 
 # For DM-Crypt LUKS, match ENV{ID_FS_TYPE}=="crypto_LUKS"
 ENV{ID_FS_TYPE}=="crypto_LUKS", ACTION=="add|change", PROGRAM=="/usr/bin/head -c 1 /etc/crypto-sdcard/crypto_luks_%E{ID_FS_UUID}", RESULT=="?", ENV{CRYPTOSD_TYPE}="LUKS"
@@ -39,7 +39,7 @@ ENV{CRYPTOSD_TYPE}=="PLAIN", ACTION=="remove", ENV{CRYPTOSD_TYPE}="removed", ENV
 
 LABEL="cryptosd_unlock_end"
 
-SUBSYSTEM!="block", GOTO="cryptosd_mount_end"
+# Not necessary, beause dm-[0-9]* is always a block device: SUBSYSTEM!="block", GOTO="cryptosd_mount_end"
 KERNEL!="dm-[0-9]*", GOTO="cryptosd_mount_end"
 
 # Carefully match resulting virtual node dm-[0-9]* to trigger mounting it; see /lib/udev/rules.d/10-dm.rules for details
