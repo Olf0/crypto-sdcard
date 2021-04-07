@@ -2,8 +2,7 @@
 Description=Manually mount /dev/mapper/%I directly
 Documentation=https://github.com/Olf0/crypto-sdcard
 DefaultDependencies=no
-After=sysinit.target cryptosd-luks@%i.service dev-mapper-%i.device
-Requisite=sysinit.target 
+After=systemd-udevd.service systemd-udev-trigger.service cryptosd-luks@%i.service dev-mapper-%i.device systemd-journald.service local-fs.target
 Requires=cryptosd-luks@%i.service
 # "Requisite=" here would prevent this unit from auto-starting its
 # dependencies, when called manually:
@@ -23,6 +22,8 @@ RemainAfterExit=yes
 #EnvironmentFile=/etc/systemd/system/cryptosd.conf
 #EnvironmentFile=-/etc/crypto-sdcard/cryptosd.conf
 #EnvironmentFile=-/etc/crypto-sdcard/cryptosd@%I.conf
-ExecStart=/bin/mount -v /dev/mapper/%I /<?where?>
+ExecStartPre=/usr/bin/mkdir -p /media/%I
+ExecStart=/bin/mount -v /dev/mapper/%I /media/%I
 ExecStop=/bin/umount -vr /dev/mapper/%I
+ExecStopPost=/usr/bin/rmdir /media/%I
 
