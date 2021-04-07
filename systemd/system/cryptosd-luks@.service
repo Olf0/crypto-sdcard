@@ -1,5 +1,5 @@
 [Unit]
-Description=Open %I per cryptsetup
+Description=Open /dev/disk/by-uuid/%I per cryptsetup
 Documentation=https://github.com/Olf0/crypto-sdcard
 DefaultDependencies=no
 After=systemd-udevd.service systemd-udev-trigger.service dev-disk-by\x2duuid-%i.device systemd-journald.service local-fs.target cryptsetup-pre.target
