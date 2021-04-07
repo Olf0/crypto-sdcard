@@ -10,10 +10,6 @@ PartOf=dev-mapper-%i.device sysinit.target
 # Also conflict with umount.target (see man 7 systemd.special), as
 # this is a mounting unit, though not a mount unit:
 Conflicts=umount.target shutdown.target actdead.target factory-test.target
-# Ensure that this Unit is processed before alien-service-manager
-# is started (and even more importantly that it is shut down, *after*
-# alien-service-manager is shut down), to allow for e.g. (and more),
-# android_storage on encrypted SD-card:
 Before=alien-service-manager.service umount.target shutdown.target
 
 [Service]
