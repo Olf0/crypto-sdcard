@@ -2,11 +2,11 @@
 Description=Manually mount /dev/mapper/%I directly
 Documentation=https://github.com/Olf0/crypto-sdcard
 DefaultDependencies=no
-After=systemd-udevd.service systemd-udev-trigger.service cryptosd-luks@%i.service dev-mapper-%i.device systemd-journald.service local-fs.target
+After=systemd-udevd.service systemd-udev-trigger.service cryptosd-luks@%i.service dev-mapper-%i.device systemd-journald.service local-fs.target cryptsetup.target
 Requires=cryptosd-luks@%i.service
-# "Requisite=" here would prevent this unit from auto-starting its
-# dependencies, when called manually:
-PartOf=dev-mapper-%i.device
+# "Requisite=dev-mapper-%i.device" here would prevent this unit from
+# auto-starting its dependencies, when called manually:
+PartOf=dev-mapper-%i.device sysinit.target
 # Also conflict with umount.target (see man 7 systemd.special), as
 # this is a mounting unit, though not a mount unit:
 Conflicts=umount.target shutdown.target actdead.target factory-test.target
