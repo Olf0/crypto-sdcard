@@ -2,9 +2,9 @@
 Description=Open %I per cryptsetup
 Documentation=https://github.com/Olf0/crypto-sdcard
 DefaultDependencies=no
-After=systemd-udevd.service systemd-udev-trigger.service dev-disk-by\x2duuid-%i.device systemd-journald.service local-fs.target cryptsetup-pre.target
+After=systemd-udevd.service systemd-udev-trigger.service dev-disk-by\x2duuid-%i.device systemd-journald.service local-fs.target
 Requisite=dev-disk-by\x2duuid-%i.device
-PartOf=mount-cryptosd-luks@%i.service cryptsetup.target
+PartOf=mount-cryptosd-luks@%i.service
 Conflicts=umount.target shutdown.target actdead.target factory-test.target
 Before=umount.target shutdown.target mount-cryptosd-luks@%i.service
 # That would allow this unit to keep on running, when switching to e.g., rescue.target
