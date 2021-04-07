@@ -22,8 +22,8 @@ RemainAfterExit=yes
 #EnvironmentFile=/etc/systemd/system/cryptosd.conf
 #EnvironmentFile=-/etc/crypto-sdcard/cryptosd.conf
 #EnvironmentFile=-/etc/crypto-sdcard/cryptosd@%I.conf
-ExecStartPre=/usr/bin/mkdir -p /media/luks-%I
-ExecStart=/bin/mount -v /dev/mapper/%I /media/luks-%I
+ExecStartPre=/usr/bin/mkdir -p /media/cryptosd-luks-%I
+ExecStart=/bin/mount -v /dev/mapper/%I /media/cryptosd-luks-%I
 ExecStop=/bin/umount -vr /dev/mapper/%I
-ExecStopPost=/usr/bin/rmdir /media/luks-%I
+ExecStopPost=/usr/bin/rmdir /media/cryptosd-luks-%I
 
