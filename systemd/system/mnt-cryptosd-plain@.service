@@ -5,7 +5,7 @@ DefaultDependencies=no
 After=systemd-udevd.service systemd-udev-trigger.service cryptosd-plain@%i.service dev-mapper-%i.device systemd-journald.service local-fs.target cryptsetup.target
 Requires=cryptosd-plain@%i.service
 # "Requisite=dev-mapper-%i.device" here would prevent this unit from
-# auto-starting its dependencies, when called manually:
+# auto-starting its dependencies, when started manually:
 PartOf=dev-mapper-%i.device sysinit.target
 # Also conflict with umount.target (see man 7 systemd.special), as
 # this is a mounting unit, though not a mount unit:
