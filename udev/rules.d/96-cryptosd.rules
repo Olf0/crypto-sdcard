@@ -48,7 +48,7 @@ ENV{ID_FS_USAGE}=="filesystem", ENV{DM_UDEV_RULES_VSN}=="[2-9]", ENV{DM_NAME}=="
 ENV{CRYPTOSD_TYPE}=="mount-LUKS", ACTION=="remove", ENV{CRYPTOSD_TYPE}="mount-removed", ENV{UDISKS_NAME}="mount_crypto_removed", ENV{SYSTEMD_WANTS}="", ENV{SYSTEMD_USER_WANTS}="", PROGRAM=="/usr/bin/systemd-escape --template=mount-cryptosd-luks@.service %E{DM_NAME}", RUN{program}+="/usr/bin/systemctl stop %c"
 
 # Ditto for DM-Crypt "plain"
-ENV{ID_FS_USAGE}=="filesystem", ENV{DM_UDEV_RULES_VSN}=="[2-9]", ENV{DM_NAME}=="mmcblk1*|sd[a-z][0-9]", ACTION=="change", ENV{DM_UDEV_PRIMARY_SOURCE_FLAG}=="1", ENV{DM_ACTIVATION}=="1", ENV{DM_SUSPENDED}=="0", ENV{CRYPTOSD_TYPE}="mount-PLAIN", ENV{UDISKS_SYSTEM}="0", ENV{UDISKS_AUTO}="0", ENV{UDISKS_NAME}="mount_crypto_plain_%E{DM_NAME}", MODE="0660", TAG+="systemd", ENV{SYSTEMD_WANTS}="'mount-cryptosd-plain@%E{DM_NAME}.service'"
+ENV{ID_FS_USAGE}=="filesystem", ENV{DM_UDEV_RULES_VSN}=="[2-9]", ENV{DM_NAME}=="mmcblk[1-9]*|sd*|sr*", ACTION=="change", ENV{DM_UDEV_PRIMARY_SOURCE_FLAG}=="1", ENV{DM_ACTIVATION}=="1", ENV{DM_SUSPENDED}=="0", ENV{CRYPTOSD_TYPE}="mount-PLAIN", ENV{UDISKS_SYSTEM}="0", ENV{UDISKS_AUTO}="0", ENV{UDISKS_NAME}="mount_crypto_plain_%E{DM_NAME}", MODE="0660", TAG+="systemd", ENV{SYSTEMD_WANTS}="'mount-cryptosd-plain@%E{DM_NAME}.service'"
 ENV{CRYPTOSD_TYPE}=="mount-PLAIN", ACTION=="remove", ENV{CRYPTOSD_TYPE}="mount-removed", ENV{UDISKS_NAME}="mount_crypto_removed", ENV{SYSTEMD_WANTS}="", ENV{SYSTEMD_USER_WANTS}="", RUN{program}+="/usr/bin/systemctl stop mount-cryptosd-plain@%E{DM_NAME}.service"
 
 LABEL="cryptosd_mount_end"
