@@ -17,6 +17,7 @@ KERNEL!="mmcblk[1-9]*|sd*|sr*", GOTO="cryptosd_unlock_end"
 # https://git.sailfishos.org/mer-core/udisks2/blob/master/rpm/0005-Add-udev-rule-for-the-sda-drives.patch
 # by setting these anew / clobbering these for *all suitable* devices.
 ENV{DEVTYPE}=="disk", ENV{MMC_TYPE}!="?*", ENV{ID_DRIVE_FLASH_SD}="1", ENV{ID_DRIVE_MEDIA_FLASH_SD}="1"
+KERNEL=="sd*|sr*", ENV{DEVTYPE}=="disk", ENV{ID_DRIVE_FLASH_SD}="1", ENV{ID_DRIVE_MEDIA_FLASH_SD}="1"
 # Unset that for storage, which is "rotational":
 #KERNEL=="sd*|sr*", ENV{DEVTYPE}=="disk", ATTR{queue/rotational}=="1", ENV{ID_DRIVE_FLASH_SD}="0", ENV{ID_DRIVE_MEDIA_FLASH_SD}="0"
 
