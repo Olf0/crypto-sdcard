@@ -64,7 +64,8 @@ cp -R polkit-1 systemd udev %{buildroot}%{_sysconfdir}/
 %{_sysconfdir}/systemd/system/mount-cryptosd-plain@.service
 %{_sysconfdir}/systemd/system/mnt-cryptosd-luks@.service
 %{_sysconfdir}/systemd/system/mnt-cryptosd-plain@.service
-%{_sysconfdir}/polkit-1/localauthority/50-local.d/69-cryptosd.pkla
+%{_sysconfdir}/polkit-1/localauthority/50-local.d/69-cryptosd-root.pkla
+%{_sysconfdir}/polkit-1/localauthority/50-local.d/69-cryptosd-user.pkla
 # Extraordinary files / dirs:
 %defattr(0640,root,root,0750)
 %dir %{_sysconfdir}/%{name}
