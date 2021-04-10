@@ -2,128 +2,97 @@
 [Identity=unix-group:system (SFOS 2.2.0 - 3.2 0) / media_rw (SFOS 3.2.1+)]
 
 Identity=unix-group:media_rw
-
-Action=org.freedesktop.udisks2.encrypted-unlock
+Action=org.freedesktop.udisks2.encrypted-unlock;org.freedesktop.udisks2.encrypted-unlock-other-seat;org.freedesktop.udisks2.encrypted-lock-others
 ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
 
+Identity=unix-group:media_rw
 Action=org.freedesktop.udisks2.encrypted-unlock-system
 ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=auth_self_keep
 
-Action=org.freedesktop.udisks2.encrypted-unlock-other-seat
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
-
-Action=org.freedesktop.udisks2.encrypted-lock-others
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
-
+Identity=unix-group:media_rw
 Action=org.freedesktop.udisks2.encrypted-change-passphrase
 ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=yes
 
+Identity=unix-group:media_rw
 Action=org.freedesktop.udisks2.manage-md-raid
 ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=auth_self_keep
 
-Action=org.freedesktop.udisks2.power-off-drive
+Identity=unix-group:media_rw
+Action=org.freedesktop.udisks2.power-off-drive;org.freedesktop.udisks2.power-off-drive-other-seat
 ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
 
-Action=org.freedesktop.udisks2.power-off-drive-other-seat
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
-
+Identity=unix-group:media_rw
 Action=org.freedesktop.udisks2.eject-media
 ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=yes
 
+Identity=unix-group:media_rw
 Action=org.freedesktop.udisks2.eject-media-other-seat
 ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=auth_self_keep
 
+Identity=unix-group:media_rw
 Action=org.freedesktop.udisks2.modify-device
 ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=auth_self_keep
 
+Identity=unix-group:media_rw
 Action=org.freedesktop.udisks2.modify-device-system
 ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=auth_self_keep
 
+Identity=unix-group:media_rw
 Action=org.freedesktop.udisks2.rescan
 ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
 
+Identity=unix-group:media_rw
 Action=org.freedesktop.udisks2.open-device
 ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=yes
 
+Identity=unix-group:media_rw
 Action=org.freedesktop.udisks2.open-device-system
 ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=auth_self_keep
 
-Action=org.freedesktop.udisks2.modify-drive-settings
+Identity=unix-group:media_rw
+Action=org.freedesktop.udisks2.modify-drive-settings;org.freedesktop.udisks2.ata-smart-enable-disable;org.freedesktop.udisks2.ata-smart-update
 ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
 
-Action=org.freedesktop.udisks2.ata-smart-update
-ResultAny=auth_self
-ResultInactive=auth_self
-ResultActive=yes
-
-Action=org.freedesktop.udisks2.ata-smart-simulate
+Identity=unix-group:media_rw
+Action=org.freedesktop.udisks2.ata-smart-simulate;org.freedesktop.udisks2.ata-smart-selftest
 ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=auth_self_keep
 
-Action=org.freedesktop.udisks2.ata-smart-selftest
-ResultAny=auth_self
-ResultInactive=auth_self
-ResultActive=auth_self_keep
-
-Action=org.freedesktop.udisks2.ata-smart-enable-disable
+Identity=unix-group:media_rw
+Action=org.freedesktop.udisks2.ata-check-power;org.freedesktop.udisks2.ata-standby;org.freedesktop.udisks2.ata-standby-other-seat
 ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
 
-Action=org.freedesktop.udisks2.ata-check-power
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
-
-Action=org.freedesktop.udisks2.ata-standby
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
-
-Action=org.freedesktop.udisks2.ata-standby-other-seat
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
-
-Action=org.freedesktop.udisks2.cancel-job
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
-
-Action=org.freedesktop.udisks2.cancel-job-other-user
+Identity=unix-group:media_rw
+Action=org.freedesktop.udisks2.cancel-job;org.freedesktop.udisks2.cancel-job-other-user
 ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
