@@ -2,10 +2,16 @@
 [Identity=unix-group:system (SFOS 2.2.0 - 3.2 0) / media_rw (SFOS 3.2.1+)]
 
 Identity=unix-group:media_rw
+
 Action=org.freedesktop.udisks2.encrypted-unlock
 ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
+
+Action=org.freedesktop.udisks2.encrypted-unlock-system
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
 
 Action=org.freedesktop.udisks2.encrypted-unlock-other-seat
 ResultAny=yes
@@ -15,6 +21,11 @@ ResultActive=yes
 Action=org.freedesktop.udisks2.encrypted-lock-others
 ResultAny=yes
 ResultInactive=yes
+ResultActive=yes
+
+Action=org.freedesktop.udisks2.encrypted-change-passphrase
+ResultAny=auth_self
+ResultInactive=auth_self
 ResultActive=yes
 
 Action=org.freedesktop.udisks2.manage-md-raid
@@ -40,7 +51,7 @@ ResultActive=yes
 Action=org.freedesktop.udisks2.eject-media-other-seat
 ResultAny=auth_self
 ResultInactive=auth_self
-ResultActive=yes
+ResultActive=auth_self_keep
 
 Action=org.freedesktop.udisks2.modify-device
 ResultAny=auth_self
