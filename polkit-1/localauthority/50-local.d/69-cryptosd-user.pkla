@@ -1,9 +1,5 @@
-[Placeholder for telling udisks2 to allow for "ejecting" media (SD-cards and USB-storage devices) in the future.]
-[Identity=unix-group:system / media_rw (SFOS3.2.1+)]
-[Action=org.freedesktop.udisks2.XXXX]
-[ResultAny=yes]
-[ResultInactive=yes]
-[ResultActive=yes]
+[User configuration of mostly non-system device actions, based on SFOS 2.2.0 - 4.1.0 and udisks 2.7.5 - 2.8.1]
+[Identity=unix-group:system (SFOS 2.2.0 - 3.2 0) / media_rw (SFOS 3.2.1+)]
 
 Identity=unix-group:media_rw
 Action=org.freedesktop.udisks2.encrypted-unlock
@@ -22,9 +18,9 @@ ResultInactive=yes
 ResultActive=yes
 
 Action=org.freedesktop.udisks2.manage-md-raid
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
 
 Action=org.freedesktop.udisks2.power-off-drive
 ResultAny=yes
@@ -37,24 +33,24 @@ ResultInactive=yes
 ResultActive=yes
 
 Action=org.freedesktop.udisks2.eject-media
-ResultAny=yes
-ResultInactive=yes
+ResultAny=auth_self
+ResultInactive=auth_self
 ResultActive=yes
 
 Action=org.freedesktop.udisks2.eject-media-other-seat
-ResultAny=yes
-ResultInactive=yes
+ResultAny=auth_self
+ResultInactive=auth_self
 ResultActive=yes
 
 Action=org.freedesktop.udisks2.modify-device
-ResultAny=yes
-ResultInactive=yes
+ResultAny=auth_self
+ResultInactive=auth_self
 ResultActive=yes
 
-Action=org.freedesktop.udisks2.modify-device-other-seat
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
+Action=org.freedesktop.udisks2.modify-device-system
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
 
 Action=org.freedesktop.udisks2.rescan
 ResultAny=yes
@@ -62,19 +58,14 @@ ResultInactive=yes
 ResultActive=yes
 
 Action=org.freedesktop.udisks2.open-device
-ResultAny=yes
-ResultInactive=yes
+ResultAny=auth_self
+ResultInactive=auth_self
 ResultActive=yes
 
-Action=org.freedesktop.udisks2.modify-system-configuration
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
-
-Action=org.freedesktop.udisks2.read-system-configuration-secrets
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
+Action=org.freedesktop.udisks2.open-device-system
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
 
 Action=org.freedesktop.udisks2.modify-drive-settings
 ResultAny=yes
@@ -82,19 +73,19 @@ ResultInactive=yes
 ResultActive=yes
 
 Action=org.freedesktop.udisks2.ata-smart-update
-ResultAny=yes
-ResultInactive=yes
+ResultAny=auth_self
+ResultInactive=auth_self
 ResultActive=yes
 
 Action=org.freedesktop.udisks2.ata-smart-simulate
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
 
 Action=org.freedesktop.udisks2.ata-smart-selftest
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
 
 Action=org.freedesktop.udisks2.ata-smart-enable-disable
 ResultAny=yes
