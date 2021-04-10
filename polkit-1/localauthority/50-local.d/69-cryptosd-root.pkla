@@ -16,8 +16,12 @@ ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
 
-
 Action=org.freedesktop.udisks2.encrypted-lock-others
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+
+Action=org.freedesktop.udisks2.manage-md-raid
 ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
@@ -118,11 +122,6 @@ ResultInactive=yes
 ResultActive=yes
 
 Action=org.freedesktop.udisks2.cancel-job-other-user
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
-
-Action=
 ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
