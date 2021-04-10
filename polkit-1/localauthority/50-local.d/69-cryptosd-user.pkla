@@ -1,8 +1,14 @@
 [User configuration of mostly non-system device actions, based on SFOS 2.2.0 - 4.1.0 and udisks 2.7.5 - 2.8.1]
 [Identity=unix-group:system (SFOS 2.2.0 - 3.2 0) / media_rw (SFOS 3.2.1+)]
 
-Identity=unix-group:media_rw
+Identity=unix-group:root;unix-group:media_rw
 Action=org.freedesktop.udisks2.encrypted-unlock;org.freedesktop.udisks2.encrypted-unlock-other-seat;org.freedesktop.udisks2.encrypted-lock-others
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+
+Identity=unix-group:root
+Action=org.freedesktop.udisks2.encrypted-unlock-system
 ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
@@ -13,10 +19,16 @@ ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=auth_self_keep
 
-Identity=unix-group:media_rw
+Identity=unix-group:root;unix-group:media_rw
 Action=org.freedesktop.udisks2.encrypted-change-passphrase
 ResultAny=auth_self
 ResultInactive=auth_self
+ResultActive=yes
+
+Identity=unix-group:root
+Action=org.freedesktop.udisks2.manage-md-raid
+ResultAny=yes
+ResultInactive=yes
 ResultActive=yes
 
 Identity=unix-group:media_rw
@@ -25,23 +37,23 @@ ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=auth_self_keep
 
-Identity=unix-group:media_rw
+Identity=unix-group:root;unix-group:media_rw
 Action=org.freedesktop.udisks2.power-off-drive;org.freedesktop.udisks2.power-off-drive-other-seat
 ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
 
-Identity=unix-group:media_rw
-Action=org.freedesktop.udisks2.eject-media
+Identity=unix-group:root;unix-group:media_rw
+Action=org.freedesktop.udisks2.eject-media;org.freedesktop.udisks2.eject-media-other-seat
 ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=yes
 
-Identity=unix-group:media_rw
-Action=org.freedesktop.udisks2.eject-media-other-seat
+Identity=unix-group:root
+Action=org.freedesktop.udisks2.modify-device
 ResultAny=auth_self
 ResultInactive=auth_self
-ResultActive=auth_self_keep
+ResultActive=yes
 
 Identity=unix-group:media_rw
 Action=org.freedesktop.udisks2.modify-device
@@ -49,14 +61,20 @@ ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=auth_self_keep
 
-Identity=unix-group:media_rw
-Action=org.freedesktop.udisks2.modify-device-system
+Identity=unix-group:root;unix-group:media_rw
+Action=org.freedesktop.udisks2.modify-device-system;org.freedesktop.udisks2.modify-device-other-seat
 ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=auth_self_keep
 
-Identity=unix-group:media_rw
+Identity=unix-group:root;unix-group:media_rw
 Action=org.freedesktop.udisks2.rescan
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+
+Identity=unix-group:root
+Action=org.freedesktop.udisks2.open-device
 ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
@@ -67,14 +85,32 @@ ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=yes
 
-Identity=unix-group:media_rw
+Identity=unix-group:root;unix-group:media_rw
 Action=org.freedesktop.udisks2.open-device-system
 ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=auth_self_keep
 
-Identity=unix-group:media_rw
+Identity=unix-group:root
+Action=org.freedesktop.udisks2.modify-system-configuration
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
+
+Identity=unix-group:root
+Action=org.freedesktop.udisks2.read-system-configuration-secrets
+ResultAny=auth_admin
+ResultInactive=auth_admin
+ResultActive=auth_admin_keep
+
+Identity=unix-group:root;unix-group:media_rw
 Action=org.freedesktop.udisks2.modify-drive-settings;org.freedesktop.udisks2.ata-smart-enable-disable;org.freedesktop.udisks2.ata-smart-update
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+
+Identity=unix-group:root
+Action=org.freedesktop.udisks2.ata-smart-simulate;org.freedesktop.udisks2.ata-smart-selftest
 ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
@@ -85,13 +121,13 @@ ResultAny=auth_self
 ResultInactive=auth_self
 ResultActive=auth_self_keep
 
-Identity=unix-group:media_rw
+Identity=unix-group:root;unix-group:media_rw
 Action=org.freedesktop.udisks2.ata-check-power;org.freedesktop.udisks2.ata-standby;org.freedesktop.udisks2.ata-standby-other-seat
 ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
 
-Identity=unix-group:media_rw
+Identity=unix-group:root;unix-group:media_rw
 Action=org.freedesktop.udisks2.cancel-job;org.freedesktop.udisks2.cancel-job-other-user
 ResultAny=yes
 ResultInactive=yes
