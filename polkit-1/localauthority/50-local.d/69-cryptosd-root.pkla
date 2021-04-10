@@ -90,7 +90,7 @@ ResultActive=auth_self_keep
 Action=org.freedesktop.udisks2.modify-system-configuration
 ResultAny=auth_self
 ResultInactive=auth_self
-ResultActive=yes
+ResultActive=auth_self_keep
 
 Action=org.freedesktop.udisks2.read-system-configuration-secrets
 ResultAny=auth_admin
