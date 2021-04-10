@@ -22,14 +22,14 @@ ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
 
-Action=org.freedesktop.udisks2.encrypted-change-passphrase
+Action=org.freedesktop.udisks2.encrypted-lock-others
 ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
 
-Action=org.freedesktop.udisks2.encrypted-lock-others
-ResultAny=yes
-ResultInactive=yes
+Action=org.freedesktop.udisks2.encrypted-change-passphrase
+ResultAny=auth_self
+ResultInactive=auth_self
 ResultActive=yes
 
 Action=org.freedesktop.udisks2.manage-md-raid
@@ -48,23 +48,28 @@ ResultInactive=yes
 ResultActive=yes
 
 Action=org.freedesktop.udisks2.eject-media
-ResultAny=yes
-ResultInactive=yes
+ResultAny=auth_self
+ResultInactive=auth_self
 ResultActive=yes
 
 Action=org.freedesktop.udisks2.eject-media-other-seat
-ResultAny=yes
-ResultInactive=yes
+ResultAny=auth_self
+ResultInactive=auth_self
 ResultActive=yes
 
 Action=org.freedesktop.udisks2.modify-device
-ResultAny=yes
-ResultInactive=yes
+ResultAny=auth_self
+ResultInactive=auth_self
 ResultActive=yes
 
+Action=org.freedesktop.udisks2.modify-device-system
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
+
 Action=org.freedesktop.udisks2.modify-device-other-seat
-ResultAny=yes
-ResultInactive=yes
+ResultAny=auth_self
+ResultInactive=auth_self
 ResultActive=yes
 
 Action=org.freedesktop.udisks2.rescan
@@ -77,15 +82,20 @@ ResultAny=yes
 ResultInactive=yes
 ResultActive=yes
 
+Action=org.freedesktop.udisks2.open-device-system
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
+
 Action=org.freedesktop.udisks2.modify-system-configuration
-ResultAny=yes
-ResultInactive=yes
+ResultAny=auth_admin
+ResultInactive=auth_admin
 ResultActive=yes
 
 Action=org.freedesktop.udisks2.read-system-configuration-secrets
-ResultAny=yes
-ResultInactive=yes
-ResultActive=yes
+ResultAny=auth_admin
+ResultInactive=auth_admin
+ResultActive=auth_admin_keep
 
 Action=org.freedesktop.udisks2.modify-drive-settings
 ResultAny=yes
