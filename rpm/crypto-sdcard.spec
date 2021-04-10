@@ -27,7 +27,6 @@ Source:        https://github.com/Olf0/%{name}/archive/%{version}-%{release}/%{n
 #Icon:          smartmedia_mount.256x256.gif
 BuildArch:     noarch
 Requires:      systemd
-Requires:      polkit
 Requires:      udisks2
 # Better use direct dependencies on specific versions than indirect ones (here: the line above
 # versus the one below) in general, but ultimately decided not to do so in this special case
