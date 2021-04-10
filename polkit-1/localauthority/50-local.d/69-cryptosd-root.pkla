@@ -1,9 +1,4 @@
-[Placeholder for telling udisks2 to allow for "ejecting" media (SD-cards and USB-storage devices) in the future.]
-[Identity=unix-group:system / media_rw (SFOS3.2.1+)]
-[Action=org.freedesktop.udisks2.XXXX]
-[ResultAny=yes]
-[ResultInactive=yes]
-[ResultActive=yes]
+[Root configuration of udisks2's device actions, based on SFOS 2.2.0 - 4.1.0 and udisks 2.7.5 - 2.8.1]
 
 Identity=unix-group:root
 Action=org.freedesktop.udisks2.encrypted-unlock
