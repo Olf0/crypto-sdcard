@@ -35,7 +35,7 @@ KERNEL=="sd*", ENV{DEVTYPE}=="disk", ENV{ID_DRIVE_FLASH_SD}="1", ENV{ID_DRIVE_ME
 
 # For DM-Crypt LUKS, match ENV{ID_FS_TYPE}=="crypto_LUKS"
 ENV{ID_FS_TYPE}=="crypto_LUKS", ACTION=="add|change", PROGRAM=="/usr/bin/head -c 1 /etc/crypto-sdcard/crypto_luks_%E{ID_FS_UUID}", RESULT=="?", ENV{CRYPTOSD_TYPE}="LUKS"
-ENV{CRYPTOSD_TYPE}=="LUKS", ENV{UDISKS_SYSTEM}="0", ENV{UDISKS_AUTO}="0", ENV{UDISKS_NAME}="cryptosd_luks_%k_%E{ID_FS_UUID}", MODE="0660", TAG+="systemd", PROGRAM=="/usr/bin/systemd-escape --template=cryptosd-luks@.service %E{ID_FS_UUID}", ENV{SYSTEMD_WANTS}="'%c'"
+ENV{CRYPTOSD_TYPE}=="LUKS", ENV{UDISKS_SYSTEM}="0", ENV{UDISKS_AUTO}="0", ENV{UDISKS_NAME}="cryptosd_luks_dev-%k_%E{ID_FS_UUID}", MODE="0660", TAG+="systemd", PROGRAM=="/usr/bin/systemd-escape --template=cryptosd-luks@.service %E{ID_FS_UUID}", ENV{SYSTEMD_WANTS}="'%c'"
 # When above detected and assigned devices are removed
 ENV{CRYPTOSD_TYPE}=="LUKS", ACTION=="remove", ENV{CRYPTOSD_TYPE}="removed", ENV{UDISKS_NAME}="cryptosd_removed", PROGRAM=="/usr/bin/systemd-escape --template=cryptosd-luks@.service %E{ID_FS_UUID}", ENV{SYSTEMD_WANTS}="", ENV{SYSTEMD_USER_WANTS}="", RUN{program}+="/usr/bin/systemctl stop %c"
 
@@ -43,7 +43,7 @@ ENV{CRYPTOSD_TYPE}=="LUKS", ACTION=="remove", ENV{CRYPTOSD_TYPE}="removed", ENV{
 # Two rules, one for partitions and a tighter one for whole disks:
 ENV{DEVTYPE}=="disk", ENV{ID_FS_USAGE}!="?*", ENV{ID_FS_TYPE}!="?*", ENV{ID_PART_TABLE_TYPE}!="?*", ACTION=="add|change", PROGRAM=="/usr/bin/head -c 1 /etc/crypto-sdcard/crypto_plain_%k", RESULT=="?", ENV{UDISKS_PARTITIONABLE}="0", ENV{CRYPTOSD_TYPE}="PLAIN"
 ENV{DEVTYPE}=="partition", ENV{ID_FS_USAGE}!="?*", ENV{ID_FS_TYPE}!="?*", ACTION=="add|change", PROGRAM=="/usr/bin/head -c 1 /etc/crypto-sdcard/crypto_plain_%k", RESULT=="?", ENV{CRYPTOSD_TYPE}="PLAIN"
-ENV{CRYPTOSD_TYPE}=="PLAIN", ENV{UDISKS_SYSTEM}="0", ENV{UDISKS_AUTO}="0", ENV{UDISKS_NAME}="cryptosd_plain_%k", MODE="0660", TAG+="systemd", ENV{SYSTEMD_WANTS}="'cryptosd-plain@%k.service'"
+ENV{CRYPTOSD_TYPE}=="PLAIN", ENV{UDISKS_SYSTEM}="0", ENV{UDISKS_AUTO}="0", ENV{UDISKS_NAME}="cryptosd_plain_dev-%k", MODE="0660", TAG+="systemd", ENV{SYSTEMD_WANTS}="'cryptosd-plain@%k.service'"
 # When above detected and assigned devices are removed
 ENV{CRYPTOSD_TYPE}=="PLAIN", ACTION=="remove", ENV{CRYPTOSD_TYPE}="removed", ENV{UDISKS_NAME}="cryptosd_removed", ENV{SYSTEMD_WANTS}="", ENV{SYSTEMD_USER_WANTS}="", RUN{program}+="/usr/bin/systemctl stop cryptosd-plain@%k.service"
 
