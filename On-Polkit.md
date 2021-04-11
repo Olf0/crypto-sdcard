@@ -67,7 +67,7 @@ Using `pkaction`:
   While there is only a single user (root) in the group "root" on SailfishOS by default, this enables an admin to let additional user(s) use these relaxed rules by adding them to the "root" group as their secondary group.
 
 
-#### 2.2 Implementation notes for 69-cryptosd.pkla (since v1.7.0)
+#### 2.2 Implementation notes for 69-cryptosd.pkla (as of *crypto-sdcard 1.7.0*)
 
 **Workflow**
 
