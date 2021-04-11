@@ -13,7 +13,7 @@
   
   See the [original announcement and explanation](https://davidz25.blogspot.com/2012/06/authorization-rules-in-polkit.html) for this change.    See the fundamental differences between these two file formats [in this simple example](https://fossies.org/linux/libvirt/docs/auth.rst#unix-socket-policykit-auth).<br />
   The comments at this page concisely reflect the year long debates this change triggered, including most of the technical and usablility issues denoted.<br />
-  Note that there was no migration period (in which both file formats were supported): Polkit ≤ 0.105 solely understands ".pkla" files, while Polkit ≥ 0.106 only understands JavaScript-based ".rules" files.
+  Note that there was no migration period (in which both file formats were supported): Polkit ≤ 0.105 solely understands ".pkla" files, while Polkit ≥ 0.106 only understands ".rules" files.
 
 
 * **Consequences / effects for Linux distributions**
