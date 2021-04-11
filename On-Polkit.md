@@ -41,7 +41,7 @@ Thus assess per [`pkaction --version`](https://www.freedesktop.org/software/polk
 Specifically this is the latest and last (original) documentation of [pklocalauthority](https://www.freedesktop.org/software/polkit/docs/0.105/pklocalauthority.8.html), i.e. the ".pkla" file format.<br />
 Nice examples with explanations for ".pkla" files:
 * [libvirt's SSHPolicyKitSetup](https://wiki.libvirt.org/page/SSHPolicyKitSetup#Configuration_for_individual_users)
-* [Actually a report of a resolved bug, but also provides a nice example](https://forums.gentoo.org/viewtopic-p-7587064.html)
+* [Actually a report of a resolved Gentoo bug, but it also provides a nice example](https://forums.gentoo.org/viewtopic-p-7587064.html#7587064)
 
 Using `pkaction`:
 * `pkaction` (without any options) lists all action IDs, which Polkit controls.
@@ -51,9 +51,11 @@ Using `pkaction`:
 
 ### 2. *crypto-sdcard's* use of Polkit's admin configurable policy rules
 
-*crypto-sdcard* deploys a single ".pkla" file in [/etc/polkit-1/localauthority/50-local.d/69-cryptosd.pkla](https://github.com/Olf0/crypto-sdcard/blob/master/polkit-1/localauthority/50-local.d/69-cryptosd.pkla) since v1.7.0. 
+*crypto-sdcard* deploys a single ".pkla" file in [/etc/polkit-1/localauthority/50-local.d/69-cryptosd.pkla](https://github.com/Olf0/crypto-sdcard/blob/master/polkit-1/localauthority/50-local.d/69-cryptosd.pkla), whcih was significantly refactored and expanded in v1.7.0. 
+
 
 #### 2.1 Intentions and considerations for these policy rules
+
 
 #### 2.2 
 https://github.com/Olf0/crypto-sdcard/blob/master/polkit-1/localauthority/50-local.d/69-cryptosd.pkla
