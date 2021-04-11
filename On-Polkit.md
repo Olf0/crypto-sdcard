@@ -44,10 +44,16 @@ Nice examples with explanations for ".pkla" files:
 * [Actually a report of a resolved bug, but also provides a nice example](https://forums.gentoo.org/viewtopic-p-7587064.html)
 
 Using `pkaction`:
-* `pkaction` (without any options) lists all action IDs Polkit controls.
+* `pkaction` (without any options) lists all action IDs, which Polkit controls.
 * `pkaction --verbose` lists the configuration of all action IDs.
 * `pkaction --verbose --action-id <action ID>` lists the configuration of the action IDs selected (supports globbing per "**\***", needs quoting then).
 
 
 ### 2. *crypto-sdcard's* use of Polkit's admin configurable policy rules
 
+*crypto-sdcard* deploys a single ".pkla" file in [/etc/polkit-1/localauthority/50-local.d/69-cryptosd.pkla](https://github.com/Olf0/crypto-sdcard/blob/master/polkit-1/localauthority/50-local.d/69-cryptosd.pkla) since v1.7.0. 
+
+#### 2.1 Intentions and considerations for these policy rules
+
+#### 2.2 
+https://github.com/Olf0/crypto-sdcard/blob/master/polkit-1/localauthority/50-local.d/69-cryptosd.pkla
