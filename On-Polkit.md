@@ -51,11 +51,19 @@ Using `pkaction`:
 
 ### 2. *crypto-sdcard's* use of Polkit's admin configurable policy rules
 
-*crypto-sdcard* deploys a single ".pkla" file in [/etc/polkit-1/localauthority/50-local.d/69-cryptosd.pkla](https://github.com/Olf0/crypto-sdcard/blob/master/polkit-1/localauthority/50-local.d/69-cryptosd.pkla), whcih was significantly refactored and expanded in v1.7.0. 
+*crypto-sdcard* deploys a single ".pkla" file in [/etc/polkit-1/localauthority/50-local.d/69-cryptosd.pkla](https://github.com/Olf0/crypto-sdcard/blob/master/polkit-1/localauthority/50-local.d/69-cryptosd.pkla), which was significantly refactored and expanded in *crypto-sdcard 1.7.0*. 
 
 
 #### 2.1 Intentions and considerations for these policy rules
 
+* 69-cryptosd.pkla (since v1.7.0) uniformly extends udisks2's default policy configuration depolyed by SailfishOS ≥ 2.2.0, which is comprised of udisks2's original configuration (e.g. [for udisks 2.7.5](https://github.com/storaged-project/udisks/blob/udisks-2.7.5/data/org.freedesktop.UDisks2.policy.in) from its documentation, e.g. [for udisks 2.8.1](http://storaged.org/doc/udisks2-api/latest/udisks-polkit-actions.html#udisks-polkit-actions-file)) plus Jolla's patches ([SailfishOS 2.2.x: 0003-Loosen-up-mount-unmount-rights.patch](https://git.sailfishos.org/mer-core/udisks2/blob/upgrade-2.2.0/rpm/0003-Loosen-up-mount-unmount-rights.patch) / [SailfishOS ≥ 3.0.0: 0003-Loosen-up-polkit-policies-to-work-from-another-seat.patch](https://git.sailfishos.org/mer-core/udisks2/blob/master/rpm/0003-Loosen-up-polkit-policies-to-work-from-another-seat.patch).
+* Allow programs running in the root context (e.g., *crypto-sdcard*) to automatically unlock non-system Cryptsetup "containers" (if they can provide the necessary credentials).
+* Carefully relax rules for some harmless actions (WRT SMART data, power saving etc.) to be programatically executed by the root or primary user.<br />
+  Note that [SMART suppport seems to be disabled in SailfishOS](https://git.sailfishos.org/mer-core/udisks2/blob/master/rpm/0002-Drop-smartata-dependencies.patch). 
+* Alleviate some (IMO) overly careful asking (or call it "nagging with authorisations") by Polkit for some interactive actions for the primary user, plus a few additional ones for the root user.
+* Allow "primary" SailfishOS users (i.e., in the `unix-group:system` for at least SailfishOS 2.2.0 - 3.x.y (< 3.2.1), rsp. in the `unix-group:media_rw` for SailfishOS ≥ 3.x.y (< 3.2.1)) to use the relaxed user rules: This usually affects only a single user (the "primary user"), either *nemo* or *defaultuser*.
+* Intentionally allow all users in the `unix-group:root` (i.e., not just the `unix-user:root`) to use their relaxed rules.<br />
+  While there is only a single user (root) in the group "root" on SailfishOS by default, this enables an admin to let additional user(s) use these relaxed rules by adding them to the "root" group as their secondary group.
 
 #### 2.2 
-https://github.com/Olf0/crypto-sdcard/blob/master/polkit-1/localauthority/50-local.d/69-cryptosd.pkla
+
