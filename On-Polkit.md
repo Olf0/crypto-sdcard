@@ -75,6 +75,6 @@ Using `pkaction`:
   Also look at the current version of the [org.freedesktop.UDisks2.policy.in from udisks2's "master" branch](https://github.com/storaged-project/udisks/blob/master/data/org.freedesktop.UDisks2.policy.in), to anticipate future actions.
 * Manually compare these three files and decide which policies to alter, separately for the root user(s) and the primary user.
 * Implement these altered policies in .pkla format, two separate files for
-  * ... [the root user(s)](https://github.com/Olf0/crypto-sdcard/blob/69e826fd8ef1f3eacde806deaa80176886d91faf/polkit-1/localauthority/50-local.d/69-cryptosd-root.pkla)
-  * ... [the primary user](https://github.com/Olf0/crypto-sdcard/blob/f2eaa4fa69ee6e49e30df6ac89f77f77b06a8462/polkit-1/localauthority/50-local.d/69-cryptosd-user.pkla)
+  * ... [the root user(s)](https://github.com/Olf0/crypto-sdcard/blob/69e826fd8ef1f3eacde806deaa80176886d91faf/polkit-1/localauthority/50-local.d/69-cryptosd-root.pkla).
+  * ... [the primary user](https://github.com/Olf0/crypto-sdcard/blob/f2eaa4fa69ee6e49e30df6ac89f77f77b06a8462/polkit-1/localauthority/50-local.d/69-cryptosd-user.pkla).
 * Merge these changes into a single file while grouping actions as appropiate: [69-cryptosd.pkla](https://github.com/Olf0/crypto-sdcard/blob/master/polkit-1/localauthority/50-local.d/69-cryptosd.pkla)
