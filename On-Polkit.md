@@ -53,7 +53,7 @@ Using `pkaction`:
 
 *crypto-sdcard* deploys a single ".pkla" file in [/etc/polkit-1/localauthority/50-local.d/69-cryptosd.pkla](https://github.com/Olf0/crypto-sdcard/blob/master/polkit-1/localauthority/50-local.d/69-cryptosd.pkla), which was significantly refactored and expanded in *crypto-sdcard 1.7.0*. 
 
-69-cryptosd.pkla (since v1.7.0) uniformly extends udisks2's default policy configuration depolyed by SailfishOS ≥ 2.2.0, which is comprised of udisks2's original configuration (e.g. [for udisks 2.7.5](https://github.com/storaged-project/udisks/blob/udisks-2.7.5/data/org.freedesktop.UDisks2.policy.in) from its documentation, e.g. [for udisks 2.8.1](http://storaged.org/doc/udisks2-api/latest/udisks-polkit-actions.html#udisks-polkit-actions-file)) plus Jolla's patches ([SailfishOS 2.2.x: 0003-Loosen-up-mount-unmount-rights.patch](https://git.sailfishos.org/mer-core/udisks2/blob/upgrade-2.2.0/rpm/0003-Loosen-up-mount-unmount-rights.patch) / [SailfishOS ≥ 3.0.0: 0003-Loosen-up-polkit-policies-to-work-from-another-seat.patch](https://git.sailfishos.org/mer-core/udisks2/blob/master/rpm/0003-Loosen-up-polkit-policies-to-work-from-another-seat.patch).
+69-cryptosd.pkla (since v1.7.0) uniformly extends udisks2's default policy configuration depolyed by SailfishOS ≥ 2.2.0, which is comprised of udisks2's original configuration (e.g. [for udisks 2.7.5](https://github.com/storaged-project/udisks/blob/udisks-2.7.5/data/org.freedesktop.UDisks2.policy.in) from its documentation, e.g. [for udisks 2.8.1](http://storaged.org/doc/udisks2-api/latest/udisks-polkit-actions.html#udisks-polkit-actions-file)) plus Jolla's patches (SailfishOS 2.2.x: [0003-Loosen-up-mount-unmount-rights.patch](https://git.sailfishos.org/mer-core/udisks2/blob/upgrade-2.2.0/rpm/0003-Loosen-up-mount-unmount-rights.patch) / SailfishOS ≥ 3.0.0: [0003-Loosen-up-polkit-policies-to-work-from-another-seat.patch](https://git.sailfishos.org/mer-core/udisks2/blob/master/rpm/0003-Loosen-up-polkit-policies-to-work-from-another-seat.patch).
 
 
 #### 2.1 Intentions and considerations for these policy rules
@@ -66,5 +66,15 @@ Using `pkaction`:
 * Intentionally allow all users in the `unix-group:root` (i.e., not just the `unix-user:root`) to use their relaxed rules.<br />
   While there is only a single user (root) in the group "root" on SailfishOS by default, this enables an admin to let additional user(s) use these relaxed rules by adding them to the "root" group as their secondary group.
 
-#### 2.2 
 
+#### 2.2 Implemetation notes for 69-cryptosd.pkla (since v1.7.0)
+
+**Workflow**
+
+* Get hold of udisks2's policy rules as deployed by the oldest (still SailfishOS 2.2.0) and newest ("master", i.e. currently: SailfishOS 4.1.0) SailfishOS release to be supported by *crypto-sdcard*, either by copying them from SailfishOS installations, or by downloading the right udisks2 versions of the org.freedesktop.UDisks2.policy.in file (2.7.5. and 2.8.1) plus patching them with Jolla's patches.
+  Also download the current version of the org.freedesktop.UDisks2.policy.in from udisks2's "master" branch, to anticipate future actions.
+* Manually compare these three files and decide which policies to alter, separately for the root users and the primary user.
+* Implement these altered policies in .pkla format, two separate files for
+  * ... [the root users](https://github.com/Olf0/crypto-sdcard/blob/69e826fd8ef1f3eacde806deaa80176886d91faf/polkit-1/localauthority/50-local.d/69-cryptosd-root.pkla)
+  * ... [the primary user](https://github.com/Olf0/crypto-sdcard/blob/f2eaa4fa69ee6e49e30df6ac89f77f77b06a8462/polkit-1/localauthority/50-local.d/69-cryptosd-user.pkla)
+* Merge these changes into a single file while grouping actions as appropiate: [69-cryptosd.pkla](https://github.com/Olf0/crypto-sdcard/blob/master/polkit-1/localauthority/50-local.d/69-cryptosd.pkla)
