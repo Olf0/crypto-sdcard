@@ -1,5 +1,5 @@
 [Unit]
-Description=Open %I per cryptsetup
+Description=Open /dev/disk/by-uuid/%I per cryptsetup
 Documentation=https://github.com/Olf0/crypto-sdcard
 DefaultDependencies=no
 After=sysinit.target dev-disk-by\x2duuid-%i.device
@@ -7,11 +7,6 @@ Requisite=dev-disk-by\x2duuid-%i.device
 PartOf=mount-cryptosd-luks@%i.service sysinit.target
 Conflicts=umount.target shutdown.target actdead.target factory-test.target
 Before=umount.target shutdown.target mount-cryptosd-luks@%i.service
-# That would allow this unit to keep on running, when switching to e.g., rescue.target
-# (but never for the SFOS recovery!).  While having an unlocked device around should be
-# harmless, disable it as long as benefits and potential consequences for the SFOS updater
-# are not properly evaluated:
-# IgnoreOnIsolate=true
 AssertFileNotEmpty=/etc/crypto-sdcard/crypto_luks_%I.key
 
 [Service]
@@ -22,7 +17,7 @@ RemainAfterExit=yes
 # ExecStartPre=/sbin/modprobe qcrypto
 # For various reasons (avoid (temporal) dependency on udisks2, allow for discards etc.), do
 # not use "udisksctl unlock --key-file", instead call cryptsetup directly:
-ExecStart=/usr/sbin/cryptsetup --allow-discards -d /etc/crypto-sdcard/crypto_luks_%I.key luksOpen /dev/disk/by-uuid/%I %I
+ExecStart=/usr/sbin/cryptsetup --allow-discards -d /etc/crypto-sdcard/crypto_luks_%I.key luksOpen /dev/disk/by-uuid/%I %I ; /bin/sleep 1
 # "udisksctl mount" (in mount-cryptosd-luks@.service) sometimes fails when issued right after
 # "udisksd" (per "udisks2.service") has finished starting, because the udisks object for this
 # unlocked device has not been created yet.
@@ -32,9 +27,10 @@ ExecStart=/usr/sbin/cryptsetup --allow-discards -d /etc/crypto-sdcard/crypto_luk
 # unnecessarily waste this second most of the time; that is avoided this way.
 # Note that using ExecStartPost= for this is futile (as irrelevant for dependencies, see
 # https://www.freedesktop.org/software/systemd/man/systemd.service.html#Type= ), but (only)
-# units of the Type=oneshot may use multiple ExecStart= lines and / or commands.  Side note:
-# For non-oneshot units a solution is to move the ExecStart= command to ExecStartPre= (that
-# is functionally equivalent!) and ...
-ExecStart=/bin/sleep 1
+# units of the Type=oneshot may use multiple ExecStart= lines (which are *started
+# concurrently*, but the last one is displayed as "main process") and / or commands in an
+# ExecStart= line.  Side note: For non-oneshot units a solution is to move the ExecStart=
+# command to ExecStartPre= (that is *functionally equivalent*, but again displays the
+# ExecStart= command as "main process") and use ExecStart=/bin/sleep 1
 ExecStop=/usr/sbin/cryptsetup close %I
 

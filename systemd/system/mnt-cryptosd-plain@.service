@@ -1,0 +1,25 @@
+[Unit]
+Description=Manually mount /dev/mapper/%I directly
+Documentation=https://github.com/Olf0/crypto-sdcard
+DefaultDependencies=no
+After=systemd-udevd.service systemd-udev-trigger.service cryptosd-plain@%i.service dev-mapper-%i.device systemd-journald.service local-fs.target cryptsetup.target
+Requires=cryptosd-plain@%i.service
+# "Requisite=dev-mapper-%i.device" here would prevent this unit from
+# auto-starting its dependencies, when started manually:
+PartOf=dev-mapper-%i.device sysinit.target
+# Also conflict with umount.target (see man 7 systemd.special), as
+# this is a mounting unit, though not a mount unit:
+Conflicts=umount.target shutdown.target actdead.target factory-test.target
+Before=alien-service-manager.service umount.target shutdown.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+#EnvironmentFile=/etc/systemd/system/cryptosd.conf
+#EnvironmentFile=-/etc/crypto-sdcard/cryptosd.conf
+#EnvironmentFile=-/etc/crypto-sdcard/cryptosd@%I.conf
+ExecStartPre=/bin/mkdir -p /media/cryptosd-plain-%I
+ExecStart=/bin/mount -v /dev/mapper/%I /media/cryptosd-plain-%I
+ExecStop=/bin/umount -vr /dev/mapper/%I
+ExecStopPost=/bin/rmdir /media/cryptosd-plain-%I
+

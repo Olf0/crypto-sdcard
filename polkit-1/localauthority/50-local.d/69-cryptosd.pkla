@@ -1,6 +1,154 @@
-[Placeholder for telling udisks2 to allow for "ejecting" media (SD-cards and USB-storage devices) in the future.]
-[Identity=unix-group:system / media_rw (SFOS3.2.1+)]
-[Action=org.freedesktop.udisks2.XXXX]
-[ResultAny=yes]
-[ResultInactive=yes]
-[ResultActive=yes]
+[Root users & primary user(s): udisks2.encrypted-*lock*, except for *-system]
+Identity=unix-group:root;unix-group:system
+Action=org.freedesktop.udisks2.encrypted-unlock;org.freedesktop.udisks2.encrypted-unlock-other-seat;org.freedesktop.udisks2.encrypted-lock-others
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+
+[Root users: udisks2.encrypted-unlock-system]
+Identity=unix-group:root
+Action=org.freedesktop.udisks2.encrypted-unlock-system
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+
+[Primary user(s): udisks2.encrypted-unlock-system]
+Identity=unix-group:system
+Action=org.freedesktop.udisks2.encrypted-unlock-system
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
+
+[Root users & primary user(s): udisks2.encrypted-change-passphrase, but not for *-system]
+Identity=unix-group:root;unix-group:system
+Action=org.freedesktop.udisks2.encrypted-change-passphrase
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=yes
+
+[Root users: udisks2.manage-md-raid]
+Identity=unix-group:root
+Action=org.freedesktop.udisks2.manage-md-raid
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+
+[Primary user(s): udisks2.manage-md-raid]
+Identity=unix-group:system
+Action=org.freedesktop.udisks2.manage-md-raid
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
+
+[Root users & primary user(s): udisks2.power-off-drive*, except for *-system]
+Identity=unix-group:root;unix-group:system
+Action=org.freedesktop.udisks2.power-off-drive;org.freedesktop.udisks2.power-off-drive-other-seat
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+
+[Root users & primary user(s): udisks2.eject-media*, except for *-system]
+Identity=unix-group:root;unix-group:system
+Action=org.freedesktop.udisks2.eject-media;org.freedesktop.udisks2.eject-media-other-seat
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=yes
+
+[Root users: udisks2.modify-device]
+Identity=unix-group:root
+Action=org.freedesktop.udisks2.modify-device
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=yes
+
+[Primary user(s): udisks2.modify-device]
+Identity=unix-group:system
+Action=org.freedesktop.udisks2.modify-device
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
+
+[Root users & primary user(s): udisks2.modify-device-system & udisks2.modify-device-other-seat]
+Identity=unix-group:root;unix-group:system
+Action=org.freedesktop.udisks2.modify-device-system;org.freedesktop.udisks2.modify-device-other-seat
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
+
+[Root users & primary user(s): udisks2.rescan]
+Identity=unix-group:root;unix-group:system
+Action=org.freedesktop.udisks2.rescan
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+
+[Root users: udisks2.open-device]
+Identity=unix-group:root
+Action=org.freedesktop.udisks2.open-device
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+
+[Primary user(s): udisks2.open-device]
+Identity=unix-group:system
+Action=org.freedesktop.udisks2.open-device
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=yes
+
+[Root users & primary user(s): udisks2.open-device-system]
+Identity=unix-group:root;unix-group:system
+Action=org.freedesktop.udisks2.open-device-system
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
+
+[Root users: udisks2.modify-system-configuration]
+Identity=unix-group:root
+Action=org.freedesktop.udisks2.modify-system-configuration
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
+
+[Root users: udisks2.read-system-configuration-secrets]
+Identity=unix-group:root
+Action=org.freedesktop.udisks2.read-system-configuration-secrets
+ResultAny=auth_admin
+ResultInactive=auth_admin
+ResultActive=auth_admin_keep
+
+[Root users & primary user(s): <various, harmless device settings>]
+Identity=unix-group:root;unix-group:system
+Action=org.freedesktop.udisks2.modify-drive-settings;org.freedesktop.udisks2.ata-smart-enable-disable;org.freedesktop.udisks2.ata-smart-update
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+
+[Root users: udisks2.ata-smart-simulate & udisks2.ata-smart-selftest]
+Identity=unix-group:root
+Action=org.freedesktop.udisks2.ata-smart-simulate;org.freedesktop.udisks2.ata-smart-selftest
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+
+[Primary user(s): udisks2.ata-smart-simulate & udisks2.ata-smart-selftest]
+Identity=unix-group:system
+Action=org.freedesktop.udisks2.ata-smart-simulate;org.freedesktop.udisks2.ata-smart-selftest
+ResultAny=auth_self
+ResultInactive=auth_self
+ResultActive=auth_self_keep
+
+[Root users & primary user(s): <device power-save settings>, except for *-system]
+Identity=unix-group:root;unix-group:system
+Action=org.freedesktop.udisks2.ata-check-power;org.freedesktop.udisks2.ata-standby;org.freedesktop.udisks2.ata-standby-other-seat
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+
+[Root users & primary user(s): udisks2.cancel-job*]
+Identity=unix-group:root;unix-group:system
+Action=org.freedesktop.udisks2.cancel-job;org.freedesktop.udisks2.cancel-job-other-user
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes
+
