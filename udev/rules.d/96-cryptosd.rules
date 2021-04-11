@@ -21,8 +21,13 @@ KERNEL=="sd*", ENV{DEVTYPE}=="disk", ENV{ID_DRIVE_FLASH_SD}="1", ENV{ID_DRIVE_ME
 # ToDo: Only set that for storage, which is not "rotational", but also for SATA-RAIDs; check, if ATTR{queue/rotational} works!?!
 #KERNEL=="sd*|sr*", ENV{DEVTYPE}=="disk", ATTR{queue/rotational}=="0", ENV{ID_DRIVE_FLASH_SD}="1", ENV{ID_DRIVE_MEDIA_FLASH_SD}="1"
 
-# Set UDISKS_CAN_POWER_OFF for all devices dealt with, here:
-#ENV{DEVTYPE}=="disk", ENV{UDISKS_CAN_POWER_OFF}="1"
+# ToDo: Set UDISKS_CAN_POWER_OFF for all suitable devices dealt with, here:
+#ENV{DEVTYPE}=="disk", ATTR{power/control}=="on", ENV{UDISKS_CAN_POWER_OFF}="1"
+
+# ToDo: Use a test for ATA-Discard / - TrimSet so unlock appropriately:
+#ENV{DEVTYPE}=="disk", ATTR{discard_alignment}!="0", ...
+#ENV{DEVTYPE}=="disk", ATTR{queue/discard_granularity}!="0", ...
+
 
 # For DM-Crypt LUKS, match ENV{ID_FS_TYPE}=="crypto_LUKS"
 ENV{ID_FS_TYPE}=="crypto_LUKS", ACTION=="add|change", PROGRAM=="/usr/bin/head -c 1 /etc/crypto-sdcard/crypto_luks_%E{ID_FS_UUID}", RESULT=="?", ENV{CRYPTOSD_TYPE}="LUKS"
