@@ -2,9 +2,9 @@
 Description=Open /dev/disk/by-uuid/%I per cryptsetup
 Documentation=https://github.com/Olf0/crypto-sdcard
 DefaultDependencies=no
-After=systemd-udevd.service systemd-udev-trigger.service dev-disk-by\x2duuid-%i.device systemd-journald.service local-fs.target cryptsetup-pre.target
+After=sysinit.target dev-disk-by\x2duuid-%i.device
 Requisite=dev-disk-by\x2duuid-%i.device
-PartOf=mount-cryptosd-luks@%i.service cryptsetup.target
+PartOf=mount-cryptosd-luks@%i.service sysinit.target
 Conflicts=umount.target shutdown.target actdead.target factory-test.target
 Before=umount.target shutdown.target mount-cryptosd-luks@%i.service
 AssertFileNotEmpty=/etc/crypto-sdcard/crypto_luks_%I.key
