@@ -32,7 +32,7 @@ ENV{CRYPTOSD_TYPE}=="LUKS", ACTION=="remove", ENV{CRYPTOSD_TYPE}="removed", ENV{
 
 # For DM-Crypt "plain", ensure (by ENV{ID_*}!="?*" statements) that it appears to be unused space
 # Two rules, one for partitions and a tighter one for whole disks:
-ENV{DEVTYPE}=="disk", ENV{ID_FS_USAGE}!="?*", ENV{ID_FS_TYPE}!="?*", ENV{ID_PART_TABLE_TYPE}!="?*", ACTION=="add|change", PROGRAM=="/usr/bin/head -c 1 /etc/crypto-sdcard/crypto_plain_%k", RESULT=="?", ENV{CRYPTOSD_TYPE}="PLAIN"
+ENV{DEVTYPE}=="disk", ENV{ID_FS_USAGE}!="?*", ENV{ID_FS_TYPE}!="?*", ENV{ID_PART_TABLE_TYPE}!="?*", ACTION=="add|change", PROGRAM=="/usr/bin/head -c 1 /etc/crypto-sdcard/crypto_plain_%k", RESULT=="?", ENV{UDISKS_PARTITIONABLE}="0", ENV{CRYPTOSD_TYPE}="PLAIN"
 ENV{DEVTYPE}=="partition", ENV{ID_FS_USAGE}!="?*", ENV{ID_FS_TYPE}!="?*", ACTION=="add|change", PROGRAM=="/usr/bin/head -c 1 /etc/crypto-sdcard/crypto_plain_%k", RESULT=="?", ENV{CRYPTOSD_TYPE}="PLAIN"
 ENV{CRYPTOSD_TYPE}=="PLAIN", ENV{UDISKS_SYSTEM}="0", ENV{UDISKS_AUTO}="0", ENV{UDISKS_NAME}="cryptosd_plain_%k", MODE="0660", TAG+="systemd", ENV{SYSTEMD_WANTS}="'cryptosd-plain@%k.service'"
 # When above detected and assigned devices are removed
