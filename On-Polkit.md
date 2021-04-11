@@ -38,8 +38,12 @@
 
 The Polkit documentation [nicely provides older releases](https://www.freedesktop.org/software/polkit/docs/)!<br />
 Thus assess per [`pkaction --version`](https://www.freedesktop.org/software/polkit/docs/0.105/pkaction.1.html), which Polkit version you are running and use this documentation release, e.g. [its 0.105 version](https://www.freedesktop.org/software/polkit/docs/0.105/index.html).<br />
-Specifically this is the latest and last (original) documentation of [pklocalauthority](https://www.freedesktop.org/software/polkit/docs/0.105/pklocalauthority.8.html), i.e. the ".pkla" file format.
+Specifically this is the latest and last (original) documentation of [pklocalauthority](https://www.freedesktop.org/software/polkit/docs/0.105/pklocalauthority.8.html), i.e. the ".pkla" file format.<br />
+Nice examples with explanations for ".pkla" files:
+* [libvirt's SSHPolicyKitSetup](https://wiki.libvirt.org/page/SSHPolicyKitSetup#Configuration_for_individual_users)
+* [Actually a report of a resolved bug, but also provides a nice example](https://forums.gentoo.org/viewtopic-p-7587064.html)
 
+Using `pkaction`:
 * `pkaction` (without any options) lists all action IDs Polkit controls.
 * `pkaction --verbose` lists the configuration of all action IDs.
 * `pkaction --verbose --action-id <action ID>` lists the configuration of the action IDs selected (supports globbing per "**\***", needs quoting then).
