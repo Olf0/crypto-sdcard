@@ -1,12 +1,12 @@
 ## On admin configurable policy rules with Polkit v0.1xy
 
 
-### 1. History of Polkit's admin configurable policy rules
+### 1  History of Polkit's admin configurable policy rules
 
 [This article](https://www.admin-magazine.com/Articles/Assigning-Privileges-with-sudo-and-PolicyKit) nicely (and simply) explains the intention and functionality of Polkit.
 
 
-#### 1.1. Polkit ≤ 0.105 versus Polkit ≥ 0.106 WRT admin configured policy rules
+#### 1.1  Polkit ≤ 0.105 versus Polkit ≥ 0.106 WRT admin configured policy rules
 
 
 * **Polkit 0.106 switched from the ".pkla (Policy Kit Local Authority / [pklocalauthority](https://www.freedesktop.org/software/polkit/docs/0.105/pklocalauthority.8.html))" file format to a JavaScript-based ".rules" configuration file format**
@@ -34,7 +34,7 @@
   This looks like aforementioned approach i, although I have not checked which Polkit 0.105 variant the SailfishOS' version is based on or which backport patches it incorporates.
 
 
-#### 1.2 Practically handling Polkit rules
+#### 1.2  Practically handling Polkit rules
 
 The Polkit documentation [nicely provides older releases](https://www.freedesktop.org/software/polkit/docs/)!<br />
 Thus assess per [`pkaction --version`](https://www.freedesktop.org/software/polkit/docs/0.105/pkaction.1.html), which Polkit version you are running and use this documentation release, e.g. [its 0.105 version](https://www.freedesktop.org/software/polkit/docs/0.105/index.html).<br />
@@ -49,14 +49,14 @@ Using `pkaction`:
 * `pkaction --verbose --action-id <action ID>` lists the configuration of the action IDs selected (supports globbing per "**\***", needs quoting then).
 
 
-### 2. *crypto-sdcard's* use of Polkit's admin configurable policy rules
+### 2  *crypto-sdcard's* use of Polkit's admin configurable policy rules
 
 *crypto-sdcard* deploys a single ".pkla" file in [/etc/polkit-1/localauthority/50-local.d/69-cryptosd.pkla](https://github.com/Olf0/crypto-sdcard/blob/master/polkit-1/localauthority/50-local.d/69-cryptosd.pkla), which was significantly refactored and expanded in *crypto-sdcard 1.7.0*. 
 
 69-cryptosd.pkla (since v1.7.0) uniformly extends udisks2's default policy configuration depolyed by SailfishOS ≥ 2.2.0, which is comprised of udisks2's original configuration (e.g. [for udisks 2.7.5](https://github.com/storaged-project/udisks/blob/udisks-2.7.5/data/org.freedesktop.UDisks2.policy.in) from its documentation, e.g. [for udisks 2.8.1](http://storaged.org/doc/udisks2-api/latest/udisks-polkit-actions.html#udisks-polkit-actions-file)) plus Jolla's patches (SailfishOS 2.2.x: [0003-Loosen-up-mount-unmount-rights.patch](https://git.sailfishos.org/mer-core/udisks2/blob/upgrade-2.2.0/rpm/0003-Loosen-up-mount-unmount-rights.patch) / SailfishOS ≥ "2.2.2" aka  3.0.0: [0003-Loosen-up-polkit-policies-to-work-from-another-seat.patch](https://git.sailfishos.org/mer-core/udisks2/blob/master/rpm/0003-Loosen-up-polkit-policies-to-work-from-another-seat.patch)).
 
 
-#### 2.1 Intentions and considerations for these policy rules
+#### 2.1  Intentions and considerations for these policy rules
 
 * Allow programs running in the root context (e.g., *crypto-sdcard*) to automatically unlock non-system crypto "containers" (if they can provide the necessary credentials).
 * Carefully relax rules for some harmless actions (WRT SMART data, power saving etc.) to be programatically executed by the root or primary user on non-system devices.<br />
@@ -67,7 +67,7 @@ Using `pkaction`:
   While there is only a single user (root) in the group "root" on SailfishOS by default, this enables an admin to let additional user(s) use these relaxed rules by adding them to the "root" group as their secondary group.
 
 
-#### 2.2 Implementation notes for 69-cryptosd.pkla (as of *crypto-sdcard 1.7.0*)
+#### 2.2  Implementation notes for 69-cryptosd.pkla (as of *crypto-sdcard 1.7.0*)
 
 **Workflow**
 
