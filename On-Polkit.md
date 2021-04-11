@@ -10,7 +10,7 @@
   
   See the [original announcement and explanation](https://davidz25.blogspot.com/2012/06/authorization-rules-in-polkit.html) for this change.<br />
   The comments at this page concisely reflect the year long debates this change triggered, including most of the technical and usablility issues denoted.<br />
-  Note that there was no migration period (in which both file formats were supported): Polkit ≤ 0.105 solely understands ".pkla" files, while Polkit ≥ 0.106 only understands JavaScript-based ".rules" files.
+  Note that there was no migration period (in which both file formats were supported): Polkit ≤ 0.105 solely understands ".pkla" files, while Polkit ≥ 0.106 only understands JavaScript-based ".rules" files.  See their fundamental differences [in this example](https://fossies.org/linux/libvirt/docs/auth.rst#unix-socket-policykit-auth).
 
 * **Consequences / effects for Linux distributions**
   
@@ -25,7 +25,9 @@
 * **Polkit versions in SailfishOS**
   
   As with some other components, SailfishOS tends to lag behind recent Polkit releases, which is not neccesarily a bad thing.<br />
-  SailfishOS 2.2.0 deployed Polkit 0.104, some later release (before SailfisOS 3.2.1) switched to Polkit 0.105, and SailfisOS 4.0.1 is still deploying Polkit 0.105.<br />
+  SailfishOS 2.2.0 deployed Polkit 0.104, some later release (before SailfishOS 3.2.1) switched to Polkit 0.105 and SailfishOS 4.0.1 is still deploying Polkit 0.105.<br />
   This looks like aforementioned approach i, although I have not checked which Polkit 0.105 variant the SailfishOS' version is based on or which backport patches it incorporates.
 
 #### 1.2 
+
+https://fossies.org/linux/libvirt/docs/auth.rst#unix-socket-policykit-auth
