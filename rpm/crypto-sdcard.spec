@@ -1,6 +1,6 @@
 Name:          crypto-sdcard
 Summary:       Configuration files for unlocking and mounting encrypted SD-cards automatically
-Version:       1.6.0
+Version:       1.7.0
 # Since v1.3.1, the release version consists of two or three fields, separated by a dot ("."):
 # - The first field must contain a natural number greater than zero.
 #   This number may be prefixed by one of {alpha,beta,stable}, e.g. "alpha13".
@@ -27,7 +27,6 @@ Source:        https://github.com/Olf0/%{name}/archive/%{version}-%{release}/%{n
 #Icon:          smartmedia_mount.256x256.gif
 BuildArch:     noarch
 Requires:      systemd
-Requires:      polkit
 Requires:      udisks2
 # Better use direct dependencies on specific versions than indirect ones (here: the line above
 # versus the one below) in general, but ultimately decided not to do so in this special case
@@ -54,17 +53,19 @@ Provides:      crypto-sdcard_sbj
 
 %install
 mkdir -p %{buildroot}%{_sysconfdir}/%{name}
-cp -R systemd polkit-1 udev %{buildroot}%{_sysconfdir}/
+cp -R polkit-1 systemd udev %{buildroot}%{_sysconfdir}/
 
 %files
 # Regular files:
 %defattr(-,root,root,-)
+%{_sysconfdir}/udev/rules.d/96-cryptosd.rules
 %{_sysconfdir}/systemd/system/cryptosd-luks@.service
 %{_sysconfdir}/systemd/system/cryptosd-plain@.service
 %{_sysconfdir}/systemd/system/mount-cryptosd-luks@.service
 %{_sysconfdir}/systemd/system/mount-cryptosd-plain@.service
+%{_sysconfdir}/systemd/system/mnt-cryptosd-luks@.service
+%{_sysconfdir}/systemd/system/mnt-cryptosd-plain@.service
 %{_sysconfdir}/polkit-1/localauthority/50-local.d/69-cryptosd.pkla
-%{_sysconfdir}/udev/rules.d/96-cryptosd.rules
 # Extraordinary files / dirs:
 %defattr(0640,root,root,0750)
 %dir %{_sysconfdir}/%{name}
