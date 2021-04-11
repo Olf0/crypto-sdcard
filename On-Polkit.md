@@ -8,9 +8,9 @@
 
 * **Polkit 0.106 switched from the ".pkla (Policy Kit Local Authority / [pklocalauthority](https://www.freedesktop.org/software/polkit/docs/0.105/pklocalauthority.8.html))" file format to a JavaScript-based ".rules" configuration file format**
   
-  See the [original announcement and explanation](https://davidz25.blogspot.com/2012/06/authorization-rules-in-polkit.html) for this change.<br />
+  See the [original announcement and explanation](https://davidz25.blogspot.com/2012/06/authorization-rules-in-polkit.html) for this change.    See the fundamental differences between these two file formats [in this simple example](https://fossies.org/linux/libvirt/docs/auth.rst#unix-socket-policykit-auth).<br />
   The comments at this page concisely reflect the year long debates this change triggered, including most of the technical and usablility issues denoted.<br />
-  Note that there was no migration period (in which both file formats were supported): Polkit ≤ 0.105 solely understands ".pkla" files, while Polkit ≥ 0.106 only understands JavaScript-based ".rules" files.  See their fundamental differences [in this example](https://fossies.org/linux/libvirt/docs/auth.rst#unix-socket-policykit-auth).
+  Note that there was no migration period (in which both file formats were supported): Polkit ≤ 0.105 solely understands ".pkla" files, while Polkit ≥ 0.106 only understands JavaScript-based ".rules" files.
 
 * **Consequences / effects for Linux distributions**
   
@@ -28,6 +28,9 @@
   SailfishOS 2.2.0 deployed Polkit 0.104, some later release (before SailfishOS 3.2.1) switched to Polkit 0.105 and SailfishOS 4.0.1 is still deploying Polkit 0.105.<br />
   This looks like aforementioned approach i, although I have not checked which Polkit 0.105 variant the SailfishOS' version is based on or which backport patches it incorporates.
 
-#### 1.2 
+#### 1.2 Practically handling Polkit rules
 
-https://fossies.org/linux/libvirt/docs/auth.rst#unix-socket-policykit-auth
+The Polkit documentation [nicely provides older releases](https://www.freedesktop.org/software/polkit/docs/)!
+Hence assess per [`pkaction --version`](https://www.freedesktop.org/software/polkit/docs/0.105/pkaction.1.html), which Polkit version you are running and use this documentation release, e.g. [its 0.105 version](https://www.freedesktop.org/software/polkit/docs/0.105/index.html).<br />
+Specifically this is the latest and last (original) documentation of [pklocalauthority](https://www.freedesktop.org/software/polkit/docs/0.105/pklocalauthority.8.html), i.e. the ".pkla" file format.
+
