@@ -72,7 +72,7 @@ Using `pkaction`:
 **Workflow**
 
 * Get hold of udisks2's policy rules as deployed by the oldest (still SailfishOS 2.2.0) and newest ("master", i.e. currently: SailfishOS 4.1.0) SailfishOS release to be supported by *crypto-sdcard*, either by copying them from SailfishOS installations, or by downloading the right udisks2 versions of the org.freedesktop.UDisks2.policy.in file (2.7.5 and 2.8.1) plus patching them with Jolla's patches.<br />
-  Also download the current version of the org.freedesktop.UDisks2.policy.in from udisks2's "master" branch, to anticipate future actions.
+  Also look at the current version of the [org.freedesktop.UDisks2.policy.in from udisks2's "master" branch](https://github.com/storaged-project/udisks/blob/master/data/org.freedesktop.UDisks2.policy.in), to anticipate future actions.
 * Manually compare these three files and decide which policies to alter, separately for the root user(s) and the primary user.
 * Implement these altered policies in .pkla format, two separate files for
   * ... [the root user(s)](https://github.com/Olf0/crypto-sdcard/blob/69e826fd8ef1f3eacde806deaa80176886d91faf/polkit-1/localauthority/50-local.d/69-cryptosd-root.pkla)
