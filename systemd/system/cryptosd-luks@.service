@@ -7,7 +7,8 @@ Requisite=dev-disk-by\x2duuid-%i.device
 PartOf=mount-cryptosd-luks@%i.service cryptsetup.target
 Conflicts=umount.target shutdown.target actdead.target factory-test.target
 Before=umount.target shutdown.target mount-cryptosd-luks@%i.service
-AssertFileNotEmpty=/etc/crypto-sdcard/crypto_luks_%I.key
+ConditionPathIsDirectory=!/etc/crypto-sdcard/crypto_luks_%I.key
+ConditionPathExists=/etc/crypto-sdcard/crypto_luks_%I.key
 
 [Service]
 Type=oneshot
