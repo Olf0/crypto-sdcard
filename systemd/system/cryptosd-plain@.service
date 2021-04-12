@@ -7,8 +7,8 @@ Requisite=dev-%i.device
 PartOf=mount-cryptosd-plain@%i.service cryptsetup.target
 Conflicts=umount.target shutdown.target actdead.target factory-test.target
 Before=umount.target shutdown.target mount-cryptosd-plain@%i.service
-ConditionPathIsDirectory=!/etc/crypto-sdcard/crypto_plain_%I.key
-ConditionPathExists=/etc/crypto-sdcard/crypto_plain_%I.key
+AssertPathIsDirectory=!/etc/crypto-sdcard/crypto_plain_%I.key
+AssertPathExists=/etc/crypto-sdcard/crypto_plain_%I.key
 
 [Service]
 Type=oneshot
