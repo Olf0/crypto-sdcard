@@ -36,7 +36,7 @@ KERNEL=="sd*", ENV{DEVTYPE}=="disk", ENV{ID_DRIVE_FLASH_SD}="1", ENV{ID_DRIVE_ME
 
 # For DM-Crypt LUKS, match ENV{ID_FS_TYPE}=="crypto_LUKS"
 ENV{ID_FS_TYPE}=="crypto_LUKS", ACTION=="add|change", PROGRAM=="/bin/grep -q .* /etc/crypto-sdcard/crypto_luks_%E{ID_FS_UUID}.key", ENV{CRYPTOSD_TYPE}="LUKS"
-ENV{CRYPTOSD_TYPE}=="LUKS", ENV{UDISKS_SYSTEM}="0", ENV{UDISKS_AUTO}="0", ENV{UDISKS_NAME}="cryptosd_luks_dev-%k_%E{ID_FS_UUID}", MODE="0660", TAG+="systemd", PROGRAM=="/usr/bin/systemd-escape --template=cryptosd-luks@.service %E{ID_FS_UUID}", ENV{SYSTEMD_WANTS}="%c"
+ENV{CRYPTOSD_TYPE}=="LUKS", ENV{UDISKS_SYSTEM}="0", ENV{UDISKS_AUTO}="0", ENV{UDISKS_NAME}="cryptosd_luks_dev-%k_%E{ID_FS_UUID}", MODE="0660", TAG+="systemd", PROGRAM=="/bin/systemd-escape --template=cryptosd-luks@.service %E{ID_FS_UUID}", ENV{SYSTEMD_WANTS}="%c"
 # When above detected and assigned devices are removed
 ENV{CRYPTOSD_TYPE}=="LUKS", ACTION=="remove", ENV{CRYPTOSD_TYPE}="removed", ENV{UDISKS_NAME}="cryptosd_removed", PROGRAM=="/bin/systemd-escape --template=cryptosd-luks@.service %E{ID_FS_UUID}", ENV{SYSTEMD_WANTS}="", ENV{SYSTEMD_USER_WANTS}="", RUN{program}+="/bin/systemctl stop %c"
 
