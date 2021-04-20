@@ -8,10 +8,11 @@
 # - SUBSYSTEMS=="usb", KERNEL=="mmcblk[0-9]*|sd*|sr*" to filter for anything attached via (presumably "external") USB.  Mind that on devices without an SD-card slot mmcblk1 will be an externally attached card.
 # Reference: /usr/lib/udev/rules.d/60-persistent-storage.rules
 # 
-# Is something like SUBSYSTEMS=="usb", KERNEL=="mmcblk[0-9]*|sd*|sr*", ATTR{removable}="1" possible and reasonable (means only "removable *media*"?) ?  Or without restricting it to USB-attached devices / partitions?  Yes!
+# Q: Is something like SUBSYSTEMS=="usb", KERNEL=="mmcblk[0-9]*|sd*|sr*", ATTR{removable}="1" possible and reasonable (means only "removable *media*"?) ?  Or without restricting it to USB-attached devices / partitions?
+# A: Yes.
 
-SUBSYSTEM!="block", GOTO="cryptosd_mount_end"
-SUBSYSTEMS!="usb", KERNEL!="mmcblk[0-9]*|sd*|sr*", GOTO="cryptosd_open_end"
+SUBSYSTEM!="block", GOTO="cryptosd_end"
+#SUBSYSTEMS!="usb", KERNEL!="mmcblk[0-9]*|sd*|sr*", GOTO="cryptosd_open_end"
 # Note that this means: If NOT (SUBSYSTEMS=="usb" OR KERNEL=="mmcblk[0-9]*|sd*|sr*"), then GOTO.
 
 # Ignore the additions / changes by Jolla per
@@ -41,10 +42,10 @@ ENV{CRYPTOSD_TYPE}=="PLAIN", ACTION=="add|change", ENV{UDISKS_SYSTEM}="0", ENV{U
 # When above detected and assigned devices are removed
 ENV{CRYPTOSD_TYPE}=="PLAIN", ACTION=="remove", ENV{CRYPTOSD_TYPE}="removed", ENV{UDISKS_NAME}="cryptosd_removed", ENV{SYSTEMD_WANTS}="", ENV{SYSTEMD_USER_WANTS}="", RUN{program}+="/usr/bin/systemctl stop cryptosd-plain@%k.service"
 
-LABEL="cryptosd_open_end"
+#LABEL="cryptosd_open_end"
 
 
-KERNEL!="dm-[0-9]*", GOTO="cryptosd_mount_end"
+KERNEL!="dm-[0-9]*", GOTO="cryptosd_end"
 
 # Carefully match resulting virtual node dm-[0-9]* to trigger mounting it; see /lib/udev/rules.d/10-dm.rules for details
 ENV{ID_FS_USAGE}=="filesystem", ENV{DM_UDEV_RULES_VSN}=="[2-9]", ENV{DM_NAME}=="????????-????-????-????-????????????|????-????", ACTION=="change", ENV{DM_UDEV_PRIMARY_SOURCE_FLAG}=="1", ENV{DM_ACTIVATION}=="1", ENV{DM_SUSPENDED}=="0", ENV{CRYPTOSD_TYPE}="mount-LUKS", ENV{UDISKS_SYSTEM}="0", ENV{UDISKS_AUTO}="0", ENV{UDISKS_NAME}="mount_cryptosd_luks_%E{DM_NAME}", MODE="0660", TAG+="systemd", PROGRAM=="/usr/bin/systemd-escape --template=mount-cryptosd-luks@.service %E{DM_NAME}", ENV{SYSTEMD_WANTS}="'%c'"
@@ -54,5 +55,5 @@ ENV{CRYPTOSD_TYPE}=="mount-LUKS", ACTION=="remove", ENV{CRYPTOSD_TYPE}="mount-re
 ENV{ID_FS_USAGE}=="filesystem", ENV{DM_UDEV_RULES_VSN}=="[2-9]", ENV{DM_NAME}=="mmcblk[0-9]*|sd*|sr*", ACTION=="change", ENV{DM_UDEV_PRIMARY_SOURCE_FLAG}=="1", ENV{DM_ACTIVATION}=="1", ENV{DM_SUSPENDED}=="0", ENV{CRYPTOSD_TYPE}="mount-PLAIN", ENV{UDISKS_SYSTEM}="0", ENV{UDISKS_AUTO}="0", ENV{UDISKS_NAME}="mount_cryptosd_plain_%E{DM_NAME}", MODE="0660", TAG+="systemd", ENV{SYSTEMD_WANTS}="'mount-cryptosd-plain@%E{DM_NAME}.service'"
 ENV{CRYPTOSD_TYPE}=="mount-PLAIN", ACTION=="remove", ENV{CRYPTOSD_TYPE}="mount-removed", ENV{UDISKS_NAME}="mount_cryptosd_removed", ENV{SYSTEMD_WANTS}="", ENV{SYSTEMD_USER_WANTS}="", RUN{program}+="/usr/bin/systemctl stop mount-cryptosd-plain@%E{DM_NAME}.service"
 
-LABEL="cryptosd_mount_end"
+LABEL="cryptosd_end"
 
