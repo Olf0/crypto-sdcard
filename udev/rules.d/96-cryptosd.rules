@@ -8,8 +8,8 @@
 # - SUBSYSTEMS=="usb", KERNEL=="mmcblk[0-9]*|sd*|sr*" to filter for anything attached via (presumably "external") USB.  Mind that on devices without an SD-card slot mmcblk1 will be an externally attached card.
 # Reference: /usr/lib/udev/rules.d/60-persistent-storage.rules
 # 
-# Q: Is something like SUBSYSTEMS=="usb", KERNEL=="mmcblk[0-9]*|sd*|sr*", ATTR{removable}="1" possible and reasonable (means only "removable *media*"?) ?  Or without restricting it to USB-attached devices / partitions?
-# A: Yes.
+# Q: Is something like SUBSYSTEMS=="usb", KERNEL=="mmcblk[0-9]*|sd*|sr*", ATTRS{removable}=="1" possible and reasonable (means only "removable *media*"?) ?  Or without restricting it to USB-attached devices / partitions?
+# A: Yes, but potential side effects are still evaluated.
 
 SUBSYSTEM!="block", GOTO="cryptosd_end"
 #SUBSYSTEMS!="usb", KERNEL!="mmcblk[0-9]*|sd*|sr*", GOTO="cryptosd_open_end"
@@ -21,9 +21,11 @@ SUBSYSTEM!="block", GOTO="cryptosd_end"
 KERNEL=="mmcblk[1-9]*", ENV{DEVTYPE}=="disk", ENV{MMC_TYPE}!="?*", ENV{ID_DRIVE_FLASH_SD}="1", ENV{ID_DRIVE_MEDIA_FLASH_SD}="1"
 SUBSYSTEMS=="usb", KERNEL=="mmcblk0*|sd*|sr*", ENV{DEVTYPE}=="disk", ATTR{queue/rotational}=="0", ENV{MMC_TYPE}!="?*", ENV{ID_DRIVE_FLASH_SD}="1", ENV{ID_DRIVE_MEDIA_FLASH_SD}="1"
 
-# Set UDISKS_CAN_POWER_OFF for all suitable devices dealt with, here
-KERNEL=="mmcblk[1-9]*", ENV{DEVTYPE}=="disk", ATTR{power/control}=="?*", ATTR{power/control}="on", ENV{UDISKS_CAN_POWER_OFF}="1"
-SUBSYSTEMS=="usb", KERNEL=="mmcblk0*|sd*|sr*", ENV{DEVTYPE}=="disk", ATTR{power/control}=="?*", ATTR{power/control}="on", ENV{UDISKS_CAN_POWER_OFF}="1"
+# Set power control / UDISKS_CAN_POWER_OFF for all devices dealt with, here: This is also supported for partitions, not only disks!?!
+# KERNEL=="mmcblk[1-9]*", ATTR{power/control}=="off", ATTR{power/control}="auto"
+# SUBSYSTEMS=="usb", KERNEL=="mmcblk0*|sd*|sr*", ATTR{power/control}=="off", ATTR{power/control}="auto"
+KERNEL=="mmcblk[1-9]*", ATTR{power/control}=="on", ENV{UDISKS_CAN_POWER_OFF}="1"
+SUBSYSTEMS=="usb", KERNEL=="mmcblk0*|sd*|sr*", ATTR{power/control}=="on", ENV{UDISKS_CAN_POWER_OFF}="1"
 
 # For DM-Crypt LUKS, match ENV{ID_FS_TYPE}=="crypto_LUKS"
 KERNEL=="mmcblk[1-9]*", ENV{ID_FS_TYPE}=="crypto_LUKS", ACTION=="add|change", TEST=="/etc/crypto-sdcard/crypto_luks_%E{ID_FS_UUID}.key", ENV{CRYPTOSD_TYPE}="LUKS"
