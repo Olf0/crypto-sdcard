@@ -1,17 +1,18 @@
 # Since crypto-sdcard 1.6.1, it adheres to the nomenclature used in other udev rules:
-# - KERNEL=="sd*[!0-9]|sr*", ENV{DEVTYPE}=="disk" for all USB-attached (OTG) storage *devices*
-# - KERNEL=="sd*[0-9]|sr*", ENV{DEVTYPE}=="partition" for all partitions on USB-attached storage devices
-# - KERNEL=="sd*|sr*" for both
+# - SUBSYSTEMS=="usb", KERNEL=="sd*[!0-9]|sr*", ENV{DEVTYPE}=="disk" for all USB-attached (OTG) storage *devices*
+# - SUBSYSTEMS=="usb", KERNEL=="sd*[0-9]|sr*", ENV{DEVTYPE}=="partition" for all partitions on USB-attached storage devices
+# - SUBSYSTEMS=="usb", KERNEL=="sd*|sr*" for both
 # - KERNEL=="mmcblk[1-9]" (the test ENV{DEVTYPE}=="disk" can be omitted) for the card in the internal slot and all external (USB-attached) SD-cards and MMCs (e.g., in readers).
 # - KERNEL=="mmcblk[1-9]p[0-9]" (the test ENV{DEVTYPE}=="partition" can be omitted) for all partitions on the card in the internal slot and on all external SD-cards and MMCs.  Side note: mmcblk[0-9]boot[0-9] are (e)MMC's special devices ("RPMB").
 # - KERNEL=="mmcblk[1-9]*" for both
-# - KERNEL=="mmcblk[1-9]*|sd*|sr*", SUBSYSTEMS=="usb" to filter for anything attached via (presumably "external") USB.  Mind that on devices without an SD-card slot mmcblk1 will be an externally attached card.
+# - SUBSYSTEMS=="usb", KERNEL=="mmcblk[0-9]*|sd*|sr*" to filter for anything attached via (presumably "external") USB.  Mind that on devices without an SD-card slot mmcblk1 will be an externally attached card.
 # Reference: /usr/lib/udev/rules.d/60-persistent-storage.rules
 # 
-# Is something like KERNEL=="mmcblk[1-9]*|sd*|sr*", SUBSYSTEMS=="usb", ATTR{removable}="1" possible and reasonable (means only "removable *media*"?) ?  Or without restricting it to USB-attached devices / partitions?
+# Is something like SUBSYSTEMS=="usb", KERNEL=="mmcblk[0-9]*|sd*|sr*", ATTR{removable}="1" possible and reasonable (means only "removable *media*"?) ?  Or without restricting it to USB-attached devices / partitions?  Yes!
 
 SUBSYSTEM!="block", GOTO="cryptosd_mount_end"
-KERNEL!="mmcblk[1-9]*|sd*|sr*", GOTO="cryptosd_open_end"
+SUBSYSTEMS!="usb", KERNEL!="mmcblk[0-9]*|sd*|sr*", GOTO="cryptosd_open_end"
+KERNEL!="mmcblk[1-9]*", GOTO="cryptosd_open_end"
 
 # Ignore the additions / changes by Jolla per
 # https://git.sailfishos.org/mer-core/udisks2/blob/master/rpm/0005-Add-udev-rule-for-the-sda-drives.patch
@@ -23,16 +24,6 @@ KERNEL=="sd*", ENV{DEVTYPE}=="disk", ENV{ID_DRIVE_FLASH_SD}="1", ENV{ID_DRIVE_ME
 
 # ToDo: Set UDISKS_CAN_POWER_OFF for all suitable devices dealt with, here:
 #ENV{DEVTYPE}=="disk", ATTR{power/control}=="on", ENV{UDISKS_CAN_POWER_OFF}="1"
-
-# ToDo: Use a test for ATA-Discard / -"Trim" to unlock appropriately:
-# See for details https://github.com/Olf0/crypto-sdcard/wiki/ToDo#starting-points-for-that
-# ATTR{discard_alignment}!="0", ...
-# ATTR{device/queue/discard_granularity}!="0", ...
-# ATTR{device/discard_alignment}!="0", ...
-# ATTRS{discard_alignment}!="0", ...
-# ATTRS{queue/discard_granularity}!="0", ...
-# or IMPORT{parent}="...", IMPORT{db}="...", 
-
 
 # For DM-Crypt LUKS, match ENV{ID_FS_TYPE}=="crypto_LUKS"
 ENV{ID_FS_TYPE}=="crypto_LUKS", ACTION=="add|change", TEST=="/etc/crypto-sdcard/crypto_luks_%E{ID_FS_UUID}.key", ENV{CRYPTOSD_TYPE}="LUKS"
