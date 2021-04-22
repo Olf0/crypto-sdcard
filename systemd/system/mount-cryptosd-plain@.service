@@ -24,5 +24,5 @@ EnvironmentFile=-/etc/crypto-sdcard/cryptosd.conf
 EnvironmentFile=-/etc/crypto-sdcard/cryptosd@%I.conf
 ExecStart=/usr/bin/udisksctl mount $UDISKS2_MOUNT_OPTIONS -b /dev/mapper/%I
 ExecStop=/usr/bin/udisksctl unmount -b /dev/mapper/%I
-ExecStopPost=/bin/umount -vrq /dev/mapper/%I
+ExecStopPost=-/bin/umount -vrq /dev/mapper/%I
 
