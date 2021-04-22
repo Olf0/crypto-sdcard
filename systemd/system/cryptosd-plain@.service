@@ -7,7 +7,8 @@ Requisite=dev-%i.device
 PartOf=mount-cryptosd-plain@%i.service cryptsetup.target
 Conflicts=umount.target shutdown.target actdead.target factory-test.target
 Before=umount.target shutdown.target mount-cryptosd-plain@%i.service
-AssertFileNotEmpty=/etc/crypto-sdcard/crypto_plain_%I.key
+AssertPathIsDirectory=!/etc/crypto-sdcard/crypto_plain_%I.key
+AssertPathExists=/etc/crypto-sdcard/crypto_plain_%I.key
 
 [Service]
 Type=oneshot
@@ -23,20 +24,6 @@ StandardInput=file:/etc/crypto-sdcard/crypto_plain_%I.key
 StandardOutput=journal
 # "udisksctl unlock --key-file" does only work with LUKS "containers", not with "plain" ones,
 # thus call cryptsetup directly:
-ExecStart=/usr/sbin/cryptsetup -d - -o ${CRYPTO_PLAIN_OFFSET} -h ${CRYPTO_PLAIN_PASSPHRASE_HASH} -s ${CRYPTO_PLAIN_KEYLENGTH} -c ${CRYPTO_PLAIN_CIPHER} --allow-discards --type plain open /dev/%I %I ; /bin/sleep 1
-# "udisksctl mount" (in mount-cryptosd-luks@.service) sometimes fails when issued right after
-# this unit (instance) and "udisksd" (per "udisks2.service") have finished starting, because
-# the udisks object for this unlocked device has not been created yet.
-# Hence one might give udisksd a second to recognise the fresh device, before starting units
-# dependent on this unit instance and "udisks2.service" / "udisksd".  Side note: Letting
-# dependent units sleep for a second by an "ExecStartPre=/bin/sleep 1" in them would
-# unnecessarily waste this second most of the time; that is avoided this way.
-# Note that using ExecStartPost= for this is futile (as irrelevant for dependencies, see
-# https://www.freedesktop.org/software/systemd/man/systemd.service.html#Type= ), but (only)
-# units of the Type=oneshot may use multiple ExecStart= lines (which are *started
-# concurrently*, but the last one is displayed as "main process") and / or commands in an
-# ExecStart= line.  Side note: For non-oneshot units a solution is to move the ExecStart=
-# command to ExecStartPre= (that is *functionally equivalent*, but again displays the
-# ExecStart= command as "main process") and use ExecStart=/bin/sleep 1
+ExecStart=/usr/sbin/cryptsetup -d - -o ${CRYPTO_PLAIN_OFFSET} -h ${CRYPTO_PLAIN_PASSPHRASE_HASH} -s ${CRYPTO_PLAIN_KEYLENGTH} -c ${CRYPTO_PLAIN_CIPHER} --allow-discards --type plain open /dev/%I %I
 ExecStop=/usr/sbin/cryptsetup close %I
 
