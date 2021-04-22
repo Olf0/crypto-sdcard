@@ -18,7 +18,7 @@ EnvironmentFile=-/etc/crypto-sdcard/cryptosd.conf
 EnvironmentFile=-/etc/crypto-sdcard/cryptosd@%I.conf
 # For devices, which need the qcrypto kernel module loaded to support modern cryptographic
 # schemes as e.g. XTS:
-# ExecStartPre=/sbin/modprobe qcrypto
+ExecStartPre=/sbin/modprobe qcrypto
 # With workaround for https://github.com/systemd/systemd/issues/14560 :
 StandardInput=file:/etc/crypto-sdcard/crypto_plain_%I.key
 StandardOutput=journal
