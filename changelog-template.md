@@ -31,7 +31,6 @@ and this project adheres to [Semantic Versioning v2.0.0](https://semver.org/spec
 - Croatian translation from [@porx](https://github.com/porx).
 - Persian translation from [@Hameds](https://github.com/Hameds).
 - Ukrainian translation from [@osadchyi-s](https://github.com/osadchyi-s).
-
 ### Changed
 - Start using "changelog" over "change log" since it's the common usage.
 - Start versioning based on the current English version at 0.3.0 to help
@@ -50,7 +49,6 @@ translation authors keep things up-to-date.
 - Fix typos in Swedish translation.
 - Improve phrasing in French translation.
 - Fix phrasing and spelling in German translation.
-
 ### Removed
 - Section about "changelog" vs "CHANGELOG".
 
@@ -68,7 +66,6 @@ benefit both "open" and "closed" source projects equally.
 ## [0.1.0] - 2015-10-06
 ### Added
 - Answer "Should you ever rewrite a change log?".
-
 ### Changed
 - Improve argument against commit logs.
 - Start following [SemVer](https://semver.org) properly.
@@ -78,7 +75,6 @@ benefit both "open" and "closed" source projects equally.
 - Update year to match in every README example.
 - Reluctantly stop making fun of Brits only, since most of the world
   writes dates in a strange way.
-
 ### Fixed
 - Fix typos in recent README changes.
 - Update outdated unreleased diff link.
@@ -86,10 +82,8 @@ benefit both "open" and "closed" source projects equally.
 ## [0.0.7] - 2015-02-16
 ### Added
 - Link, and make it obvious that date format is ISO 8601.
-
 ### Changed
 - Clarified the section on "Is there a standard change log format?".
-
 ### Fixed
 - Fix Markdown links to tag comparison URL with footnote-style links.
 
@@ -107,12 +101,10 @@ keeping prior to releases.
 ### Added
 - Better explanation of the difference between the file ("CHANGELOG")
 and its function "the change log".
-
 ### Changed
 - Refer to a "change log" instead of a "CHANGELOG" throughout the site
 to differentiate between the file and the purpose of the file — the
 logging of changes.
-
 ### Removed
 - Remove empty sections from CHANGELOG, they occupy too much space and
 create too much noise in the file. People will have to assume that the
@@ -135,6 +127,7 @@ notable changes.
 - README now contains answers to common questions about CHANGELOGs
 - Good examples and basic guidelines, including proper date formatting.
 - Counter-examples: "What makes unicorns cry?"
+
 
 [Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.3.0...v1.0.0
