@@ -31,7 +31,7 @@
   
   As with some other components, SailfishOS tends to lag behind recent Polkit releases, which is not neccesarily a bad thing.<br />
   SailfishOS 2.2.0 deployed Polkit 0.104, some later release (before SailfishOS 3.2.1) switched to Polkit 0.105 and SailfishOS 4.0.1 is still deploying Polkit 0.105.<br />
-  This looks like aforementioned approach i, although I have not checked which Polkit 0.105 variant the SailfishOS' version is based on or which backport patches it incorporates.
+  This looks like aforementioned approach 1, although I have not checked which Polkit 0.105 variant the SailfishOS' version is based on or which backport patches it incorporates.
 
 
 #### 1.2  Practically handling Polkit rules
