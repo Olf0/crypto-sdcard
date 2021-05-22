@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning v2.0.0](https://semver.org/spec
 ## Versions [before 1.7.2] (2018 - 2021)
 See [original thread at TJC](https://together.jolla.com/question/179054/how-to-creating-partitions-on-sd-card-optionally-encrypted/?answer=189813#post-id-189813), 
 the [course version history in the README](https://github.com/Olf0/crypto-sdcard#version-history) and
-the [detailed version specific reease notes](https://github.com/Olf0/crypto-sdcard/releases?after=0.4-0).
+the [detailed version specific release notes](https://github.com/Olf0/crypto-sdcard/releases?after=0.4-0).
 
 
 [Unreleased]: https://github.com/Olf0/crypto-sdcard/compare/v1.7.2...HEAD
