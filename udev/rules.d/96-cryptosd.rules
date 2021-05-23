@@ -12,8 +12,6 @@
 # A: Yes, but potential side effects are still evaluated.
 
 SUBSYSTEM!="block", GOTO="cryptosd_end"
-#SUBSYSTEMS!="usb", KERNEL!="mmcblk[0-9]*|sd*|sr*", GOTO="cryptosd_open_end"
-# Note that this means: If NOT (SUBSYSTEMS=="usb" OR KERNEL=="mmcblk[0-9]*|sd*|sr*"), then GOTO.
 
 # Ignore the additions / changes by Jolla per
 # https://git.sailfishos.org/mer-core/udisks2/blob/master/rpm/0005-Add-udev-rule-for-the-sda-drives.patch
@@ -43,9 +41,6 @@ SUBSYSTEMS=="usb", KERNEL=="mmcblk0*|sd*|sr*", ENV{DEVTYPE}=="partition", ENV{ID
 ENV{CRYPTOSD_TYPE}=="PLAIN", ACTION=="add|change", ENV{UDISKS_SYSTEM}="0", ENV{UDISKS_AUTO}="0", ENV{UDISKS_NAME}="cryptosd_plain_dev-%k", MODE="0660", TAG+="systemd", ENV{SYSTEMD_WANTS}="'cryptosd-plain@%k.service'"
 # When above detected and assigned devices are removed
 ENV{CRYPTOSD_TYPE}=="PLAIN", ACTION=="remove", ENV{CRYPTOSD_TYPE}="removed", ENV{UDISKS_NAME}="cryptosd_removed", ENV{SYSTEMD_WANTS}="", ENV{SYSTEMD_USER_WANTS}="", RUN{program}+="/usr/bin/systemctl stop cryptosd-plain@%k.service"
-
-#LABEL="cryptosd_open_end"
-
 
 KERNEL!="dm-[0-9]*", GOTO="cryptosd_end"
 
