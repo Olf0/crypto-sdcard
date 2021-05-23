@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning v2.0.0](https://semver.org/spec
 ## [Unreleased]
 ### Added
 ### Changed
-- Fix a couple of technical details in the [CHANGELOG.md](https://github.com/Olf0/crypto-sdcard/blob/master/CHANGELOG.md)
+- Fix a couple of technical details in the [CHANGELOG.md](https://github.com/Olf0/crypto-sdcard/blob/master/CHANGELOG.md).
 ### Removed
 
 ## [1.7.2] - 2021-05-23
