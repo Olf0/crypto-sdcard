@@ -5,10 +5,8 @@ The format is based on [Keep a Changelog v1.1.0](https://keepachangelog.com/en/1
 and this project adheres to [Semantic Versioning v2.0.0](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### Added
 ### Changed
 - Fix a couple of technical details in the [CHANGELOG.md](https://github.com/Olf0/crypto-sdcard/blob/master/CHANGELOG.md).
-### Removed
 
 ## [1.7.2] - 2021-05-23
 ### Added
