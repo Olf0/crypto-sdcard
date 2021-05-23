@@ -2,10 +2,10 @@
 Description=Open /dev/%I per cryptsetup
 Documentation=https://github.com/Olf0/crypto-sdcard
 DefaultDependencies=no
-After=systemd-udevd.service systemd-udev-trigger.service dev-%i.device systemd-journald.service local-fs.target cryptsetup-pre.target
+After=sysinit.target dev-%i.device
 Requisite=dev-%i.device
 # PartOf=mount-cryptosd-plain@%i.service does work as intended, but fails on bootup.
-PartOf=cryptsetup.target
+PartOf=sysinit.target
 Conflicts=umount.target shutdown.target actdead.target factory-test.target
 Before=umount.target shutdown.target mount-cryptosd-plain@%i.service
 AssertPathIsDirectory=!/etc/crypto-sdcard/crypto_plain_%I.key
