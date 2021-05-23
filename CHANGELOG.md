@@ -4,10 +4,7 @@ All notable changes to *crypto-sdcard* since v1.7.1 will be documented in this f
 The format is based on [Keep a Changelog v1.1.0](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning v2.0.0](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-### Changed
-
-## [1.8.0] - Unreleased
+## 1.8.0 - [Unreleased]
 ### Changed
 - Fix a couple of technical details in the [CHANGELOG.md](https://github.com/Olf0/crypto-sdcard/blob/master/CHANGELOG.md).
 - [Clean up some obsolete stuff](https://github.com/Olf0/crypto-sdcard/pull/246/commits).
