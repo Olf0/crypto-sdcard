@@ -22,5 +22,5 @@ the [detailed version specific release notes](https://github.com/Olf0/crypto-sdc
 
 
 [Unreleased]: https://github.com/Olf0/crypto-sdcard/compare/v1.7.2...HEAD
-[1.7.2]: https://github.com/Olf0/crypto-sdcard/compare/v1.7.1...v1.7.2
-[Versions before 1.7.2]: https://github.com/Olf0/crypto-sdcard/releases?after=1.7.2-1.sfos220qcrypto
+[1.7.2]: https://github.com/Olf0/crypto-sdcard/compare/v1.7.1-1.sfos340regular...v1.7.2
+[Versions before 1.7.2]: https://github.com/Olf0/crypto-sdcard/releases?after=1.7.2
