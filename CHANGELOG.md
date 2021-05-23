@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning v2.0.0](https://semver.org/spec
 - [changelog-template.md](https://github.com/Olf0/crypto-sdcard/blob/master/changelog-template.md)
 - [CHANGELOG.md](https://github.com/Olf0/crypto-sdcard/blob/master/CHANGELOG.md)
 ### Changed
-- In the files **[systemd/system](https://github.com/Olf0/crypto-sdcard/tree/master/systemd/system)/cryptosd-\*@%i.service** : [Omitting `PartOf=mount-cryptosd-*@%i.service`](https://github.com/Olf0/crypto-sdcard/commit/c36150eb8a6ff99f9ab2376e1a41e82a3047afb9), as it does work as intended, but fails on bootup.
+- In the two files **[systemd/system](https://github.com/Olf0/crypto-sdcard/tree/master/systemd/system)/cryptosd-\*@%i.service**: [Omit `PartOf=mount-cryptosd-*@%i.service`](https://github.com/Olf0/crypto-sdcard/commit/c36150eb8a6ff99f9ab2376e1a41e82a3047afb9), as it does work as intended, but fails on boot-up.
 ### Removed
 - No such file!
 
