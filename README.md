@@ -40,7 +40,7 @@ Thus *crypto-sdcard* solely protects "data at rest" on SD-cards and other remova
   * For Cryptsetup "plain": `/etc/crypto-sdcard/<device-name>.key`
   * A specific `<UUID>` can be obtained by executing `blkid -c /dev/null -s UUID -o value /dev/<device-name>` with e.g. `mmcblk1p2` as `<device-name>`.
 * Releases after v1.7.1<br />
-  See [CHANGELOG](https://github.com/Olf0/crypto-sdcard/blob/master/CHANGELOG.md#changelog).md file.
+  See [CHANGELOG.md](https://github.com/Olf0/crypto-sdcard/blob/master/CHANGELOG.md#changelog) file.
 * v1.7<br />
   Completely re-write [the Polkit rule file](https://github.com/Olf0/crypto-sdcard/blob/master/polkit-1/localauthority/50-local.d/69-cryptosd.pkla).  Also document the awkward Polkit configuration file format situation in [On-Poklkit.md](https://github.com/Olf0/crypto-sdcard/blob/master/On-Polkit.md).<br />
   Introduce units for manual mounting (and implicit, automatic unlocking / opening of a "crypto container"), which work in "rescue" (Systemd's single user) target / mode: `mnt-cryptosd-luks@<UUID>.service` and `mnt-cryptosd-plain@<device-name>.service`
