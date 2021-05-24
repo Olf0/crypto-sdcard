@@ -34,6 +34,11 @@ Thus *crypto-sdcard* solely protects "data at rest" on SD-cards and other remova
 * Boot time is not significantly prolonged, as unlocking encrypted partitions per Cryptsetup occurs in parallel to starting *udisks2.service*; after both succeeded, all mount operations are also started concurrently.
 
 #### Version history
+* v2.0 and later<br />
+  The "key"-file path and names are ultimately settled on (please rename your "key"-files accordingly):
+  * For Cryptsetup LUKS: `/etc/crypto-sdcard/<UUID>.key`
+  * For Cryptsetup "plain": `/etc/crypto-sdcard/<device-name>.key`
+  * A specific `<UUID>` can be obtained by executing `blkid -c /dev/null -s UUID -o value /dev/<device-name>` with e.g. `mmcblk1p2` as `<device-name>`.
 * Releases after v1.7.1<br />
   See [CHANGELOG](https://github.com/Olf0/crypto-sdcard/blob/master/CHANGELOG.md#changelog).md file.
 * v1.7<br />
