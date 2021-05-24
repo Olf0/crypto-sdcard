@@ -34,6 +34,19 @@ Thus *crypto-sdcard* solely protects "data at rest" on SD-cards and other remova
 * Boot time is not significantly prolonged, as unlocking encrypted partitions per Cryptsetup occurs in parallel to starting *udisks2.service*; after both succeeded, all mount operations are also started concurrently.
 
 #### Version history
+* Releases after v1.7.1<br />
+  See [CHANGELOG](https://github.com/Olf0/crypto-sdcard/blob/master/CHANGELOG.md#changelog).md file.
+* v1.7<br />
+  Completely re-write [the Polkit rule file](https://github.com/Olf0/crypto-sdcard/blob/master/polkit-1/localauthority/50-local.d/69-cryptosd.pkla).  Also document the awkward Polkit configuration file format situation in [On-Poklkit.md](https://github.com/Olf0/crypto-sdcard/blob/master/On-Polkit.md).<br />
+  Introduce units for manual mounting (and implicit, automatic unlocking / opening of a "crypto container"), which work in "rescue" (Systemd's single user) target / mode: `mnt-cryptosd-luks@<UUID>.service` and `mnt-cryptosd-plain@<device-name>.service`
+* v1.6<br />
+  Refactor and vastly enhance [the Udev rule file](https://github.com/Olf0/crypto-sdcard/blob/master/udev/rules.d/96-cryptosd.rules).
+* v1.5<br />
+  Re-establish support for SailfishOS 2.2.0 to 3.2.0 in order to bring recently introduced features to older SailfishOS releases.<br />
+  Change license from MIT to LGPL-2.1-only.
+* v1.4<br />
+  Reintegrated the ["sbj edition"'s git repository](https://github.com/Olf0/crypto-sdcard_sbj) into this one as [branch *qcrypto*](https://github.com/Olf0/crypto-sdcard/tree/qcrypto).<br />
+  [Enhance the parsing of "key"-files in "plain" mode](https://github.com/Olf0/crypto-sdcard/commit/ba3ccce0c3573747fadd7b30e576159b15277513).  This change requires to convert extant "key"-files for "plain" mode, [see details](https://github.com/Olf0/crypto-sdcard/commit/ba3ccce0c3573747fadd7b30e576159b15277513#commitcomment-47340935).  New "plain" partitions shall be [created slightly differently](https://github.com/Olf0/crypto-sdcard/commit/ba3ccce0c3573747fadd7b30e576159b15277513#commitcomment-47340935) now, in order to take advantage of this enhancement.  
 * v1.3<br />
   Mounting is now restricted to users, who belong to the Unix-group `media_rw`, which is the case for the user *nemo* since some SailfishOS release before v3.2.1 and after v2.2.1 (unable to assess which one), or the *defaultuser* on freshly installed devices (since SailfishOS 3.4.0).<br />
   Significantly altered versioning scheme, git tags naming and archive file (tarball) names, again: This time to accommodate for multiple release variants per version in order to serve different SailfishOS releases from one repository easily.  For details see the [document "Release version format, RPM dependencies and Git workflow"](https://github.com/Olf0/crypto-sdcard/blob/master/RPM-dependencies_Git-workflow.md).
