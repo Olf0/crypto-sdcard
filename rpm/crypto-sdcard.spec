@@ -33,7 +33,7 @@ Requires:      udisks2
 # (for commonality across release versions):
 Requires:      sailfish-version >= 4.0.0
 # Omit anti-dependency on future, untested SFOS versions, until a known conflict exists:
-# Requires:      sailfish-version < 4.9.9
+# Requires:      sailfish-version < 9.9.9
 Requires:      cryptsetup >= 1.4.0
 # Necessary counter-dependency to https://github.com/Olf0/crypto-sdcard/blob/qcrypto/rpm/crypto-sdcard.spec#L40
 Conflicts:     kernel-adaptation-sbj
